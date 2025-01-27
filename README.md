@@ -3,7 +3,7 @@
 **Matière** : Motifs de Conception\
 **Encadrant** : Guillaume SANTINI\
 **Année scolaire** : 2024-2025\
-**École** : Sup Galilée\
+**École** : Sup Galilée
 
 ## Composition du groupe
 - Jean-Yves BUISSERETH
