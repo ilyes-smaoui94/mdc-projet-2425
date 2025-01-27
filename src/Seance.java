@@ -1,0 +1,1 @@
+class Seance implements SujetSeance {}
