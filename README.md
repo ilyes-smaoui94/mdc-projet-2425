@@ -2,7 +2,9 @@
 Projet de Motifs de Conception 2025-2025 pour Sup Galilée
 
 **Matière** : Motifs de Conception
+
 **Encadrant** : Guillaume SANTINI
+
 **Année scolaire** : 2024-2025
 
 ## Composition du groupe
