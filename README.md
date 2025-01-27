@@ -1,11 +1,9 @@
 # mdc-projet-2425
-Projet de Motifs de Conception 2025-2025 pour Sup Galilée
 
-**Matière** : Motifs de Conception
-
-**Encadrant** : Guillaume SANTINI
-
-**Année scolaire** : 2024-2025
+**Matière** : Motifs de Conception\
+**Encadrant** : Guillaume SANTINI\
+**Année scolaire** : 2024-2025\
+**École** : Sup Galilée\
 
 ## Composition du groupe
 - Jean-Yves BUISSERETH
