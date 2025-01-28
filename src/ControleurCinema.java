@@ -1,0 +1,1 @@
+class ControleurCinema implements ObservateurSeance {}
