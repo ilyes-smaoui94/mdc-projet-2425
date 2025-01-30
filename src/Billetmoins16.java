@@ -1,4 +1,3 @@
-package app_cinema;
 
 public class Billetmoins16 extends Billet {
 
