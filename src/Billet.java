@@ -1,4 +1,4 @@
-package app_cinema;
+
 
 public abstract class Billet {
 	private Seance seance;
