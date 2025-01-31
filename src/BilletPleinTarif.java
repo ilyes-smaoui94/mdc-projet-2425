@@ -10,7 +10,6 @@ public class BilletPleinTarif extends Billet {
 		if (this.getSeance().getTypeSeance() == null) {
 			return default_price; 
 		}
-		
 		switch (this.getSeance().getTypeSeance()) {
 		case DMAX_4D:
 			return 16.0;

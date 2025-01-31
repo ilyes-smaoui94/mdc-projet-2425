@@ -3,12 +3,13 @@ public abstract class Utilisateur {
 	protected String nom;
 	protected String email;
 	protected String motDePasse;
+	static protected int maxUsedID = 0;
 
 	public Utilisateur() {
 	}
 
-	public Utilisateur(int id, String nom, String email, String motDePasse) {
-		this.id = id;
+	public Utilisateur(String nom, String email, String motDePasse) {
+		this.id = this.getNextId();
 		this.nom = nom;
 		this.email = email;
 		this.motDePasse = motDePasse;
@@ -17,12 +18,18 @@ public abstract class Utilisateur {
 	public abstract void seConnecter();
 	public abstract void seDeconnecter();
 
+	public int getNextId () {
+		int nextID = maxUsedID + 1;
+		maxUsedID += 1;
+		return nextID;
+	}
+
 	// -- Getters et Setters --
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	private void setId(int id) {
 		this.id = id;
 	}
 

@@ -52,5 +52,13 @@ class VueCinema implements ObservateurSeance {
                            + s.getFilm().getTitre() + ", en salle " 
                            + s.getSalle().getNom());
     }
+
+    public void afficherCreationClient (Client c) {
+        String aAfficher = "";
+        // [TBC]
+        aAfficher += "Utilisateur n°" + c.getId() + " (email : " + c.getEmail() + ") bien créé !\n";
+        // [/TBC]
+        System.out.println(aAfficher);
+    }
   
 }

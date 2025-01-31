@@ -1,23 +1,26 @@
 package app_cinema;
 
+import java.util.Set;
+import java.util.HashSet;
+
 public class Film {
 
 	private String titre;
 	private int annee;
 	private String description;
-	private GenreFilm genre;
+	private Set<Genre> genres;
 
 	public Film (String t, int a, String d) {
 		this.titre = t;
 		this.annee = a;
 		this.description = d;
-		this.genre = new GenreFilm();
+		this.genres = new HashSet<Genre>();
 	}
-	public Film (String t, int a, String d, GenreFilm gf) {
+	public Film (String t, int a, String d, Set<Genre> g) {
 		this.titre = t;
 		this.annee = a;
 		this.description = d;
-		this.genre = gf;
+		this.genres = gf;
 	}
 
 	public String getTitre () {
@@ -35,5 +38,16 @@ public class Film {
 	public String getDesc () {
 		return this.description;
 	}
-	
+	public void setDesc (String d) {
+		this.description = d;
+	}
+	public void addGenre (Genre g) {
+		this.genres.add(g);
+	}
+	public void removeGenre (Genre g) {
+		this.genres.remove(g);
+	}
+	public void setGenres (Set<Genres> g) {
+		this.genres = g;
+	}
 }

@@ -8,7 +8,7 @@ public class BilletMoins16 extends Billet {
 	public double prix() {
 		double default_price = 5.0;
 		if (this.getSeance().getTypeSeance() == null) {
-	        return default_price; 
+			return default_price;
 		}
 		switch (this.getSeance().getTypeSeance()) {
 		case DMAX_4D:

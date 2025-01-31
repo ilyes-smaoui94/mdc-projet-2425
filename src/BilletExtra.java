@@ -4,7 +4,7 @@ public abstract class BilletExtra extends Billet {
 
 	public BilletExtra( Billet monBillet) {
 		super();
-		this.monBillet = monBillet;		
+		this.monBillet = monBillet;
 	}
 	
 	public abstract double prix();
