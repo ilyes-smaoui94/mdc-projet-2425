@@ -7,17 +7,17 @@ public class Seance {
 	private int nb_place_dispo;
 	private TypeSeance typeSeance; 
 	
-	public Seance(Salle salle, String date,String heure, int nb_place_dispo ) {
-		this.salle=salle;
-		this.date=date;
-		this.heure=heure;
-		this.nb_place_dispo=nb_place_dispo;
+	public Seance(Salle salle, String date, String heure, int nb_place_dispo) {
+		this.salle = salle;
+		this.date = date;
+		this.heure = heure;
+		this.nb_place_dispo = nb_place_dispo;
 	}
 	
 	public Seance() {}
 
 	public String getDate() {
-		return date;
+		return this.date;
 	}
 
 	public void setDate(String date) {
@@ -25,7 +25,7 @@ public class Seance {
 	}
 
 	public String getHeure() {
-		return heure;
+		return this.heure;
 	}
 
 	public void setHeure(String heure) {
@@ -33,7 +33,7 @@ public class Seance {
 	}
 
 	public int getNb_place_dispo() {
-		return nb_place_dispo;
+		return this.nb_place_dispo;
 	}
 
 	public void setNb_place_dispo(int nb_place_dispo) {
@@ -41,7 +41,7 @@ public class Seance {
 	}
 
 	public Salle getSalle() {
-		return salle;
+		return this.salle;
 	}
 
 	public void setSalle(Salle salle) {
@@ -49,7 +49,7 @@ public class Seance {
 	}
 
 	public TypeSeance getTypeSeance() {
-		return typeSeance;
+		return this.typeSeance;
 	}
 
 	public void setTypeSeance(TypeSeance typeSeance) {

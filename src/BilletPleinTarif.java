@@ -6,7 +6,7 @@ public class BilletPleinTarif extends Billet {
 
 	@Override
 	public double prix() {
-		double default_price= 11.0;
+		double default_price = 11.0;
 		if (this.getSeance().getTypeSeance() == null) {
 			return default_price; 
 		}
@@ -14,12 +14,16 @@ public class BilletPleinTarif extends Billet {
 		switch (this.getSeance().getTypeSeance()) {
 		case DMAX_4D:
 			return 16.0;
+			break;
 		case _3D:
 			return 14.0;
+			break;
 		case IMAX:
 			return 13.0;
+			break;
 		default:
 			return default_price;
+			break;
 		}
 	}
 }

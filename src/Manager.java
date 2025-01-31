@@ -14,10 +14,10 @@ public class Manager extends Utilisateur {
 
 	// 3) Méthode statique pour récupérer ou créer l'instance
 	public static Manager getDataManager(int id, String nom, String email, String motDePasse) {
-		if (instance == null) {
-			instance = new Manager(id, nom, email, motDePasse);
+		if (this.instance == null) {
+			this.instance = new Manager(id, nom, email, motDePasse);
 		}
-		return instance;
+		return this.instance;
 	}
 
 	// --------------------

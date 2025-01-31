@@ -5,8 +5,8 @@ public class Salle {
 	private int capacite;
 	
 	public Salle(int id,int capacite) {
-		this.id=id;
-		this.capacite=capacite;
+		this.id = id;
+		this.capacite = capacite;
 		
 	}
 	public int getId() {
