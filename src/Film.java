@@ -4,23 +4,32 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class Film {
-
+	private static int nextAvailableId = 0;
+	private int id;
 	private String titre;
 	private int annee;
 	private String description;
 	private Set<Genre> genres;
 
 	public Film (String t, int a, String d) {
+		this.id = this.getNextAvailableId();
 		this.titre = t;
 		this.annee = a;
 		this.description = d;
 		this.genres = new HashSet<Genre>();
 	}
 	public Film (String t, int a, String d, Set<Genre> g) {
+		this.id = this.getNextAvailableId();
 		this.titre = t;
 		this.annee = a;
 		this.description = d;
 		this.genres = gf;
+	}
+
+	public int getNextAvailableId () {
+		int nextId = Film.nextAvailableId;
+		Film.nextAvailableId += 1;
+		return nextId;
 	}
 
 	public String getTitre () {

@@ -1,4 +1,4 @@
-class VueCinema implements ObservateurSeance {
+class VueCinema implements ObservateurSeance, IVueCinema {
     public void afficherMenu(Utilisateur utilisateur) {
         System.out.println("=== MENU CINEMA ===");
         // Simple exemple : on affiche un menu générique,
@@ -47,13 +47,13 @@ class VueCinema implements ObservateurSeance {
     }
 
     // Affiche la confirmation d’une séance créée (s)
-    public void afficheConfSeanceCreée(Seance s) {
+    public void afficheConfSeanceCreee(Seance s) {
         System.out.println("Confirmation : Séance programmée pour le film " 
                            + s.getFilm().getTitre() + ", en salle " 
                            + s.getSalle().getNom());
     }
 
-    public void afficherCreationClient (Client c) {
+    public void afficherConfCreationClient (Client c) {
         String aAfficher = "";
         // [TBC]
         aAfficher += "Utilisateur n°" + c.getId() + " (email : " + c.getEmail() + ") bien créé !\n";

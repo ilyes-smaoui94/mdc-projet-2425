@@ -1,19 +1,19 @@
 package app_cinema;
 
 public class Salle {
-	private int id;
+	private int numero;
 	private int capacite;
 	
-	public Salle(int id,int capacite) {
-		this.id = id;
+	public Salle(int numero, int capacite) {
+		this.numero = numero;
 		this.capacite = capacite;
 		
 	}
-	public int getId() {
-		return id;
+	public int getNumero() {
+		return numero;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 	public int getCapacite() {
 		return capacite;

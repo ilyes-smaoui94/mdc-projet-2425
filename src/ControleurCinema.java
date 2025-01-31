@@ -3,17 +3,40 @@ import java.util.HashSet;
 
 class ControleurCinema implements ObservateurSeance {
 
-	protected Set<Utilisateur> utilisateursEnregistres;
+	private IVueCinema vueCinema;
+	private IModeleCinema modeleCinema;
+	private Set<Utilisateur> utilisateursEnregistres;
 
 	public CinemaController () {
 		this.utilisateursEnregistres = new HashSet<Utilisateur>();
 	}
 
+	public CinemaController () {
+		this.utilisateursEnregistres = new HashSet<Utilisateur>();
+	}
+
+	public void getVue () {
+		return this.vueCinema,
+	}
+
+	public void setVue (IVueCinema vueCinema) {
+		this.vueCinema = vueCinema;
+	}
+
+	public void getModele () {
+		return this.modeleCinema;
+	}
+
+	public void setModele (IModeleCinema modeleCinema) {
+		this.modeleCinema = modeleCinema;
+	}
+
 	public void ajouterClient (String nom, String email, String mdp) {
 		Client nouveauClient = new Client(nom, email, mdp);
+		// [TBC] vérifier qu'il n'y a pas déjà d'autre utilisateur avec cet email
 		this.utilisateursEnregistres.add(nouvelUtilisateur);
 		if (this.vueCinema != null) {
-			this.vueCinema.afficherCreationClient(nouveauClient);
+			this.vueCinema.afficherConfCreationClient(nouveauClient);
 		}
 	}
 
@@ -36,7 +59,7 @@ class ControleurCinema implements ObservateurSeance {
 	}
 
 	// !! À COMPLÉTER !!
-	// !! À COMPLÉTER !!
+	
 	// !! À COMPLÉTER !!
 
 	public Film creerFilm(Utilisateur utilisateur, String titre, int duree) {

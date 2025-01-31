@@ -10,9 +10,9 @@ public interface IVueCinema {
 	public void afficheConfFilm(Utilisateur u);
 	public void afficheConfFilm(Film f);
 	public void afficheConfFilm(Utilisateur u, Film f);
-	public void afficheConfSeanceCreée(Seance s);
+	public void afficheConfSeanceCreee(Seance s);
 
-	public void afficherCreationClient (Client nouveauClient);
+	public void afficherConfCreationClient (Client nouveauClient);
 
 	// public void afficher_horaire();
 	// public void afficher_prix();
