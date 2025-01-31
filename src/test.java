@@ -18,13 +18,8 @@ public class test {
 
 		System.out.println("Billet classique etudiant + popcorn + boisson");
 
-		BilletExtra c= new SupplementBoisson(b);
+		BilletExtra c = new SupplementBoisson(b);
 
 		System.out.println(c.prix());
-
-		
-		
-		
 	}
-
 }

@@ -4,12 +4,11 @@ public class SupplementBoisson extends BilletExtra{
 
 	public SupplementBoisson(Billet Billet) {
 		super(Billet);
-			
-		}
-		
-		public double prix() {
-			// TODO Auto-generated method stub
-			double p= this.getMonBillet().prix();
-			return p+ 3.0;
-		}
+	}
+	
+	public double prix() {
+		// TODO Auto-generated method stub
+		double p = this.getMonBillet().prix();
+		return p + 3.0;
+	}
 }

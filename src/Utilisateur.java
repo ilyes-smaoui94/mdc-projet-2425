@@ -1,52 +1,52 @@
 public abstract class Utilisateur {
-    protected int id;
-    protected String nom;
-    protected String email;
-    protected String motDePasse;
+	protected int id;
+	protected String nom;
+	protected String email;
+	protected String motDePasse;
 
-    public Utilisateur() {
-    }
+	public Utilisateur() {
+	}
 
-    public Utilisateur(int id, String nom, String email, String motDePasse) {
-        this.id = id;
-        this.nom = nom;
-        this.email = email;
-        this.motDePasse = motDePasse;
-    }
+	public Utilisateur(int id, String nom, String email, String motDePasse) {
+		this.id = id;
+		this.nom = nom;
+		this.email = email;
+		this.motDePasse = motDePasse;
+	}
 
-    public abstract void seConnecter();
-    public abstract void seDeconnecter();
+	public abstract void seConnecter();
+	public abstract void seDeconnecter();
 
-    // -- Getters et Setters --
-    public int getId() {
-        return id;
-    }
+	// -- Getters et Setters --
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getNom() {
-        return nom;
-    }
+	public String getNom() {
+		return nom;
+	}
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getMotDePasse() {
-        return motDePasse;
-    }
+	public String getMotDePasse() {
+		return motDePasse;
+	}
 
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
-    }
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
+	}
 }

@@ -16,7 +16,6 @@ public class Seance {
 	
 	public Seance() {}
 
-
 	public String getDate() {
 		return date;
 	}
@@ -56,8 +55,4 @@ public class Seance {
 	public void setTypeSeance(TypeSeance typeSeance) {
 		this.typeSeance = typeSeance;
 	}
-
-	
-
-
 }

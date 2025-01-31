@@ -5,7 +5,6 @@ public class Salle {
 	private int capacite;
 	
 	public Salle(int id,int capacite) {
-		
 		this.id=id;
 		this.capacite=capacite;
 		
@@ -22,8 +21,4 @@ public class Salle {
 	public void setCapacite(int capacite) {
 		this.capacite = capacite;
 	}
-	
-	
-	
-
 }
