@@ -130,19 +130,30 @@ public class ModeleCinema implements IModeleCinema {
     ;
   }
 
-  public boolean creerReservation (ArrayList<Seance>) {
-    ;
-  }
+	public boolean supprimerReservation(int id) {
+			for (Seance s : seancesEnregistrees) {
+					if (s.supprimerReservation(id)) {
+							return true;
+					}
+			}
+			return false;
+	}
 
-  public boolean supprimerReservation (id: int) {
-    ;
-  }
+	public boolean connecterUtilisateur(String email, String mdp) {
+			for (Utilisateur u : utilisateursEnregistres) {
+					if (u.getMail().equals(email) && u.verifierMotDePasse(mdp)) {
+							utilisateurConnecte = u;
+							return true;
+					}
+			}
+			return false;
+	}
 
-  public ArrayList<boolean> connecterUtilisateur (String email, String mdp) {
-    ;
-  }
-
-  public boolean deconnecterUtilisateur (String email) {
-    ;
-  }
+	public boolean deconnecterUtilisateur(String email) {
+			if (utilisateurConnecte != null && utilisateurConnecte.getMail().equals(email)) {
+					utilisateurConnecte = null;
+					return true;
+			}
+			return false;
+	}
 }
