@@ -1,6 +1,4 @@
 public interface IModeleCinema {
-<<<<<<< HEAD
-
   /**
   * Renvoie l'utilisateur enregistré dont l'ID est donné en paramètre, s'il existe
   * Renvoie null sinon
@@ -59,62 +57,82 @@ public interface IModeleCinema {
   public Set<Seance> getListeSeancesFilm (f: Film);
 
   /**
-   * Enregistre un nouveau client, et s'il y a succès, en renvoie l'ID
+   * Enregistre un nouveau client, et en cas de succès, en renvoie l'ID
    * Sinon, renvoie un nombre négatif (-1, à priori)
    */
   public int ajouterClient (nom: String, email: String, mdp: String);
 
   /**
-   * Enregistre un nouveau manager, et s'il y a succès, en renvoie l'ID
+   * Enregistre un nouveau manager, et en cas de succès, en renvoie l'ID
    * Sinon, renvoie un nombre négatif (-1, à priori)
    */
   public int ajouterManager (nom: String, email: String, mdp: String);
 
   /**
-   * Enregistre un nouveau film, et s'il y a succès, en renvoie l'ID
+   * Enregistre un nouveau film, et en cas de succès, en renvoie l'ID
    * Sinon, renvoie un nombre négatif (-1, à priori)
    */
   public int ajouterFilm (titre: String, a: int, desc: String);
 
   /**
-   * Enregistre un nouveau film, et s'il y a succès, en renvoie l'ID
+   * Enregistre un nouveau film, et en cas de succès, en renvoie l'ID
    * Sinon, renvoie un nombre négatif (-1, à priori)
    */
   public int ajouterFilm (titre: String, a: int, desc: String, genres: ArrayList<String>);
 
+  /**
+   * Supprime le film dont l'ID est donné en paramètre
+   * Renvoie true par défaut, false en cas d'erreur/problème
+   */
   public boolean supprimerFilm (int id);
-  public boolean ajouterSalle (int numeroSalle, int idFilm);
+
+  /**
+   * Enregistre une nouvelle salle, et en cas de succès, en renvoie l'ID
+   * Sinon, renvoie un nombre négatif (-1, à priori)
+   */
+  public int ajouterSalle (int numeroSalle, int idFilm);
+
+  /**
+   * Supprime la salle dont l'ID est donné en paramètre
+   * Renvoie true par défaut, false en cas d'erreur/problème
+   */
   public boolean supprimerSalle (int numero);
-  public boolean ajouterSeance (int idSalle, int idFilm, Date horaireSeance);
+
+  /**
+   * Enregistre une nouvelle séance, et en cas de succès, en renvoie l'ID
+   * Sinon, renvoie un nombre négatif (-1, à priori)
+   */
+  public int ajouterSeance (int idSalle, int idFilm, Date horaireSeance);
+	
+  /**
+   * Supprime le film dont l'ID est donné en paramètre
+   * Renvoie true par défaut, false en cas d'erreur/problème
+   */
   public boolean supprimerSeance (int id);
-  public boolean creerReservation (ArrayList<Seance>);
+
+  /**
+   * Enregistre une nouvelle salle, et en cas de succès, en renvoie l'ID
+   * Sinon, renvoie un nombre négatif (-1, à priori)
+   */
+  public int creerReservation (ArrayList<Seance>);
+
+  /**
+   * Supprime le film dont l'ID est donné en paramètre
+   * Renvoie true par défaut, false en cas d'erreur/problème
+   */
   public boolean supprimerReservation (int id);
 
+	/**
+	 * Essaye de se connecter à l'utilisateur identifiés par les paramètres donnés
+	 * En cas de succès, cet utilisateur devient l'utilisateur connecté du modèle implémentant cette interface
+	 * Renvoie un ArrayList<boolean> de deux éléments : le premier indique si la connexion a été effectuée avec succès,
+	 * le deuxième, en cas de connexion réussie, indique si l'utilisateur en question est un Manager ou pas
+	 */
   public ArrayList<boolean> connecterUtilisateur (String email, String mdp);
-  public boolean deconnecterUtilisateur (String email);
-=======
-	public Utilisateur getUtilisateur (int id);
-	public Film getFilm (int id);
-	public Reservation getReservation (id: int);
-	public Salle getSalle (numero: int);
-	public Seance getSeance (id: int);
-	public Set<Utilisateur> getListeUtilisateur ();
-	public Set<Film> getListeFilms ();
-	public Set<Salle> getListeSalles ();
-	public Set<Seance> getListeSeancesFilm (f: Film);
-	public Set<Seance> getListeSeances ();
-	public int ajouterClient (nom: String, email: String, mdp: String);
-	public int ajouterManager (nom: String, email: String, mdp: String);
-	public int ajouterFilm (titre: String, a: int, desc: String);
-	public int ajouterFilm (titre: String, a: int, desc: String, genres: ArrayList<String>);
-	public boolean supprimerFilm (id: int);
-	public boolean ajouterSalle (num: int, capacite: int);
-	public boolean supprimerSalle (numero: int);
-	public boolean ajouterSeance (s: Seance);
-	public boolean supprimerSeance (id: int);
-	public boolean creerReservation (ArrayList<Seance>);
-	public boolean supprimerReservation (id: int);
-	public ArrayList<boolean> connecterUtilisateur (String email, String mdp);
-	public boolean deconnecterUtilisateur (String email);
->>>>>>> ram
+
+	/**
+	 * Déconnecte l'utilisateur actuellement connecté (il ne peut y en avoir qu'un à la fois, donc pas besoin de paramètre)
+	 * Renvoie true en cas de succès, false en cas d'échec
+	 */
+  public boolean deconnecterUtilisateur ();
 }
