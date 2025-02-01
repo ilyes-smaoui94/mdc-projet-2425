@@ -6,7 +6,7 @@ public class ModeleCinema implements IModeleCinema {
   private Set<Seance> seancesEnregistrees;
   
   /**
-  * Renvoie l'utilisateur enregistré dont l'id est donné en paramètre, s'il existe
+  * Renvoie l'utilisateur enregistré dont l'ID est donné en paramètre, s'il existe
   * Renvoie null sinon
   */
   public Utilisateur getUtilisateur (int id) {
@@ -19,7 +19,7 @@ public class ModeleCinema implements IModeleCinema {
   }
 
   /**
-  * Renvoie le film enregistré dont l'id est donné en paramètre, s'il existe
+  * Renvoie le film enregistré dont l'ID est donné en paramètre, s'il existe
   * Renvoie null sinon
   */
   public Film getFilm (int id) {
@@ -32,7 +32,7 @@ public class ModeleCinema implements IModeleCinema {
   }
 
   /**
-  * Renvoie la réservation enregistrée dont l'id est donné en paramètre, si elle existe
+  * Renvoie la réservation enregistrée dont l'ID est donné en paramètre, si elle existe
   * Renvoie null sinon
   */
   public Reservation getReservation (int id) {
@@ -43,6 +43,11 @@ public class ModeleCinema implements IModeleCinema {
     }
     return null;
   }
+
+  /**
+  * Renvoie la salle enregistrée dont le numéro est donné en paramètre, si elle existe
+  * Renvoie null sinon
+  */
   public Salle getSalle (int numero) {
     for (Salle s : this.utilisateursEnregistres) {
       if (s.getNumero() == numero) {
@@ -51,21 +56,40 @@ public class ModeleCinema implements IModeleCinema {
     }
     return null;
   }
-  public Seance getSeance (int id) {
-    ;
+
+  /**
+  * Renvoie la séance enregistrée dont l'ID est donné en paramètre, si elle existe
+  * Renvoie null sinon
+  */
+  public Seance getSeance (int numero) {
+    for (Seance s : this.utilisateursEnregistres) {
+      if (s.getNumero() == numero) {
+        return s;
+      }
+    }
+    return null;
   }
+  
   public Set<Utilisateur> getListeUtilisateur () {
-    ;
+    return this.utilisateursEnregistres;
   }
+
   public Set<Film> getListeFilms () {
-    ;
+    return this.filmsEnregistres;
   }
+
   public Set<Salle> getListeSalles () {
     ;
   }
+
   public Set<Seance> getListeSeancesFilm (f: Film) {
     ;
   }
+  
+  public Set<Seance> getListeSeancesFilm (f: Film) {
+    ;
+  }
+
   public Set<Seance> getListeSeances () {
     ;
   }
@@ -73,33 +97,43 @@ public class ModeleCinema implements IModeleCinema {
   public int ajouterClient (nom: String, email: String, mdp: String) {
     ;
   }
+
   public int ajouterManager (nom: String, email: String, mdp: String) {
     ;
   }
+
   public int ajouterFilm (titre: String, a: int, desc: String) {
     ;
   }
+
   public int ajouterFilm (titre: String, a: int, desc: String, genres: ArrayList<String>) {
     ;
   }
+
   public boolean supprimerFilm (id: int) {
     ;
   }
+
   public boolean ajouterSalle (num: int, capacite: int) {
     ;
   }
+
   public boolean supprimerSalle (numero: int) {
     ;
   }
+
   public boolean ajouterSeance (s: Seance) {
     ;
   }
+
   public boolean supprimerSeance (id: int) {
     ;
   }
+
   public boolean creerReservation (ArrayList<Seance>) {
     ;
   }
+
   public boolean supprimerReservation (id: int) {
     ;
   }
@@ -107,6 +141,7 @@ public class ModeleCinema implements IModeleCinema {
   public ArrayList<boolean> connecterUtilisateur (String email, String mdp) {
     ;
   }
+
   public boolean deconnecterUtilisateur (String email) {
     ;
   }
