@@ -434,8 +434,8 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
 		this.controleur.GererAffichageFilms();
 	}
 	
-	public void Option4(Film f) {
-		this.controleur.GererAffichageFilm(f);
+	public void Option4() {
+		this.controleur.GererAffichageFilm();
 	}
 
     public void OptionCreerSeance() throws ParseException {
