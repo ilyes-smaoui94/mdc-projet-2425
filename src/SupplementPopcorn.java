@@ -1,4 +1,3 @@
-package app_cinema;
 
 public class SupplementPopcorn extends BilletExtra{
 	public SupplementPopcorn(Billet Billet) {

@@ -1,23 +1,27 @@
-package app_cinema;
+import java.util.ArrayList;
+
 
 public class Film {
-
-	private String titre;
+	
+	 private static int id = 1;
+	  private String titre;
 	  private int annee;
 	  private String description;
-	  private GenreFilm genre;
+	  private Genre genre;
 
 	  public Film (String t, int a, String d) {
+		this.id = id++;
 	    this.titre = t;
 	    this.annee = a;
 	    this.description = d;
-	    this.genre = new GenreFilm();
+	    this.genre = null;
 	  }
-	  public Film (String t, int a, String d, GenreFilm gf) {
+	  public Film (String t, int a, String d, Genre gf) {
+		this.id = id++;
 	    this.titre = t;
 	    this.annee = a;
 	    this.description = d;
-	    this.genre = gf;
+	    this.genre=gf;
 	  }
 
 	  public String getTitre () {
@@ -35,5 +39,13 @@ public class Film {
 	  public String getDesc () {
 	    return this.description;
 	  }
+	  
+	  // ************* ilies
+	public int getId() {
+		 return this.id;
+	}
+	public Genre getGenre() {
+		return genre;
+	}
 	  
 	}
