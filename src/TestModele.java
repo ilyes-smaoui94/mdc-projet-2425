@@ -115,7 +115,8 @@ public class TestModele {
 		essayerAjoutSalle(monModele, donneesSalle[3][0], donneesSalle[3][1]);
 		essayerAjoutSalle(monModele, donneesSalle[4][0], donneesSalle[4][1]);
 		
-		essayerAjoutFilm(monModele, "Interstellar", 2014, "desc", 169);
+		essayerAjoutFilm(monModele, "Interstellar", 2014, "descInterstellar", 169);
+		essayerAjoutFilm(monModele, "EEAO", 2022, "descEEA0", 139);
 		
 		Scanner monScan = new Scanner(System.in);
 		System.out.println("idSalle, idFilm, Date");
