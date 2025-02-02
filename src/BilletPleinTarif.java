@@ -9,7 +9,7 @@
  *   <li>{@link TypeSeance#IMAX} : 13.0€</li>
  *   <li>Type de séance non défini ou {@link TypeSeance#REGULAR} : 11.0€</li>
  * </ul>
- * </p>
+ *  
  *
  * <p>Exemple d'utilisation :
  * <pre>{@code
@@ -18,7 +18,7 @@
  * double prix = billetPleinTarif.getPrix();
  * System.out.println("Prix du billet plein tarif : " + prix + " €");
  * }</pre>
- * </p>
+ *  
  * 
  * @see Billet
  * @see Seance
