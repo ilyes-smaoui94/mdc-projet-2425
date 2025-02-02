@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -99,6 +100,11 @@ public class VueCinema implements IVueManager, IVueClient {
 
   @Override
   public void afficherSalles(Set<Salle> salles) {
+    for (Salle s : salles) {
+      System.out.println("Salle d'ID " + s.getId() + ":");
+      System.out.println("Numéro : " + s.getNumero());
+      System.out.println("Capacité : " + s.getCapacite());
+    }
   }
 
   @Override
@@ -124,13 +130,15 @@ public class VueCinema implements IVueManager, IVueClient {
   @Override
   public void afficherSeance(Seance s) {
     System.out.println("\nSeance : \n  -IdSeance:" + s.getId() + "\n  -Film" + s.getFilm().getTitre() + "\n  -IdFilm: "
-        + s.getFilm().getId() + "\n  -Date: " + s.getDate() + "\n  -Heure: " + s.getHeure() + "\n  -Salle: "
+        + s.getFilm().getId() + "\n  -Date: " + s.getDate() + "\n  -Salle: "
         + s.getSalle().toString() + "\n  -Type Seance:" + s.getTypeSeance() + ".\n");
-
   }
 
   public void afficherSeances(ArrayList<Seance> seances) {
-
+    Set<Salle> sallesSeance = new HashSet<Salle>();
+    for (Seance s: seances) {
+      if ();
+    }
   }
 
   @Override
@@ -148,16 +156,38 @@ public class VueCinema implements IVueManager, IVueClient {
 
   @Override
   public ArrayList<String> afficherDialogueReservationSeance() {
-    return new ArrayList<>();
+    ArrayList<String> res = new ArrayList<>();
+    System.out.println("Pour faire votre réservation, veuillez entrer dans l'ordre (futures options à rajouter plus tard):");
+    System.out.println("- ID de la séance à réserver");
+    res.add(this.leScanner.nextLine());
+    return res;
   }
 
-  // public void afficherReservationReussie(Reservation r) {}
+  public void afficherReservationReussie(Reservation r) {
+    System.out.println("Réservation faites avec succès !");
+    for (Billet b: r.getBillets()) {
+      System.out.println("Séance de " + b.getSeance().getDate());
+      System.out.println("Dans la salle numéro " + b.getSeance().getSalle().getNumero());
+      System.out.println("Film : " + b.getSeance().getFilm() + "\n------------------");
+    }
+  }
 
   @Override
   public void afficherReservationEchouee() {
+    System.out.println("Réservation échouée !");
   }
 
-  // public void afficherReservation(Reservation r) {}
+  public void afficherReservation(Reservation r) {
+    System.out.println("Récapitulatif de la réservation d'ID " + r.getId() + " :");
+    int i = 1;
+    for (Billet b: r.getBillets()) {
+      System.out.println("Billet n°" + i + " (ID : " + b.getId() + ") :");
+      System.out.println("Séance de " + b.getSeance().getDate());
+      System.out.println("Dans la salle numéro " + b.getSeance().getSalle().getNumero());
+      System.out.println("Film : " + b.getSeance().getFilm() + "\n------------------");
+      i += 1;
+    }
+  }
 
   @Override
   public ArrayList<String> afficherDialogueCreationUtilisateur() {
