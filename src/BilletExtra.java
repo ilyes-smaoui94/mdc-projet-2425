@@ -5,7 +5,7 @@
  * <p>
  * Cette classe hérite de {@link Billet} et contient un billet de base ({@link #billetBase})
  * afin de lui ajouter un supplément (prix, etc.) ou des informations additionnelles.
- * </p>
+ * 
  *
  * <p>Exemple d'utilisation :
  * <pre>{@code
@@ -24,13 +24,13 @@
  * // Calcul du prix final
  * double prixFinal = billetComplet.getPrix();
  * }</pre>
- * </p>
+ * 
  * 
  * <p>
  * Les classes concrètes qui étendent {@code BilletExtra} doivent implémenter 
  * la méthode {@link #getPrix()} pour définir le coût supplémentaire appliqué 
  * au billet de base.
- * </p>
+ * 
  * 
  * @see Billet
  * @see SupplementBoisson
