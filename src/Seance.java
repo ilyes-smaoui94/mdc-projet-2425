@@ -22,6 +22,7 @@ import java.util.Date;
  * }</pre>
  * </p>
  * 
+ * @author 
  */
 public class Seance {
 
@@ -128,4 +129,63 @@ public class Seance {
     /**
      * Modifie le film projeté lors de cette séance.
      *
-     * @param f Le 
+     * @param f Le nouveau film de la séance.
+     */
+    public void setFilm(Film f) {
+        this.filmSeance = f;
+    }
+
+    /**
+     * Retourne la date et l'heure de cette séance.
+     *
+     * @return La date de la séance.
+     */
+    public Date getDate() {
+        return this.date;
+    }
+
+    /**
+     * Modifie la date et l'heure de cette séance.
+     *
+     * @param date La nouvelle date de la séance.
+     */
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    /**
+     * Retourne le nombre de places restantes pour cette séance.
+     *
+     * @return Le nombre de places restantes.
+     */
+    public int getPlacesRestantes() {
+        return this.placesRestantes;
+    }
+
+    /**
+     * Modifie le nombre de places restantes pour cette séance.
+     *
+     * @param placesRestantes Le nouveau nombre de places restantes.
+     */
+    public void setPlacesRestantes(int placesRestantes) {
+        this.placesRestantes = placesRestantes;
+    }
+
+    /**
+     * Retourne le type de séance (VO, VF, etc.).
+     *
+     * @return Le type de la séance.
+     */
+    public TypeSeance getTypeSeance() {
+        return this.typeSeance;
+    }
+
+    /**
+     * Modifie le type de séance.
+     *
+     * @param typeSeance Le nouveau type de séance.
+     */
+    public void setTypeSeance(TypeSeance typeSeance) {
+        this.typeSeance = typeSeance;
+    }
+}
