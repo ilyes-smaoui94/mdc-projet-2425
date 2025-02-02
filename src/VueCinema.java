@@ -79,6 +79,13 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
     @Override
     public void afficherSalles(Set<Salle> salles) {}
 
+    public void afficherSalles(ArrayList<Salle> salles) {
+        System.out.print("Listes des Salles: ");
+        System.out.println(salles);
+    
+   } 
+
+
     @Override
     public String afficherDialogueAffichageSeance() {
         return "";
@@ -419,6 +426,11 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
     public void OptionSupprimerSalle() {
 		this.controleur.gererSuppressionSalle();
 	}
+
+    public void OptionAfficherSalles() {
+		this.controleur.gererAfficherSalles();
+	}
+
 
 
 

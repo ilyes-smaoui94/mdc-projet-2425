@@ -270,5 +270,8 @@ public class ControleurCinema implements IControleurCinema {
 	        
 	
 			}
+            public void gererAfficherSalles() {
+				vue.afficherSalles(modele.getListeSalle());
+            }
 
 }
