@@ -5,7 +5,7 @@
  * Cette classe hérite de {@link BilletExtra}, qui sert de décorateur 
  * pour un objet {@link Billet}. Le prix final est la somme du prix 
  * du billet de base et d'un supplément de 5.0€.
- * </p>
+ * 
  *
  * <p>Exemple d'utilisation :
  * <pre>{@code
@@ -16,7 +16,7 @@
  * double prixFinal = supplementGlace.getPrix();
  * System.out.println("Prix final avec supplément glace : " + prixFinal + "€");
  * }</pre>
- * </p>
+ * 
  * 
  */
 public class SupplementGlace extends BilletExtra {
@@ -35,7 +35,7 @@ public class SupplementGlace extends BilletExtra {
      * Calcule et retourne le prix du billet incluant le supplément glace.
      * <p>
      * Le prix final est le prix du billet de base majoré de 5.0€.
-     * </p>
+     * 
      *
      * @return Le prix total du billet avec supplément glace.
      */
