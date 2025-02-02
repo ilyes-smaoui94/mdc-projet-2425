@@ -186,9 +186,9 @@ public class ModeleCinema implements IModeleCinema {
 	}
 
 	@Override
-	public int ajouterFilm (String titre, int a, String desc) {
+	public int ajouterFilm (String titre, int a, String desc, int duree) {
 		try {
-			Film nvFilm = new Film(titre, a, desc);
+			Film nvFilm = new Film(titre, a, desc, duree);
 			if (nvFilm == null) {
 				return ID_VALUE_ON_ERROR;
 			}
@@ -201,7 +201,7 @@ public class ModeleCinema implements IModeleCinema {
 	}
 
 	@Override
-	public int ajouterFilm (String titre, int a, String desc, ArrayList<String> genres_str) {
+	public int ajouterFilm (String titre, int a, String desc, int duree, ArrayList<String> genres_str) {
 		try {
 			Set<Genre> genresSet = new HashSet<Genre>();
 			for (String g_str: genres_str) {
@@ -211,7 +211,7 @@ public class ModeleCinema implements IModeleCinema {
 					}
 				}
 			}
-			Film nvFilm = new Film(titre, a, desc, genresSet);
+			Film nvFilm = new Film(titre, a, desc, duree, genresSet);
 			if (nvFilm == null) {
 				return ID_VALUE_ON_ERROR;
 			}
@@ -302,6 +302,7 @@ public class ModeleCinema implements IModeleCinema {
 				return ID_VALUE_ON_ERROR;
 			}
 			else {
+				// À faire : vérifier qu'il n'y a pas chevauchement entre cette séance et une autre
 				this.seancesEnregistrees.add(s);
 				return s.getId();
 			}

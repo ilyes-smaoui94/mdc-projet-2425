@@ -155,7 +155,7 @@ public interface IModeleCinema {
 	 * @param desc description du film à enregistrer
 	 * @return l'ID du manager créé, si possible, -1 sinon
 	 */
-	public int ajouterFilm (String titre, int a, String desc);
+	public int ajouterFilm (String titre, int a, String desc, int duree);
 
 	/**
 	 * Enregistre un nouveau film
@@ -167,7 +167,7 @@ public interface IModeleCinema {
 	 * @param genres_str genres du film à enregistrer
 	 * @return ID du film créé, si possible
 	 */
-	public int ajouterFilm (String titre, int a, String desc, ArrayList<String> genres_str);
+	public int ajouterFilm (String titre, int a, String desc, int duree, ArrayList<String> genres_str);
 
 	/**
 	 * Supprime le film dont l'ID est donné en paramètre

@@ -1,26 +1,31 @@
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Date;
 
 public class Film {
+	private int dureeMin = 30;
 	private static int nextAvailableId = 1;
 	private int id;
 	private String titre;
 	private int annee;
 	private String description;
+	private int duree;
 	private Set<Genre> genres;
 
-	public Film (String t, int a, String d) {
+	public Film (String t, int a, String d, int duree) {
 		this.id = this.getNextAvailableId();
 		this.titre = t;
 		this.annee = a;
 		this.description = d;
+		this.duree = duree >= dureeMin ? duree : dureeMin;
 		this.genres = new HashSet<Genre>();
 	}
-	public Film (String t, int a, String d, Set<Genre> g) {
+	public Film (String t, int a, String d, int duree, Set<Genre> g) {
 		this.id = this.getNextAvailableId();
 		this.titre = t;
 		this.annee = a;
 		this.description = d;
+		this.duree = duree >= dureeMin ? duree : dureeMin;
 		this.genres = g != null ? g : new HashSet<Genre>();
 	}
 
@@ -51,6 +56,12 @@ public class Film {
 	}
 	public void setDesc (String d) {
 		this.description = d;
+	}
+	public int getDuree () {
+		return this.duree;
+	}
+	public void setDuree (int duree) {
+		this.duree = duree >= dureeMin ? duree : dureeMin;
 	}
 	public void addGenre (Genre g) {
 		this.genres.add(g);
