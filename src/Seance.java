@@ -1,26 +1,38 @@
+import java.util.Date;
 
 public class Seance {
+	private static int id = 1;
+	private Film film;
 	private Salle salle;
-	private String date;
+	private Date date;
 	private String heure;
 	private int nb_place_dispo;
 	private TypeSeance typeSeance; 
 	
-	public Seance(Salle salle, String date,String heure, int nb_place_dispo ) {
+	public Seance(Film film, Date date,String heure,Salle salle,TypeSeance typeSeance ) {
+		this.id = id++;
+		this.film=film;
 		this.salle=salle;
 		this.date=date;
 		this.heure=heure;
+		this.typeSeance=typeSeance;
 		this.nb_place_dispo=nb_place_dispo;
 	}
 	
 	public Seance() {}
 
 
-	public String getDate() {
+	public int getId(){
+		return this.id;
+	}
+	public Film getFilm(){
+		return this.film;
+	}
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

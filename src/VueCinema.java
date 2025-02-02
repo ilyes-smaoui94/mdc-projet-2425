@@ -1,5 +1,10 @@
 
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
@@ -155,28 +160,25 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
         return Liste;
 	   
     }
-    public void TentativeAjoutFilm(String titre, int annee, String description, Genre genrefilm) throws ParseException {
-		this.controleur.GererCreationFilm();
-	}
 	
 	public void afficherCreationFilmReussie(Film f){
-		 System.out.println("✅ Film Crée : \n  -" +f.getTitre()  + "\n  -annee: " + f.getAnnee() + "\n  -Description: " + f.getDesc() + "\n  -Genre principal:"+ f.getGenre());
+		 System.out.println("\n✅ Film Crée : \n  -" +f.getTitre()  + "\n  -annee: " + f.getAnnee() + "\n  -Description: " + f.getDesc() + "\n  -Genre principal:"+ f.getGenre()+".\n");
 
 	}
 	
 	public void afficherCreationFilmEchouer(){
-		 System.out.println("❌ Film non crée :");
+		 System.out.println("\n❌ Film non crée. \n");
 
 	}
 
     
-    public void afficherSuppresionFilmReussie(Film f){
-		 System.out.println("✅ Film supprimé avec succès: " +f.getTitre());
+    public void afficherSuppressionFilmReussie(Film f){
+		 System.out.println("✅ Film supprimé avec succès: " +f.getTitre()+ ".\n");
 
 	}
 	
-	public void afficherSuppresionFilmEchouer(){
-		 System.out.println("❌ Impossible de supprimer :");
+	public void afficherSuppressionFilmEchouer(){
+		 System.out.println("❌ Impossible de supprimer. \n");
 
 	}
 	
@@ -211,30 +213,110 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
     
    public void afficherSuppressionSalleReussie(Salle s) {}
 
-    @Override
-    public void afficherSuppresionSalleEchouee() {}
-
+    
     @Override
     public ArrayList<String> afficherDialogueCreationSeance() {
-        return new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+	    
+	    System.out.print("Entrez le film : ");
+	    String film = scanner.nextLine();
+
+	    String date;
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate today = LocalDate.now(); // Date actuelle
+        while (true) {
+            System.out.print("Entrez la date (YYYY-MM-DD) : ");
+            date = scanner.nextLine();
+            try {
+                LocalDate enteredDate = LocalDate.parse(date, dateFormatter);
+                if (enteredDate.isBefore(today)) { // Vérifie si la date est dans le passé
+                    System.out.println("⛔ Erreur : La date ne peut pas être antérieure à aujourd'hui (" + today + ").");
+                } else {
+                    break; // Sortie de la boucle si la date est valide et dans le futur
+                }
+            } catch (DateTimeParseException e) {
+                System.out.println("⛔ Format invalide ! Veuillez entrer une date valide (ex: 2024-02-02).");
+            }
+        }
+
+        // Vérification stricte de l'heure (HH:MM)
+        String heure;
+        DateTimeFormatter heureFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime enteredTime;
+        
+        while (true) {
+            System.out.print("Entrez l'heure (HH:MM) : ");
+            heure = scanner.nextLine();
+            try {
+                LocalDate enteredDate = LocalDate.parse(date, dateFormatter);
+                enteredTime = LocalTime.parse(heure, heureFormatter);
+                LocalDateTime now = LocalDateTime.now();
+                LocalDateTime enteredDateTime = LocalDateTime.of(enteredDate, enteredTime);
+                
+                if (enteredDateTime.isBefore(now.plusHours(3))) { // Vérifie si l'heure est au moins 3h après maintenant
+                    System.out.println("⛔ Erreur : L'horaire doit être au moins 3 heures après l'heure actuelle (" 
+                                       + now.format(heureFormatter) + ").");
+                } else {
+                    break; // Sortie de la boucle si l'heure est valide et respecte la condition
+                }
+            } catch (DateTimeParseException e) {
+                System.out.println("⛔ Format invalide ! Veuillez entrer une heure valide (ex: 14:30).");
+            }
+        }
+	    
+	    System.out.print("Choissiez la salle: ");
+	    String salle = scanner.nextLine();
+	    
+	    System.out.print("Entrez le type de séance (IMAX, 4Dmax, 3D) : ");
+	    String typeStr = scanner.nextLine();
+	    
+        ArrayList<String> Liste = new ArrayList<String>();
+        Liste.add(film);
+        Liste.add(date);
+        Liste.add(heure);
+        Liste.add(salle);
+        Liste.add(typeStr);
+
+        return Liste;
     }
 
     @Override
-    public void afficherCreationSeanceReussie(Seance s) {}
+    public void afficherCreationSeanceReussie(Seance s) {
+        System.out.println("\n✅ Seance Crée : \n" +s.getFilm().getTitre()  + "\nDate: " + s.getDate() + "\nHeure: " + s.getHeure() + "\nSalle: "+ s.getSalle().toString() + "\nType Seance:"+ s.getTypeSeance()+ ".\n");
+
+    }
 
     @Override
-    public void afficherCreationSeanceEchouee() {}
+    public void afficherCreationSeanceEchouee() {
+        System.out.println("\n❌ Seance non crée.\n");
+
+    }
 
     @Override
     public ArrayList<String> afficherDialogueSuppressionSeance() {
-        return new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+	    System.out.print("Entrez l'Identifiant de la seance à supprimer: ");
+	    String id = scanner.nextLine();
+	    
+		
+	    ArrayList<String> Liste = new ArrayList<String>();
+        Liste.add(id);
+        return Liste;
+    
     }
 
     
-    public void afficherSuppressionSeanceReussie(Seance s) {}
+    public void afficherSuppressionSeanceReussie(Seance s) {
+        System.out.println("✅ Seance Supprimer : \n  -Film:" +s.getFilm().getTitre()  + "\n  -Date: " + s.getDate() + "\n  -Heure: " + s.getHeure() + "\n  -Salle:"+ s.getSalle().toString() + "\n  -Type Seance:"+ s.getTypeSeance());
+
+    }
 
     @Override
-    public void afficherSuppressionSeanceEchouee() {}
+    public void afficherSuppressionSeanceEchouee() {
+        System.out.println("❌ Seance non Supprimer.");
+
+    }
 
 	@Override
 	public String afficherDialogueAffichageSeancesPlusieursSalles() {
@@ -254,7 +336,7 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
 		
 	}
 
-	
+	@Override
 	public void afficherSuppressionSalleEchouee() {
 		// TODO Auto-generated method stub
 		
@@ -295,6 +377,14 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
 	
 	public void Option4(Film f) {
 		this.controleur.GererAffichageFilm(f);
+	}
+
+    public void OptionCreerSeance() throws ParseException {
+		this.controleur.GererCreationSeance();
+	}
+
+    public void OptionSupprimerSeance() {
+		this.controleur.GererSuppressionSeance();
 	}
 
 

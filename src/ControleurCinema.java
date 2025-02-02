@@ -1,5 +1,9 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class ControleurCinema implements IControleurCinema {
 	
@@ -19,6 +23,15 @@ public class ControleurCinema implements IControleurCinema {
 	        for (Film film : listeFilms) {
 	            if (film.getId() == id) { // Vérification basée sur l'ID
 	                return film; // 🎬 Film déjà présent !
+	            }
+	        }
+	        return null; // ❌ Film non trouvé
+	    }
+
+		public Seance ChercherSeanceParID(ArrayList<Seance> l, int id) {
+	        for (Seance seance : l) {
+	            if (seance.getId() == id) { // Vérification basée sur l'ID
+	                return seance; // 🎬 Film déjà présent !
 	            }
 	        }
 	        return null; // ❌ Film non trouvé
@@ -53,9 +66,7 @@ public class ControleurCinema implements IControleurCinema {
 
 			        if (genre == null) {   
 			            System.out.println("Erreur : Données genre invalides.");
-			            
-			            
-			        }
+					}
 
 			        // Création de la séance
 					Film film= new Film(titre,annee,descritpion,MainGenre);
@@ -88,9 +99,9 @@ public class ControleurCinema implements IControleurCinema {
 
 	 			
 				if (supprime) {
-					this.vue.afficherSuppresionFilmReussie(f);
+					this.vue.afficherSuppressionFilmReussie(f);
 				} else {
-					this.vue.afficherSuppresionFilmEchouer();				}
+					this.vue.afficherSuppressionFilmEchouer();				}
 	        	
 	        }
 
@@ -113,6 +124,87 @@ public class ControleurCinema implements IControleurCinema {
 	    		}
         }
         return null; // ❌ Film non trouvé
-    }	
+    }
+	
+	public  Salle chercherSalleParId(ArrayList<Salle> salles, int num) {
+		for (Salle salle : salles) {
+			if (salle.getId()==num) {
+				return salle;  
+			}
+		}
+		return null;
+	}
+
+	public void GererCreationSeance() throws ParseException {
+
+	        	ArrayList<String> Liste =this.vue.afficherDialogueCreationSeance();
+
+	        	String f= Liste.get(0);
+	        	Film film =this.chercherFilmParNom(this.modele.getListeFilm(), f);
+	        	String d= Liste.get(1);
+	        	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		    	Date date= formatter.parse(d);
+		    	
+				String heure= Liste.get(2);
+				
+				int salle= Integer.parseInt(Liste.get(3));
+				
+				ArrayList<Salle> listeSalle=this.modele.getListeSalle();
+		    	Salle s =chercherSalleParId(listeSalle,salle);
+		    	
+			    String  typeStr=  Liste.get(4);
+			    TypeSeance typeSeance = null;
+
+			    if (typeStr.equalsIgnoreCase("IMAX")) {
+			        typeSeance = TypeSeance.IMAX;
+			    } else if (typeStr.equalsIgnoreCase("4Dmax")) {
+			        typeSeance = TypeSeance.DMAX_4D;
+			    } else if (typeStr.equalsIgnoreCase("3D")) {
+			        typeSeance = TypeSeance._3D;
+			    }
+			    
+			 // Création de la séance
+				Seance seance= new Seance(film,date,heure,s,typeSeance);
+				 if (seance !=null) {
+		               this.vue.afficherCreationSeanceReussie(seance);
+					   this.modele.getListeSeance().add(seance);
+
+		            } else {
+		            	this.vue.afficherCreationSeanceEchouee();
+		            }
+			    
+				
+			}
+			public static boolean supprimerSeanceParId(ArrayList<Seance> listeSeances, int id) {
+				Iterator<Seance> iterator = listeSeances.iterator();
+		
+				while (iterator.hasNext()) {
+					Seance seance = iterator.next();
+					if (seance.getId() == id) { // Vérifie si l'ID correspond
+						iterator.remove(); // Supprime la séance en toute sécurité
+						System.out.println("✅ Séance avec ID " + id + " supprimée avec succès.");
+						return true; // Retourne true si la suppression a eu lieu
+					}
+				}
+		
+				System.out.println("⛔ Aucune séance trouvée avec l'ID " + id + ".");
+				return false; // Retourne false si aucune séance n'a été trouvée
+			}
+
+			public void GererSuppressionSeance(){
+				ArrayList<String> Liste;
+
+				Liste = this.vue.afficherDialogueSuppressionSeance();
+				int id= Integer.parseInt(Liste.get(0));
+				Seance s= ChercherSeanceParID(this.modele.getListeSeance(), id);
+				boolean supprime = supprimerSeanceParId(this.modele.getListeSeance(),id);
+
+	 			
+				if (supprime) {
+					this.vue.afficherSuppressionSeanceReussie(s);
+				} else {
+					this.vue.afficherSuppressionSeanceEchouee();				}
+	        	
+	        }
 
 }

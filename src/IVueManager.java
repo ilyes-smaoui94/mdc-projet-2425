@@ -18,7 +18,7 @@ public interface IVueManager {
 
     ArrayList<String> AfficherDialogueSuppressionFilm();
     void afficherSuppressionFilmReussie();
-    void afficherSuppresionFilmEchouer();
+    void afficherSuppressionFilmEchouer();
 
     ArrayList<String> afficherDialogueCreationSalle();
     void afficherCreationSalleReussie(Salle s);
@@ -26,7 +26,7 @@ public interface IVueManager {
 
     ArrayList<String> afficherDialogueSuppressionSalle();
     void afficherSuppressionSalleReussie();
-    void afficherSuppresionSalleEchouee();
+    void afficherSuppressionSalleEchouee();
 
     ArrayList<String> afficherDialogueCreationSeance();
     void afficherCreationSeanceReussie(Seance s);

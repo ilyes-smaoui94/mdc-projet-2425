@@ -21,6 +21,10 @@ public class Salle {
 	public void setCapacite(int capacite) {
 		this.capacite = capacite;
 	}
+
+	public String toString() {
+		return "Salle "+ this.getId();
+	}
 	
 	
 	
