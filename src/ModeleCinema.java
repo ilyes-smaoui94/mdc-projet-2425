@@ -1,14 +1,29 @@
+import java.util.Set;
+import java.util.HashSet;
+
 public class ModeleCinema implements IModeleCinema {
 	private Utilisateur utilisateurConnecte;
 	private Set<Utilisateur> utilisateursEnregistres;
+	private Set<String> emailsUtilisateursEnregistres;
 	private Set<Film> filmsEnregistres;
 	private Set<Salle> sallesEnregistrees;
 	private Set<Seance> seancesEnregistrees;
+	private Set<Billet> billetsEnregistres;
+	private Set<Reservation> reservationsEnregistrees;
+
+	public static final int ID_VALUE_ON_ERROR = -1;
 	
-	/**
-	* Renvoie l'utilisateur enregistré dont l'ID est donné en paramètre, s'il existe
-	* Renvoie null sinon
-	*/
+	public ModeleCinema () {
+		this.utilisateursEnregistres = new HashSet<Utilisateur>();
+		this.emailsUtilisateursEnregistres = new HashSet<String>();
+		this.filmsEnregistres = new HashSet<Film>();
+		this.sallesEnregistrees = new HashSet<Salle>();
+		this.seancesEnregistrees = new HashSet<Seance>();
+		this.billetsEnregistres = new HashSet<Billet>();
+		this.reservationsEnregistrees = new HashSet<Reservation>();
+	}
+	
+	@Override
 	public Utilisateur getUtilisateur (int id) {
 		for (Utilisateur u : this.utilisateursEnregistres) {
 			if (u.getId() == id) {
@@ -18,12 +33,9 @@ public class ModeleCinema implements IModeleCinema {
 		return null;
 	}
 
-	/**
-	* Renvoie le film enregistré dont l'ID est donné en paramètre, s'il existe
-	* Renvoie null sinon
-	*/
+	@Override
 	public Film getFilm (int id) {
-		for (Film f : this.utilisateursEnregistres) {
+		for (Film f : this.filmsEnregistres) {
 			if (f.getId() == id) {
 				return f;
 			}
@@ -31,12 +43,9 @@ public class ModeleCinema implements IModeleCinema {
 		return null;
 	}
 
-	/**
-	* Renvoie la réservation enregistrée dont l'ID est donné en paramètre, si elle existe
-	* Renvoie null sinon
-	*/
+	@Override
 	public Reservation getReservation (int id) {
-		for (Reservation r : this.utilisateursEnregistres) {
+		for (Reservation r : this.reservationsEnregistrees) {
 			if (r.getId() == id) {
 				return r;
 			}
@@ -44,116 +53,296 @@ public class ModeleCinema implements IModeleCinema {
 		return null;
 	}
 
-	/**
-	* Renvoie la salle enregistrée dont le numéro est donné en paramètre, si elle existe
-	* Renvoie null sinon
-	*/
-	public Salle getSalle (int numero) {
-		for (Salle s : this.utilisateursEnregistres) {
-			if (s.getNumero() == numero) {
+	@Override
+	public Salle getSalle (int id) {
+		for (Salle s : this.sallesEnregistrees) {
+			if (s.getId() == id) {
 				return s;
 			}
 		}
 		return null;
 	}
 
-	/**
-	* Renvoie la séance enregistrée dont l'ID est donné en paramètre, si elle existe
-	* Renvoie null sinon
-	*/
-	public Seance getSeance (int numero) {
-		for (Seance s : this.utilisateursEnregistres) {
-			if (s.getNumero() == numero) {
+	@Override
+	public Seance getSeance (int id) {
+		for (Seance s : this.seancesEnregistrees) {
+			if (s.getId() == id) {
 				return s;
 			}
 		}
 		return null;
 	}
 	
+	@Override
 	public Set<Utilisateur> getListeUtilisateur () {
 		return this.utilisateursEnregistres;
 	}
 
+	@Override
 	public Set<Film> getListeFilms () {
 		return this.filmsEnregistres;
 	}
 
+	@Override
 	public Set<Salle> getListeSalles () {
-		;
+		return this.sallesEnregistrees;
 	}
 
-	public Set<Seance> getListeSeancesFilm (f: Film) {
-		;
+	@Override
+	public Set<Seance> getListeSeancesFilm (Film f) {
+		Set<Seance> resSeances = new HashSet<Seance>();
+		for (Seance s : this.seancesEnregistrees) {
+			if (s.getFilm() == f) {
+				resSeances.add(s);
+			}
+		}
+		return resSeances;
 	}
 	
-	public Set<Seance> getListeSeancesFilm (f: Film) {
-		;
-	}
-
+	@Override
 	public Set<Seance> getListeSeances () {
-		;
+		return this.seancesEnregistrees;
 	}
 
-	public int ajouterClient (nom: String, email: String, mdp: String) {
-		;
+	// 
+	@Override
+	public int ajouterClient (String nom, String email, String mdp) {
+		try {
+			Client nvClient = new Client(nom, email, mdp);
+			if (nvClient == null) {
+				return ID_VALUE_ON_ERROR;
+			}
+			this.utilisateursEnregistres.add(nvClient);
+			return nvClient.getId();
+		}
+		catch (Exception e) {
+			return ID_VALUE_ON_ERROR;
+		}
 	}
 
-	public int ajouterManager (nom: String, email: String, mdp: String) {
-		;
+	@Override
+	public int ajouterManager (String nom, String email, String mdp) {
+		try {
+			Manager leManager = Manager.getManagerInstance(email, mdp);
+			if (leManager == null) {
+				return ID_VALUE_ON_ERROR;
+			}
+			else {
+				this.utilisateursEnregistres.add(leManager);
+				return leManager.getId();
+			}
+		}
+		catch (Exception e) {
+			return ID_VALUE_ON_ERROR;
+		}
 	}
 
-	public int ajouterFilm (titre: String, a: int, desc: String) {
-		;
+	@Override
+	public int ajouterFilm (String titre, int a, String desc) {
+		try {
+			Film nvFilm = new Film(titre, a, desc);
+			if (nvFilm == null) {
+				return ID_VALUE_ON_ERROR;
+			}
+			this.filmsEnregistres.add(nvFilm);
+			return nvFilm.getId();
+		}
+		catch (Exception e) {
+			return ID_VALUE_ON_ERROR;
+		}
 	}
 
+	@Override
 	public int ajouterFilm (titre: String, a: int, desc: String, genres: ArrayList<String>) {
-		;
+		try {
+			Set<Genre> genresSet = new HashSet<Genre>();
+			for (String g_str: genres) {
+				for (Genre g: Genre.values()) {
+					if (g.name().equalsIgnoreCase(g_str)) {
+						genresSet.add(g);
+					}
+				}
+			}
+			Film nvFilm = new Film(titre, a, desc, genresSet);
+			if (nvFilm == null) {
+				return ID_VALUE_ON_ERROR;
+			}
+			else {
+				this.filmsEnregistres.add(nvFilm);
+				return nvFilm.getId();
+			}
+		}
+		catch (Exception e) {
+			return ID_VALUE_ON_ERROR;
+		}
 	}
 
-	public boolean supprimerFilm (id: int) {
-		;
+	@Override
+	public boolean supprimerFilm (int id) {
+		try {
+			Film filmAEnlever = null;
+			for (Film f: this.filmsEnregistres) {
+				if (f.getId() == id) {
+					filmAEnlever = f;
+					break;
+				}
+			}
+			if (filmAEnlever == null) {
+				return false;
+			}
+			else {
+				this.filmsEnregistres.remove(filmAEnlever);
+				return true;
+			}
+		}
+		catch (Exception e) {
+			return false;
+		}
 	}
 
-	public boolean ajouterSalle (num: int, capacite: int) {
-		;
+	@Override
+	public int ajouterSalle (num: int, capacite: int) {
+		try {
+			Salle s = new Salle(num, capacite);
+			if (s == null) {
+				return ID_VALUE_ON_ERROR;
+			}
+			else {
+				this.sallesEnregistrees.add(s);
+				return s.getId();
+			}
+		}
+		catch (Exception e) {
+			return ID_VALUE_ON_ERROR;
+		}
 	}
 
+	@Override
 	public boolean supprimerSalle (numero: int) {
-		;
+		try {
+			Salle salleAEnlever = null;
+			for (Salle s: this.sallesEnregistrees) {
+				if (s.getId() == id) {
+					salleAEnlever = s;
+					break;
+				}
+			}
+			if (salleAEnlever == null) {
+				return false;
+			}
+			else {
+				this.sallesEnregistrees.remove(salleAEnlever);
+				return true;
+			}
+		}
+		catch (Exception e) {
+			return false;
+		}
 	}
 
-	public boolean ajouterSeance (s: Seance) {
-		;
+	@Override
+	public int ajouterSeance (int idSalle, int idFilm, Date heureDebut) {
+		try {
+			Seance s = new Seance(this.getSalle(idSalle), this.getFilm(idFilm), heureDebut);
+			if (s == null) {
+				return ID_VALUE_ON_ERROR;
+			}
+			else {
+				this.seancesEnregistrees.add(s);
+				return s.getId();
+			}
+		}
+		catch (Exception e) {
+			return ID_VALUE_ON_ERROR;
+		}
 	}
 
-	public boolean supprimerSeance (id: int) {
-		;
+	@Override
+	public boolean supprimerSeance (int id) {
+		try {
+			Seance seanceAEnlever = null;
+			for (Seance s: this.seancesEnregistrees) {
+				if (s.getId() == id) {
+					seanceAEnlever = s;
+					break;
+				}
+			}
+			if (seanceAEnlever == null) {
+				return false;
+			}
+			else {
+				this.seancesEnregistrees.remove(seanceAEnlever);
+				return true;
+			}
+		}
+		catch (Exception e) {
+			return false;
+		}
 	}
 
+	@Override
 	public boolean supprimerReservation(int id) {
-			for (Seance s : seancesEnregistrees) {
-					if (s.supprimerReservation(id)) {
-							return true;
-					}
+		try {
+			Reservation reservationAEnlever = null;
+			for (Reservation r: this.reservationsEnregistrees) {
+				if (r.getId() == id) {
+					reservationAEnlever = r;
+					break;
+				}
 			}
+			if (reservationAEnlever == null) {
+				return false;
+			}
+			else {
+				for (Billet b: reservationAEnlever.getBillets()) {
+					this.billetsEnregistres.remove(b);
+				}
+				this.reservationsEnregistrees.remove(reservationAEnlever);
+				return true;
+			}
+		}
+		catch (Exception e) {
 			return false;
+		}
 	}
 
-	public boolean connecterUtilisateur(String email, String mdp) {
+	@Override
+	public ArrayList<Boolean> connecterUtilisateur(String email, String mdp) {
+		ArrayList<Boolean> resConnexion = new ArrayList<Boolean>(Arrays.asList(false, false));
+		try {
 			for (Utilisateur u : utilisateursEnregistres) {
-					if (u.getMail().equals(email) && u.verifierMotDePasse(mdp)) {
-							utilisateurConnecte = u;
-							return true;
+				if (u.getMail().equals(email) && u.verifierMotDePasse(mdp)) {
+					utilisateurConnecte = u;
+					resConnexion.set(0, true);
+					if (u instanceof Manager) {
+						resConnexion.set(1, true);
 					}
+					else {
+						resConnexion.set(1, false);
+					}
+					return resConnexion;
+				}
 			}
-			return false;
+			resConnexion.set(0, false);
+			return resConnexion;
+		}
+		catch (Exception e) {
+			resConnexion.set(0, false);
+			return resConnexion;
+		}
 	}
 
-	public boolean deconnecterUtilisateur(String email) {
-			if (utilisateurConnecte != null && utilisateurConnecte.getMail().equals(email)) {
-					utilisateurConnecte = null;
-					return true;
+	@Override
+	public boolean deconnecterUtilisateur() {
+		try {
+			if (this.utilisateurConnecte != null) {
+				this.utilisateurConnecte = null;
+				return true;
 			}
 			return false;
+		}
+		catch (Exception e) {
+			return false;
+		}
 	}
 }
