@@ -4,7 +4,7 @@ import java.util.Set;
 public interface IVueUtilisateur {
 	public ArrayList<String> afficherDialogueConnexion();
 
-	public void afficherConnexionReussie();
+	// public void afficherConnexionReussie();
 
 	public void afficherConnexionReussie(Utilisateur u);
 

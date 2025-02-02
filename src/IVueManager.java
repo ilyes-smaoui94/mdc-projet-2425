@@ -6,7 +6,7 @@ public interface IVueManager extends IVueUtilisateur {
     public void afficherMenuManager();
    
     public ArrayList<String> afficherDialogueCreationUtilisateur();
-    //void afficherCreationUtilisateurReussie(Utilisateur u);
+    void afficherCreationUtilisateurReussie(Utilisateur u);
     public void afficherCreationUtilisateurEchouee();
     
     public void afficherDialogueSuppressionUtilisateur();
