@@ -71,12 +71,13 @@ public class Seance {
      * @param f           Film projeté lors de la séance.
      * @param date        Date et heure de la séance.
      */
-    public Seance(Salle salleSeance, Film f, Date date) {
-        this.id = this.getNextAvailableId();
+    public Seance(Salle salleSeance, Film f, Date date, TypeSeance typeSeance) {
+        this.id = Seance.getNextAvailableId();
         this.salleSeance = salleSeance;
         this.filmSeance = f;
         this.date = date;
         this.placesRestantes = salleSeance.getCapacite();
+        this.typeSeance = typeSeance;
     }
 
     /**

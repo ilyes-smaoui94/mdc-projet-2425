@@ -29,83 +29,98 @@ public class ControleurCinema implements IControleurCinema {
 		this.modele = modele;
 	}
 
-	public Film chercherFilmParID(HashSet<Film> listeFilms, int id) {
-		for (Film film : listeFilms) {
-			if (film.getId() == id) { // Vérification basée sur l'ID
-				return film; // 🎬 Film déjà présent !
-			}
-		}
-		return null; // ❌ Film non trouvé
+	public IVueClient getVueClient() {
+		return this.vueClient;
 	}
 
-	public Seance ChercherSeanceParID(ArrayList<Seance> l, int id) {
-		for (Seance seance : l) {
-			if (seance.getId() == id) { // Vérification basée sur l'ID
-				return seance; // 🎬 Film déjà présent !
-			}
-		}
-		return null; // ❌ Film non trouvé
+	public IVueManager getVueManager() {
+		return this.vueManager;
 	}
 
-	public Salle ChercherSalleParID(ArrayList<Salle> l, int id) {
-		for (Salle salle : l) {
-			if (salle.getId() == id) {
-				return salle;
-			}
-		}
-		return null;
+	public IModeleCinema getModele() {
+		return this.modele;
 	}
 
-	public static boolean verifierDisponibiliteSeance(ArrayList<Seance> listeSeances, Salle salle, String heure) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-		LocalTime heureNouvelleSeance = LocalTime.parse(heure, formatter);
+	// [MERGE] [MERGE_DEL]
+	// public Film chercherFilmParID(HashSet<Film> listeFilms, int id) {
+	// for (Film film : listeFilms) {
+	// if (film.getId() == id) { // Vérification basée sur l'ID
+	// return film; // 🎬 Film déjà présent !
+	// }
+	// }
+	// return null; // ❌ Film non trouvé
+	// }
 
-		for (Seance seance : listeSeances) {
-			if (seance.getSalle().getId() == salle.getId()) {
-				LocalTime heureExistante = LocalTime.parse(seance.getHeure(), formatter);
-				long difference = Math.abs(heureExistante.toSecondOfDay() - heureNouvelleSeance.toSecondOfDay()) / 3600; // Convertir
-																														 // en
-																														 // heures
+	// [MERGE] [MERGE_DEL]
+	// public Seance ChercherSeanceParID(ArrayList<Seance> l, int id) {
+	// for (Seance seance : l) {
+	// if (seance.getId() == id) { // Vérification basée sur l'ID
+	// return seance; // 🎬 Film déjà présent !
+	// }
+	// }
+	// return null; // ❌ Film non trouvé
+	// }
 
-				if (difference < 2) {
-					return false; // ⛔ Trop proche d'une autre séance !
-				}
-			}
-		}
-		return true; // ✅ Disponible avec une marge de 2 heures
-	}
+	// [MERGE] [MERGE_DEL]
+	// public Salle ChercherSalleParID(ArrayList<Salle> l, int id) {
+	// 	for (Salle salle : l) {
+	// 		if (salle.getId() == id) {
+	// 			return salle;
+	// 		}
+	// 	}
+	// 	return null;
+	// }
+
+	// [MERGE]
+	// public static boolean verifierDisponibiliteSeance(ArrayList<Seance> listeSeances, Salle salle, String heure) {
+	// 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+	// 	LocalTime heureNouvelleSeance = LocalTime.parse(heure, formatter);
+
+	// 	for (Seance seance : listeSeances) {
+	// 		if (seance.getSalle().getId() == salle.getId()) {
+	// 			LocalTime heureExistante = Outils.asLocalDateTime(date)(seance.getDate());
+	// 			long difference = Math.abs(heureExistante.toSecondOfDay() - heureNouvelleSeance.toSecondOfDay()) / 3600; // Convertir
+	// 																														// en
+	// 																														// heures
+	// 			if (difference < 2) {
+	// 				return false; // ⛔ Trop proche d'une autre séance !
+	// 			}
+	// 		}
+	// 	}
+	// 	return true; // ✅ Disponible avec une marge de 2 heures
+	// }
 
 	public void GererCreationFilm() {
 
-		ArrayList<String> Liste = this.vue.AfficherDialogueCreationFilm();
+		ArrayList<String> Liste = this.vueManager.AfficherDialogueCreationFilm();
 		String titre = Liste.get(0);
 		int annee = Integer.parseInt(Liste.get(1));
 		String descritpion = Liste.get(2);
-		String genre = Liste.get(3);
+		String duree_str = Liste.get(3);
+		String genre = Liste.get(4);
 
 		Genre MainGenre = null;
 
 		if (genre.equalsIgnoreCase("Drame")) {
-			MainGenre = Genre.Drame;
+			MainGenre = Genre.DRAME;
 		} else if (genre.equalsIgnoreCase("Comedie")) {
-			MainGenre = Genre.Comedie;
+			MainGenre = Genre.COMEDIE;
 		} else if (genre.equalsIgnoreCase("Horreur")) {
-			MainGenre = Genre.Horreur;
+			MainGenre = Genre.HORREUR;
 		} else if (genre.equalsIgnoreCase("Action")) {
-			MainGenre = Genre.Action;
+			MainGenre = Genre.ACTION;
 		} else if (genre.equalsIgnoreCase("Thriller")) {
-			MainGenre = Genre.Thriller;
+			MainGenre = Genre.THRILLER;
 		}
 
 		// Création de la séance
-		Film film = new Film(titre, annee, descritpion, MainGenre);
-		if (film != null) {
-			this.vue.afficherCreationFilmReussie(film);
+		try {
+			Film film = new Film(titre, annee, descritpion, Integer.parseInt(duree_str), MainGenre);
+			this.vueManager.afficherCreationFilmReussie(film);
 			this.modele.getListeFilms().add(film);
-
-		} else {
-			this.vue.afficherCreationFilmEchouer();
-			// System.out.println(titre); // [debugging]
+		}
+		catch (Exception e) {
+			this.vueManager.afficherCreationFilmEchouer();
 		}
 		// Ajout de la séance au planning
 
@@ -114,11 +129,11 @@ public class ControleurCinema implements IControleurCinema {
 	public void GererSuppressionFilm() {
 		ArrayList<String> Liste;
 
-		Liste = this.vue.AfficherDialogueSuppressionFilm();
+		Liste = this.vueManager.AfficherDialogueSuppressionFilm();
 		String titre = Liste.get(0);
 		int annee = Integer.parseInt(Liste.get(1));
 
-		Film f = this.chercherFilmParNom(this.modele.getListeFilms(), titre);
+		Film f = this.chercherFilmParNom(this.modele.getListeFilms(), titre); // [MERGE]
 		// System.out.println("*********************"); // [debugging]
 		// System.out.println(f.getTitre()); // [debugging]
 		// System.out.println(f.getId()); // [debugging]
@@ -126,9 +141,9 @@ public class ControleurCinema implements IControleurCinema {
 		boolean supprime = this.modele.getListeFilms().remove(f);
 
 		if (supprime) {
-			this.vue.afficherSuppressionFilmReussie(f);
+			this.vueManager.afficherSuppressionFilmReussie();
 		} else {
-			this.vue.afficherSuppressionFilmEchouer();
+			this.vueManager.afficherSuppressionFilmEchouer();
 		}
 
 	}
@@ -137,7 +152,7 @@ public class ControleurCinema implements IControleurCinema {
 		Set<Film> films = this.modele.getListeFilms();
 		for (Film f : films) {
 			System.out.println("[ID: " + f.getId() + ", titre: " + f.getTitre() + ", annee: " + f.getAnnee()
-					+ ", Description: " + f.getDesc() + ", Genre principal:" + f.getGenre() + "]");
+					+ ", Description: " + f.getDesc() + ", Genre principal:" + f.getGenres() + "]");
 		}
 	}
 
@@ -172,10 +187,10 @@ public class ControleurCinema implements IControleurCinema {
 
 	public void GererCreationSeance() throws ParseException {
 
-		ArrayList<String> Liste = this.vue.afficherDialogueCreationSeance();
+		ArrayList<String> listeArguments = this.vueManager.afficherDialogueCreationSeance();
 		Boolean creation = true;
-		String f = Liste.get(0);
-		Film film = this.chercherFilmParNom(this.modele.getListeFilms(), f);
+		String f = listeArguments.get(0);
+		// Film film = this.chercherFilmParNom(this.modele.getListeFilms(), f);
 
 		if (film == null) {
 			vue.afficherCreationSeanceEchouee();
@@ -183,26 +198,28 @@ public class ControleurCinema implements IControleurCinema {
 			System.out.println(
 					"Le Film sélectionner n'est pas au catalogue du Cinema, merci de  l'ajouter dans un premier temps. \n");
 		}
-		String d = Liste.get(1);
+		String d = listeArguments.get(1);
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = formatter.parse(d);
 
-		String heure = Liste.get(2);
+		String heure = listeArguments.get(2);
 
-		int salle = Integer.parseInt(Liste.get(3));
+		int idSalle = Integer.parseInt(listeArguments.get(3));
 
-		ArrayList<Salle> listeSalle = this.modele.getListeSalle();
-		Salle s = chercherSalleParId(listeSalle, salle);
+		// [MERGE] [MERGE_DEL]
+		// ArrayList<Salle> listeSalle = this.modele.getListeSalle();
+		// Salle s = chercherSalleParId(listeSalle, idSalle);
+		Salle s = this.modele.getSalle(idSalle);
 		if (s == null) {
 			creation = false;
-			vue.afficherCreationSeanceEchouee();
+			this.vueManager.afficherCreationSeanceEchouee();
 			System.out.println("La Salle sélectionner n'existe, merci de reprocéder. \n");
-		} else if (!verifierDisponibiliteSeance(modele.getListeSeance(), s, heure)) {
-			creation = false;
-			vue.afficherCreationSeanceEchouee();
-			System.out.println("La Salle sélectionner n'est pas disponible, merci de reprocéder. \n");
-		}
-		String typeStr = Liste.get(4);
+		// } else if (!verifierDisponibiliteSeance(this.modele.getListeSeances(), s, heure)) {
+		// 	creation = false;
+		// 	vue.afficherCreationSeanceEchouee();
+		// 	System.out.println("La Salle sélectionner n'est pas disponible, merci de reprocéder. \n");
+		// }
+		String typeStr = listeArguments.get(4);
 		TypeSeance typeSeance = TypeSeance.REGULAR;
 
 		if (typeStr.equalsIgnoreCase("IMAX") || typeStr.equalsIgnoreCase("imax") || typeStr.equalsIgnoreCase("Imax")) {
@@ -219,16 +236,15 @@ public class ControleurCinema implements IControleurCinema {
 
 		// Création de la séance
 		if (creation) {
-			Seance seance = new Seance(film, date, heure, s, typeSeance);
-
-			if (seance != null) {
-				this.vue.afficherCreationSeanceReussie(seance);
-				this.modele.getListeSeance().add(seance);
-
-			} else {
-				this.vue.afficherCreationSeanceEchouee();
+			try {
+				// Seance seance = new Seance(film, date, heure, s, typeSeance);
+				this.modele.ajouterFilm(idSalle, , listeArguments, typeSeance)
+				this.vueManager.afficherCreationSeanceReussie(seance);
+				// this.modele.getListeSeances().add(seance);
 			}
-
+			catch (Exception e) {
+				this.vueClient.afficherCreationSeanceEchouee();
+			}
 		}
 	}
 
@@ -251,15 +267,17 @@ public class ControleurCinema implements IControleurCinema {
 	public void GererSuppressionSeance() {
 		ArrayList<String> Liste;
 
-		Liste = this.vue.afficherDialogueSuppressionSeance();
+		Liste = this.vueManager.afficherDialogueSuppressionSeance();
 		int id = Integer.parseInt(Liste.get(0));
-		Seance s = ChercherSeanceParID(this.modele.getListeSeance(), id);
-		boolean supprime = supprimerSeanceParId(this.modele.getListeSeance(), id);
+		// Seance s = ChercherSeanceParID(this.modele.getListeSeances(), id); [MERGE]
+		// Seance seance = this.modele.getSeance(id);
+		// boolean supprime = supprimerSeanceParId(this.modele.getListeSeances(), id);
+		boolean supprime = this.modele.supprimerSeance(id);
 
 		if (supprime) {
-			this.vue.afficherSuppressionSeanceReussie(s);
+			this.vueManager.afficherSuppressionSeanceReussie();
 		} else {
-			this.vue.afficherSuppressionSeanceEchouee();
+			this.vueManager.afficherSuppressionSeanceEchouee();
 		}
 
 	}

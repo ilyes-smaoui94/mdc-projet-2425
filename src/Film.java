@@ -1,6 +1,5 @@
-import java.util.Set;
 import java.util.HashSet;
-import java.util.Date;
+import java.util.Set;
 
 /**
  * Représente un film avec un titre, une année de sortie, une description, une durée 
@@ -214,6 +213,10 @@ public class Film {
         this.duree = (duree >= dureeMin) ? duree : dureeMin;
     }
 
+    public Set<Genre> getGenres () {
+        return this.genres;
+    }
+    
     /**
      * Ajoute un genre à l'ensemble des genres de ce film.
      *
