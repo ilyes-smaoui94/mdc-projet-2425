@@ -15,11 +15,11 @@ public interface IVueManager extends IVueUtilisateur {
 
     public ArrayList<String> AfficherDialogueCreationFilm();
     public void afficherCreationFilmReussie(Film f);
-    public void afficherCreationFilmEchouer();
+    public void afficherCreationFilmEchouee();
 
     public ArrayList<String> AfficherDialogueSuppressionFilm();
     public void afficherSuppressionFilmReussie();
-    public void afficherSuppressionFilmEchouer();
+    public void afficherSuppressionFilmEchouee();
 
     public ArrayList<String> afficherDialogueCreationSalle();
     public void afficherCreationSalleReussie(Salle s);

@@ -389,7 +389,7 @@ public class VueCinema implements IVueManager, IVueClient {
 
   }
 
-  public void afficherCreationFilmEchouer() {
+  public void afficherCreationFilmEchouee() {
     System.out.println("\n❌ Film non crée. \n");
 
   }
@@ -399,7 +399,7 @@ public class VueCinema implements IVueManager, IVueClient {
 
   }
 
-  public void afficherSuppressionFilmEchouer() {
+  public void afficherSuppressionFilmEchouee() {
     System.out.println("❌ Impossible de supprimer. \n");
 
   }
