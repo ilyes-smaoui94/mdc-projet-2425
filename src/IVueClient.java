@@ -1,3 +1,3 @@
-public interface IVueClient {
+public interface IVueClient extends IVueUtilisateur {
 	public void afficherMenuClient();
 }

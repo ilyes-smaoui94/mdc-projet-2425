@@ -1,8 +1,6 @@
-import java.util.Set;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 /**
  * Interface définissant les méthodes à implémenter pour tout classe gérant un Modèle pour notre application
  */
@@ -16,6 +14,13 @@ public interface IModeleCinema {
 	 * @return L'utilisateur correspondant s'il existe, {@code null} sinon
 	 */
 	public Utilisateur getUtilisateur (int id);
+
+	/**
+	 * Sert à savoir quel utilisateur est actuellement connecté au modèle
+	 * 
+	 * @return Objet Utilisateur représentant l'utilisateur actuellement connecté au modèle
+	 */
+	public Utilisateur getUtilisateurConnecte ();
 
 	/**
 	 * Renvoie le film enregistré dont l'ID est donné en paramètre, si possible
@@ -204,7 +209,7 @@ public interface IModeleCinema {
 	 * @param heureDebut heure de début de la Séance (l'heure de fin déterminée peut être déterminée via la durée du film)
 	 * @return ID de la séance créée en cas de succès, {@code -1} sinon
 	 */
-	public int ajouterSeance (int idSalle, int idFilm, Date heureDebut);
+	public int ajouterSeance (int idSalle, int idFilm, Date heureDebut, TypeSeance typeSeance);
 	
 	/**
 	 * Supprime le film dont l'ID est donné en paramètre

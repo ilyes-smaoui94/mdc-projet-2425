@@ -1,39 +1,41 @@
 import java.util.ArrayList;
 
-public interface IVueManager {
+public interface IVueManager extends IVueUtilisateur {
    // ChoixMenu afficherMenuManager();
 
-    ArrayList<String> afficherDialogueCreationUtilisateur();
+    public void afficherMenuManager();
+   
+    public ArrayList<String> afficherDialogueCreationUtilisateur();
     //void afficherCreationUtilisateurReussie(Utilisateur u);
-    void afficherCreationUtilisateurEchouee();
+    public void afficherCreationUtilisateurEchouee();
     
-    void afficherDialogueSuppressionUtilisateur();
-    void afficherSuppressionUtilisateurReussie();
-    void afficherSuppressionUtilisateurEchouee();
+    public void afficherDialogueSuppressionUtilisateur();
+    public void afficherSuppressionUtilisateurReussie();
+    public void afficherSuppressionUtilisateurEchouee();
 
-    ArrayList<String> AfficherDialogueCreationFilm();
-    void afficherCreationFilmReussie(Film f);
-    void afficherCreationFilmEchouer();
+    public ArrayList<String> AfficherDialogueCreationFilm();
+    public void afficherCreationFilmReussie(Film f);
+    public void afficherCreationFilmEchouer();
 
-    ArrayList<String> AfficherDialogueSuppressionFilm();
-    void afficherSuppressionFilmReussie();
-    void afficherSuppressionFilmEchouer();
+    public ArrayList<String> AfficherDialogueSuppressionFilm();
+    public void afficherSuppressionFilmReussie();
+    public void afficherSuppressionFilmEchouer();
 
-    ArrayList<String> afficherDialogueCreationSalle();
-    void afficherCreationSalleReussie(Salle s);
-    void afficherCreationSalleEchouee();
+    public ArrayList<String> afficherDialogueCreationSalle();
+    public void afficherCreationSalleReussie(Salle s);
+    public void afficherCreationSalleEchouee();
 
-    ArrayList<String> afficherDialogueSuppressionSalle();
-    void afficherSuppressionSalleReussie();
-    void afficherSuppressionSalleEchouee();
+    public ArrayList<String> afficherDialogueSuppressionSalle();
+    public void afficherSuppressionSalleReussie();
+    public void afficherSuppressionSalleEchouee();
 
-    ArrayList<String> afficherDialogueCreationSeance();
-    void afficherCreationSeanceReussie(Seance s);
-    void afficherCreationSeanceEchouee();
+    public ArrayList<String> afficherDialogueCreationSeance();
+    public void afficherCreationSeanceReussie(Seance s);
+    public void afficherCreationSeanceEchouee();
 
-    ArrayList<String> afficherDialogueSuppressionSeance();
-    void afficherSuppressionSeanceReussie();
-    void afficherSuppressionSeanceEchouee();
+    public ArrayList<String> afficherDialogueSuppressionSeance();
+    public void afficherSuppressionSeanceReussie();
+    public void afficherSuppressionSeanceEchouee();
     
     
 }

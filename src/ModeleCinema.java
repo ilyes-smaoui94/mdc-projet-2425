@@ -48,6 +48,11 @@ public class ModeleCinema implements IModeleCinema {
 	}
 
 	@Override
+	public Utilisateur getUtilisateurConnecte () {
+		return this.utilisateurConnecte;
+	}
+
+	@Override
 	public Film getFilm (int id) {
 		for (Film f : this.filmsEnregistres) {
 			if (f.getId() == id) {
@@ -305,9 +310,9 @@ public class ModeleCinema implements IModeleCinema {
 	}
 
 	@Override
-	public int ajouterSeance (int idSalle, int idFilm, Date heureDebut) {
+	public int ajouterSeance (int idSalle, int idFilm, Date heureDebut, TypeSeance typeSeance) {
 		try {
-			Seance s = new Seance(this.getSalle(idSalle), this.getFilm(idFilm), heureDebut);
+			Seance s = new Seance(this.getSalle(idSalle), this.getFilm(idFilm), heureDebut, typeSeance);
 			if (s == null || this.getFilm(idFilm) == null || this.getSalle(idSalle) == null) {
 				return ID_VALUE_ON_ERROR;
 			}

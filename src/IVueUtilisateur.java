@@ -2,33 +2,48 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public interface IVueUtilisateur {
-    ArrayList<String> afficherDialogueConnexion();
-    //void afficherConnexionReussie(Utilisateur u);
-    void afficherConnexionEchouee();
+	public ArrayList<String> afficherDialogueConnexion();
 
-    ArrayList<String> afficherDialogueDeconnexion();
-   // void afficherDeconnexionReussie(Utilisateur u);
-    void afficherDeconnexionEchouee();
+	public void afficherConnexionReussie();
 
-    String afficherDialogueAffichageFilm();
-    void afficherFilm(Film f);
-    void afficherFilms(Set<Film> films);
+	public void afficherConnexionReussie(Utilisateur u);
 
-    String afficherDialogueAffichageSalle();
-    void afficherSalle(Salle s);
-    void afficherSalles(Set<Salle> salles);
+	public void afficherConnexionEchouee();
 
-    String afficherDialogueAffichageSeance();
-    void afficherSeance(Seance s);
-    
-    String afficherDialogueAffichageSeancesUneSalle();
-    void afficherSeancesUneSalle(Set<Seance> seances);
-    
-    String afficherDialogueAffichageSeancesPlusieursSalles();
-    void afficherSeancesPlusieursSalles(Set<Seance> seances);
+	/**
+	 * Appelée lorsque l'utilisateur choisir l'option de déconnexion dans le menu
+	 * 
+	 * @return {@code true} si l'utilisateur confirme vouloir se déconnecter, {@code false} sinon
+	 */
+	public boolean afficherDialogueDeconnexion();
 
-    ArrayList<String> afficherDialogueReservationSeance();
-    //void afficherReservationReussie(Reservation r);
-    void afficherReservationEchouee();
-    //void afficherReservation(Reservation r);
+	public void afficherDeconnexionReussie(Utilisateur u);
+
+	public void afficherDeconnexionEchouee();
+
+	public String afficherDialogueAffichageFilm();
+
+	public void afficherFilm(Film f);
+
+	public void afficherFilms(Set<Film> films);
+
+	public void afficherSalles(Set<Salle> salles);
+
+	public String afficherDialogueAffichageSeance();
+
+	public void afficherSeance(Seance s);
+
+	public String afficherDialogueAffichageSeancesUneSalle();
+
+	public void afficherSeancesUneSalle(Set<Seance> seances);
+
+	public String afficherDialogueAffichageSeancesPlusieursSalles();
+
+	public void afficherSeancesPlusieursSalles(Set<Seance> seances);
+
+	public ArrayList<String> afficherDialogueReservationSeance();
+
+	// void afficherReservationReussie(Reservation r);
+	public void afficherReservationEchouee();
+	// void afficherReservation(Reservation r);
 }

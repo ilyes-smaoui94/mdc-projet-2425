@@ -20,6 +20,44 @@ public class ControleurCinema implements IControleurCinema {
 		this.modele = modele;
 	}
 
+	public void lancerApplication() {
+		// "Activer" la vue si nécessaire
+		this.gererConnexion();
+	}
+
+	public void gererConnexion () {
+		boolean connecte = false;
+		// Attends une connexion réussie
+		while (!connecte) {
+			// Récupère les identifiants
+			ArrayList<String> connArgs = this.vueClient.afficherDialogueConnexion();
+			String email = connArgs.get(0);
+			String mdp = connArgs.get(1);
+			// Tente une connexion auprès du modèle
+			ArrayList<Boolean> resConnexion = this.modele.connecterUtilisateur(email, mdp);
+			// Si connecté
+			if (resConnexion.get(0)) {
+				connecte = true;
+				Utilisateur utilisateurConnecte = this.modele.getUtilisateurConnecte();
+				this.vueManager.afficherConnexionReussie(utilisateurConnecte);
+				// Si c'est un admin
+				if (resConnexion.get(1)) {
+					this.vueManager.afficherMenuManager();
+				}
+				// Sinon, c'est un client
+				else {
+					this.vueClient.afficherMenuClient();
+				}
+			}
+			// Sinon, afficher que la connexion a échoué
+			else {
+				this.vueClient.afficherConnexionEchouee();
+			}
+		}
+	}
+
+	// public void gererReservationSeance ();
+
 	public void setVues(IVueClient vueClient, IVueManager vueManager) {
 		this.vueClient = vueClient;
 		this.vueManager = vueManager;
@@ -63,31 +101,33 @@ public class ControleurCinema implements IControleurCinema {
 
 	// [MERGE] [MERGE_DEL]
 	// public Salle ChercherSalleParID(ArrayList<Salle> l, int id) {
-	// 	for (Salle salle : l) {
-	// 		if (salle.getId() == id) {
-	// 			return salle;
-	// 		}
-	// 	}
-	// 	return null;
+	// for (Salle salle : l) {
+	// if (salle.getId() == id) {
+	// return salle;
+	// }
+	// }
+	// return null;
 	// }
 
 	// [MERGE]
-	// public static boolean verifierDisponibiliteSeance(ArrayList<Seance> listeSeances, Salle salle, String heure) {
-	// 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-	// 	LocalTime heureNouvelleSeance = LocalTime.parse(heure, formatter);
+	// public static boolean verifierDisponibiliteSeance(ArrayList<Seance>
+	// listeSeances, Salle salle, String heure) {
+	// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+	// LocalTime heureNouvelleSeance = LocalTime.parse(heure, formatter);
 
-	// 	for (Seance seance : listeSeances) {
-	// 		if (seance.getSalle().getId() == salle.getId()) {
-	// 			LocalTime heureExistante = Outils.asLocalDateTime(date)(seance.getDate());
-	// 			long difference = Math.abs(heureExistante.toSecondOfDay() - heureNouvelleSeance.toSecondOfDay()) / 3600; // Convertir
-	// 																														// en
-	// 																														// heures
-	// 			if (difference < 2) {
-	// 				return false; // ⛔ Trop proche d'une autre séance !
-	// 			}
-	// 		}
-	// 	}
-	// 	return true; // ✅ Disponible avec une marge de 2 heures
+	// for (Seance seance : listeSeances) {
+	// if (seance.getSalle().getId() == salle.getId()) {
+	// LocalTime heureExistante = Outils.asLocalDateTime(date)(seance.getDate());
+	// long difference = Math.abs(heureExistante.toSecondOfDay() -
+	// heureNouvelleSeance.toSecondOfDay()) / 3600; // Convertir
+	// // en
+	// // heures
+	// if (difference < 2) {
+	// return false; // ⛔ Trop proche d'une autre séance !
+	// }
+	// }
+	// }
+	// return true; // ✅ Disponible avec une marge de 2 heures
 	// }
 
 	public void GererCreationFilm() {
@@ -118,8 +158,7 @@ public class ControleurCinema implements IControleurCinema {
 			Film film = new Film(titre, annee, descritpion, Integer.parseInt(duree_str), MainGenre);
 			this.vueManager.afficherCreationFilmReussie(film);
 			this.modele.getListeFilms().add(film);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			this.vueManager.afficherCreationFilmEchouer();
 		}
 		// Ajout de la séance au planning
