@@ -22,18 +22,18 @@ import java.util.HashSet;
  * System.out.println("Description : " + film1.getDesc());
  * System.out.println("Durée : " + film1.getDuree() + " minutes");
  * }</pre>
- * </p>
+ *  
  * 
  * <p>
  * La durée minimale d'un film est fixée à 30 minutes. Toute tentative de définir 
  * une durée inférieure à cette valeur sera ramenée automatiquement à 30.
- * </p>
+ *  
  * 
  * <p>
  * Les genres du film peuvent être définis dès la construction via le second 
  * constructeur, ou bien à l'aide des méthodes 
  * {@link #addGenre(Genre)} et {@link #removeGenre(Genre)}.
- * </p>
+ *  
  */
 public class Film {
 
@@ -82,7 +82,7 @@ public class Film {
     /**
      * Construit un nouveau film avec titre, année, description et durée spécifiés.
      * 
-     * <p>Si la durée passée en paramètre est inférieure à 30, elle est ajustée à 30.</p>
+     * <p>Si la durée passée en paramètre est inférieure à 30, elle est ajustée à 30. 
      *
      * @param t     Le titre du film.
      * @param a     L'année de sortie du film.
@@ -101,7 +101,7 @@ public class Film {
     /**
      * Construit un nouveau film avec titre, année, description, durée et ensemble de genres.
      * 
-     * <p>Si la durée passée en paramètre est inférieure à 30, elle est ajustée à 30.</p>
+     * <p>Si la durée passée en paramètre est inférieure à 30, elle est ajustée à 30. 
      *
      * @param t     Le titre du film.
      * @param a     L'année de sortie du film.
