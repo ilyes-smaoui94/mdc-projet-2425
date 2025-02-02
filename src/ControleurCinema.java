@@ -37,9 +37,18 @@ public class ControleurCinema implements IControleurCinema {
 	        return null; // ❌ Film non trouvé
 	    }
 
+		public Salle ChercherSalleParID(ArrayList<Salle> l, int id) {
+			for (Salle salle : l) {
+				if (salle.getId() == id) { 
+					return salle; 
+				}
+			}
+			return null; 
+		}
+
 
 	     
-	        public void GererCreationFilm() {
+	    public void GererCreationFilm() {
 	       
 	        
 	        	ArrayList<String> Liste= this.vue.AfficherDialogueCreationFilm();
@@ -206,5 +215,60 @@ public class ControleurCinema implements IControleurCinema {
 					this.vue.afficherSuppressionSeanceEchouee();				}
 	        	
 	        }
+
+			public void GererCreationSalle (){
+				ArrayList<String> Liste;
+	
+				Liste = this.vue.afficherDialogueCreationSalle();
+
+				int id= Integer.parseInt(Liste.get(0));
+				int nb= Integer.parseInt(Liste.get(1));
+
+				Salle salle= new Salle(id, nb);
+
+				if (salle !=null) {
+					this.vue.afficherCreationSalleReussie(salle);
+					this.modele.getListeSalle().add(salle);
+
+				 } else {
+					 this.vue.afficherCreationSalleEchouee();
+				 }
+
+			}
+
+			public static boolean supprimerSalleParId(ArrayList<Salle> listeSalles, int id) {
+				Iterator<Salle> iterator = listeSalles.iterator();
+		
+				while (iterator.hasNext()) {
+					Salle salle = iterator.next();
+					if (salle.getId() == id) { // Vérifie si l'ID correspond
+						iterator.remove(); // Supprime la salle en toute sécurité
+						System.out.println("✅ Salle avec ID " + id + " supprimée avec succès.");
+						return true; // Retourne true si la suppression a eu lieu
+					}
+				}
+		
+				System.out.println("⛔ Aucune salle trouvée avec l'ID " + id + ".");
+				return false; // Retourne false si aucune salle n'a été trouvée
+			}
+
+			public void gererSuppressionSalle (){
+				ArrayList<String> Liste;
+	
+				Liste = this.vue.afficherDialogueSuppressionSalle();
+
+				int id= Integer.parseInt(Liste.get(0));
+				Salle s= ChercherSalleParID(this.modele.getListeSalle(), id);
+				boolean supprime = supprimerSalleParId(this.modele.getListeSalle(),id);
+
+	 			
+				if (supprime) {
+					this.vue.afficherSuppressionSalleReussie(s);
+				} else {
+					this.vue.afficherSuppressionSalleEchouee();				}
+	        	
+	        
+	
+			}
 
 }

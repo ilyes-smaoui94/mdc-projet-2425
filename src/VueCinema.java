@@ -200,14 +200,28 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
 	}
 
     @Override
-    public void afficherCreationSalleReussie(Salle s) {}
+    public void afficherCreationSalleReussie(Salle s) {
+        System.out.println("✅ Salle creer avec succès: \n  -Salle ID:" +s.getId()+ "\n  -Capacité: " +s.getCapacite());
+
+    }
 
     @Override
-    public void afficherCreationSalleEchouee() {}
+    public void afficherCreationSalleEchouee() {
+        System.out.println("❌ Impossible de Creer la salle. \n");
+
+    }
 
     @Override
     public ArrayList<String> afficherDialogueSuppressionSalle() {
-        return new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+	    System.out.print("Entrez l'ID de la salle à supprimer ");
+	    String id = scanner.nextLine();
+	    
+		
+	    ArrayList<String> Liste = new ArrayList<String>();
+       Liste.add(id);       
+       return Liste;    
     }
 
     
@@ -367,8 +381,19 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
 
 	@Override
 	public ArrayList<String> afficherDialogueCreationSalle() {
-		// TODO Auto-generated method stub
-		return null;
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Entrez le numero ID de la salle à creer: ");
+        String id = scanner.nextLine();
+	    
+	    System.out.print("Entrez le nombre maximal de place pour la nouvelle salle : ");
+        String nb = scanner.nextLine();
+
+
+		ArrayList<String> l= new ArrayList<String>();
+        l.add(id);
+        l.add(nb);
+        return l;
 	}
 
     public void Option3() {
@@ -385,6 +410,14 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
 
     public void OptionSupprimerSeance() {
 		this.controleur.GererSuppressionSeance();
+	}
+
+    public void OptionCreerSalle() throws ParseException {
+		this.controleur.GererCreationSalle();
+	}
+
+    public void OptionSupprimerSalle() {
+		this.controleur.gererSuppressionSalle();
 	}
 
 
