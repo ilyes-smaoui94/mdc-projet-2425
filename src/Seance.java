@@ -22,7 +22,7 @@ import java.util.Date;
  * }</pre>
  *  
  * 
- * @author 
+ * 
  */
 public class Seance {
 
