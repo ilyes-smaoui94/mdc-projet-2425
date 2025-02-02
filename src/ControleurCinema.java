@@ -60,10 +60,10 @@ public class ControleurCinema implements IControleurCinema {
 	public void gererReservationSeance() {
 		ArrayList<String> donneesResa = this.vueClient.afficherDialogueReservationSeance();
 		Set<Billet> billetsAPrendre = new HashSet<Billet>();
+		// ArrayList<String> argsResa = new ArrayList<String>();
 		for (String s : donneesResa) {
 			int idSeance = Integer.parseInt(s);
 			Billet b = new BilletPleinTarif(this.modele.getSeance(idSeance));
-
 		}
 		this.modele.creerReservation(this.modele.getUtilisateurConnecte().getId(), billetsAPrendre);
 	}

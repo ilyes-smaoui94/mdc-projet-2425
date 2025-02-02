@@ -75,7 +75,12 @@ public class VueCinema implements IVueManager, IVueClient {
           this.controleur.gererSuppressionSalle();
           break;
         case 8:
-          this.controleur.gererCreationSeance();
+          try {
+            this.controleur.gererCreationSeance();
+          }
+          catch (ParseException e) {
+            // ;
+          }
           break;
         case 9:
           this.controleur.gererSuppressionSeance();
@@ -311,29 +316,6 @@ public class VueCinema implements IVueManager, IVueClient {
   public void afficherSuppressionUtilisateurEchouee() {
     System.out.println("Échec de la suppression de l'utilisateur.");
   }
-
-  // @Override
-  // public ArrayList<String> afficherDialogueCreationUtilisateur() {
-  // return new ArrayList<>();
-  // }
-
-  // public void afficherCreationUtilisateurReussie(Utilisateur u) {}
-
-  // @Override
-  // public void afficherCreationUtilisateurEchouee() {
-  // }
-
-  // @Override
-  // public void afficherDialogueSuppressionUtilisateur() {
-  // }
-
-  // @Override
-  // public void afficherSuppressionUtilisateurReussie() {
-  // }
-
-  // @Override
-  // public void afficherSuppressionUtilisateurEchouee() {
-  // }
 
   public ArrayList<String> AfficherDialogueCreationFilm() {
     // Scanner this.leScanner = new Scanner(System.in);
