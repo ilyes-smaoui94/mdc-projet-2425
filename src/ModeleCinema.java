@@ -5,6 +5,12 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Classe implémentant l'interface pour un Modèle
+ * Elle stocke une liste des objets qu'elle gère et qu'elle a enregistrés
+ * Elle implémente aussi plusieurs méthodes permettant d'ajouter ou supprimer ces objets,
+ * d'en récupérer une liste, ou d'en récupérer un en particulier, à l'aide de son ID.
+ */
 public class ModeleCinema implements IModeleCinema {
 	private Utilisateur utilisateurConnecte;
 	private Set<Utilisateur> utilisateursEnregistres;
@@ -15,6 +21,10 @@ public class ModeleCinema implements IModeleCinema {
 	private Set<Billet> billetsEnregistres;
 	private Set<Reservation> reservationsEnregistrees;
 
+  /**
+   * Valeur à renvoyer pour les fonctions qui créent un objet et sont censées en renvoyer l'ID,
+   * Lorsque l'objet n'a pas pu être créé, ou plus généralement qu'il y a eu une erreur
+   */
 	public static final int ID_VALUE_ON_ERROR = -1;
 	
 	public ModeleCinema () {
