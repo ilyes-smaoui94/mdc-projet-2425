@@ -17,7 +17,7 @@ public class VueCinema implements IVueManager, IVueClient {
   // private ModeleCinema modele;
   private Scanner leScanner;
 
-  public VueCinema(ControleurCinema controleur, ModeleCinema modele) {
+  public VueCinema(ControleurCinema controleur, IModeleCinema modele) {
     this.controleur = controleur;
     // this.modele = modele;
     this.leScanner = new Scanner(System.in);

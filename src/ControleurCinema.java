@@ -16,7 +16,7 @@ public class ControleurCinema implements IControleurCinema {
 	private IVueClient vueClient;
 	private IVueManager vueManager;
 
-	public ControleurCinema(ModeleCinema modele) {
+	public ControleurCinema(IModeleCinema modele) {
 
 		this.modele = modele;
 	}
@@ -63,7 +63,7 @@ public class ControleurCinema implements IControleurCinema {
 		for (String s : donneesResa) {
 			int idSeance = Integer.parseInt(s);
 			Billet b = new BilletPleinTarif(this.modele.getSeance(idSeance));
-			
+
 		}
 		this.modele.creerReservation(this.modele.getUtilisateurConnecte().getId(), billetsAPrendre);
 	}
