@@ -17,9 +17,6 @@ public abstract class Utilisateur {
 		this.connectionStatus = false;
 	}
 
-	public abstract void seConnecter();
-	public abstract void seDeconnecter();
-
 	protected static int getNextAvailableId () {
 		int nextID = nextAvailableId;
 		nextAvailableId += 1;
@@ -55,11 +52,11 @@ public abstract class Utilisateur {
 		this.motDePasse = motDePasse;
 	}
 
-	public abstract getConnectionStatus() {
+	public boolean getConnectionStatus() {
 		return this.connectionStatus;
 	}
 
-	public abstract void seConnecter();
+	public abstract boolean seConnecter();
 
-	public void seDeconnecter();
+	public abstract boolean seDeconnecter();
 }

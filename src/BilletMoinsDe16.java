@@ -1,7 +1,7 @@
 public class BilletMoinsDe16 extends Billet {
 
-	public BilletMoinsDe16(Seance seance) {
-		super(seance);
+	public BilletMoinsDe16(Seance seanceBillet) {
+		super(seanceBillet);
 	}
 
 	@Override
@@ -13,16 +13,16 @@ public class BilletMoinsDe16 extends Billet {
 		switch (this.getSeance().getTypeSeance()) {
 		case DMAX_4D:
 			return 10.0;
-			break;
+			// break;
 		case _3D:
 			return 8.0;
-			break;
+			// break;
 		case IMAX:
 			return 7.0;		
-			break;
+			// break;
 		default:
 			return default_price;
-			break;
+			// break;
 		}
 	}
 }

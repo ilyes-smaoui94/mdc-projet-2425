@@ -58,7 +58,7 @@ public class Film {
 	public void removeGenre (Genre g) {
 		this.genres.remove(g);
 	}
-	public void setGenres (Set<Genres> g) {
+	public void setGenres (Set<Genre> g) {
 		this.genres = g != null ? g : new HashSet<Genre>();
 	}
 }

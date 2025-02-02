@@ -9,8 +9,8 @@ public abstract class Billet {
 	}
 
 	protected static int getNextAvailableId () {
-		int nextId = nextAvailableId;
-		Film.nextAvailableId += 1;
+		int nextID = nextAvailableId;
+		Billet.nextAvailableId += 1;
 		return nextID;
 	}
 

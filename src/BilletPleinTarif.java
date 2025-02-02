@@ -1,7 +1,7 @@
 public class BilletPleinTarif extends Billet {
 
-	public BilletPleinTarif(Seance seance) {
-		super(seance);
+	public BilletPleinTarif(Seance seanceBillet) {
+		super(seanceBillet);
 	}
 
 	@Override
@@ -13,16 +13,16 @@ public class BilletPleinTarif extends Billet {
 		switch (this.getSeance().getTypeSeance()) {
 		case DMAX_4D:
 			return 16.0;
-			break;
+			// break;
 		case _3D:
 			return 14.0;
-			break;
+			// break;
 		case IMAX:
 			return 13.0;
-			break;
+			// break;
 		default:
 			return default_price;
-			break;
+			// break;
 		}
 	}
 }

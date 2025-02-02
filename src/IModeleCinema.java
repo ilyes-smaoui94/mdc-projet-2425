@@ -1,4 +1,8 @@
 import java.util.Set;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
 
 public interface IModeleCinema {
 
@@ -54,12 +58,12 @@ public interface IModeleCinema {
 	 */
 	public Seance getSeance (int id);
 
-	/** Renvoie la réservation enregistrée dont l'ID est donné en paramètre, si possible
-	 * 
-	 * @param id ID de la réservation à récupérer
-	 * @return ID de la réservation correspondante, si possible
-	 */
-	public Reservation getReservation (int id);
+	// /** Renvoie la réservation enregistrée dont l'ID est donné en paramètre, si possible
+	//  * 
+	//  * @param id ID de la réservation à récupérer
+	//  * @return ID de la réservation correspondante, si possible
+	//  */
+	// public Reservation getReservation (int id);
 
 	/**
 	 * Renvoie la liste des utilisateurs enregistrés dans le modèle
@@ -94,7 +98,7 @@ public interface IModeleCinema {
 	 * 
 	 * @return la liste des séances d'un film
 	 */
-	public Set<Seance> getListeSeancesFilm (f: Film);
+	public Set<Seance> getListeSeancesFilm (Film f);
 
 	/**
 	 * Renvoie la liste des réservations enregistrées par le modèle
@@ -176,7 +180,7 @@ public interface IModeleCinema {
 	 * @param numeroSalle numéro de la salle à enregistrer
 	 * @return ID de la salle créée en cas de succès, {@code -1} sinon
 	 */
-	public int ajouterSalle (int numeroSalle);
+	public int ajouterSalle (int numeroSalle, int capacite);
 
 	/**
 	 * Supprime la salle dont l'ID est donné en paramètre
@@ -205,24 +209,25 @@ public interface IModeleCinema {
 	 */
 	public boolean supprimerSeance (int id);
 
-	/**
-	 * Enregistre un nouveau billet
-	 * (on triche un peu pour le premier paramètre; pour éviter d'avoir à faire une fonction différentes pour chaque type de billet
-	 * , c'est le Contrôleur qui, exceptionnellement, insancie un Billet avant de demander au Modèle de l'enregistrer)
-	 * 
-	 * @param billetAEnregistrer IDs des séances pour lequelles faire une réservation (mettre plusieurs fois la même séance pour prendre plusieurs places)
-	 * @return ID du billet enregistré en cas de succès, {@code -1} sinon
-	 */
-	public int ajouterBillet (Billet billetAEnregistrer);
+	// /**
+	//  * Enregistre un nouveau billet
+	//  * (on triche un peu pour le premier paramètre; pour éviter d'avoir à faire une fonction différentes pour chaque type de billet
+	//  * , c'est le Contrôleur qui, exceptionnellement, insancie un Billet avant de demander au Modèle de l'enregistrer)
+	//  * 
+	//  * @param billetAEnregistrer IDs des séances pour lequelles faire une réservation (mettre plusieurs fois la même séance pour prendre plusieurs places)
+	//  * @return ID du billet enregistré en cas de succès, {@code -1} sinon
+	//  */
+	// public int ajouterBillet (Billet billetAEnregistrer);
 
 	/**
 	 * Enregistre une nouvelle salle
 	 * Sinon, renvoie un nombre négatif (-1, à priori)
 	 * 
-	 * @param billetsAPrendre IDs des billets pour lequels faire une réservation (mettre plusieurs fois la même séance pour prendre plusieurs places)
+	 * @param idUtilisateur ID de l'utilisateur qui fait la réservation
+	 * @param billetsAPrendre billets pour lequels faire une réservation (mettre plusieurs fois la même séance pour prendre plusieurs places)
 	 * @return ID de la réservation créée en cas de succès, {@code -1} sinon
 	 */
-	public int creerReservation (ArrayList<int> billetsAPrendre);
+	public int creerReservation (int idUtilisateur, Set<Billet> billetsAPrendre);
 
 	/**
 	 * Supprime le film dont l'ID est donné en paramètre
@@ -238,9 +243,9 @@ public interface IModeleCinema {
 	 * 
 	 * @param email adresse email de l'utilisateur concerné
 	 * @param mdp mot de passe de l'utilisateur concerné
-	 * @return un {@code ArrayList<boolean>} dont le premier élément vaut true en cas de succès, et le deuxième, le cas échéant, indique si l'utilisateur est un Manager
+	 * @return un {@code ArrayList<Boolean>} dont le premier élément vaut true en cas de succès, et le deuxième, le cas échéant, indique si l'utilisateur est un Manager
 	 */
-	public ArrayList<boolean> connecterUtilisateur (String email, String mdp);
+	public ArrayList<Boolean> connecterUtilisateur (String email, String mdp);
 
 	/**
 	 * Déconnecte l'utilisateur actuellement connecté (il ne peut y en avoir qu'un à la fois, donc pas besoin de paramètre)

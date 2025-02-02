@@ -1,5 +1,9 @@
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class ModeleCinema implements IModeleCinema {
 	private Utilisateur utilisateurConnecte;
@@ -54,6 +58,16 @@ public class ModeleCinema implements IModeleCinema {
 	}
 
 	@Override
+	public Billet getBillet (int id) {
+		for (Billet b : this.billetsEnregistres) {
+			if (b.getId() == id) {
+				return b;
+			}
+		}
+		return null;
+	}
+
+	@Override
 	public Salle getSalle (int id) {
 		for (Salle s : this.sallesEnregistrees) {
 			if (s.getId() == id) {
@@ -87,6 +101,11 @@ public class ModeleCinema implements IModeleCinema {
 	public Set<Salle> getListeSalles () {
 		return this.sallesEnregistrees;
 	}
+	
+	@Override
+	public Set<Seance> getListeSeances () {
+		return this.seancesEnregistrees;
+	}
 
 	@Override
 	public Set<Seance> getListeSeancesFilm (Film f) {
@@ -98,10 +117,15 @@ public class ModeleCinema implements IModeleCinema {
 		}
 		return resSeances;
 	}
-	
+
 	@Override
-	public Set<Seance> getListeSeances () {
-		return this.seancesEnregistrees;
+	public Set<Reservation> getListeReservations () {
+		return this.reservationsEnregistrees;
+	}
+
+	@Override
+	public Set<Billet> getListeBillets () {
+		return this.billetsEnregistres;
 	}
 
 	// 
@@ -123,7 +147,7 @@ public class ModeleCinema implements IModeleCinema {
 	@Override
 	public int ajouterManager (String nom, String email, String mdp) {
 		try {
-			Manager leManager = Manager.getManagerInstance(email, mdp);
+			Manager leManager = Manager.getManagerInstance(nom, email, mdp);
 			if (leManager == null) {
 				return ID_VALUE_ON_ERROR;
 			}
@@ -134,6 +158,30 @@ public class ModeleCinema implements IModeleCinema {
 		}
 		catch (Exception e) {
 			return ID_VALUE_ON_ERROR;
+		}
+	}
+
+	@Override
+	public boolean supprimerUtilisateur (int id) {
+		try {
+			Utilisateur utilisateurAEnlever = null;
+			for (Utilisateur u: this.utilisateursEnregistres) {
+				if (u.getId() == id) {
+					utilisateurAEnlever = u;
+					break;
+				}
+			}
+			// si l'utilisateur n'a pas été trouve
+			if (utilisateurAEnlever == null) {
+				return false;
+			}
+			else {
+				this.utilisateursEnregistres.remove(utilisateurAEnlever);
+				return true;
+			}
+		}
+		catch (Exception e) {
+			return false;
 		}
 	}
 
@@ -187,6 +235,7 @@ public class ModeleCinema implements IModeleCinema {
 					break;
 				}
 			}
+			// si le film n'a pas été trouvé
 			if (filmAEnlever == null) {
 				return false;
 			}
@@ -281,6 +330,27 @@ public class ModeleCinema implements IModeleCinema {
 	}
 
 	@Override
+	public int creerReservation (int idUtilisateur, Set<Billet> billetsAPrendre) {
+		try {
+			Utilisateur uResa = this.getUtilisateur(idUtilisateur);
+			if (uResa == null) {
+				return ID_VALUE_ON_ERROR;
+			}
+			for (Billet b : billetsAPrendre) {
+				if (b != null) {
+					this.billetsEnregistres.add(b);
+				}
+			}
+			Reservation nvlReservation = new Reservation(uResa, billetsAPrendre);
+			this.reservationsEnregistrees.add(nvlReservation);
+			return nvlReservation.getId();
+		}
+		catch (Exception e) {
+			return ID_VALUE_ON_ERROR;
+		}
+	}
+
+	@Override
 	public boolean supprimerReservation(int id) {
 		try {
 			Reservation reservationAEnlever = null;
@@ -290,6 +360,7 @@ public class ModeleCinema implements IModeleCinema {
 					break;
 				}
 			}
+			// Si on a pas trouvé la réservation
 			if (reservationAEnlever == null) {
 				return false;
 			}
@@ -297,6 +368,7 @@ public class ModeleCinema implements IModeleCinema {
 				for (Billet b: reservationAEnlever.getBillets()) {
 					this.billetsEnregistres.remove(b);
 				}
+				// réservation trouvée, billets enlevés, réservation enlevée : tout est bon, on renvoie true
 				this.reservationsEnregistrees.remove(reservationAEnlever);
 				return true;
 			}
@@ -311,7 +383,7 @@ public class ModeleCinema implements IModeleCinema {
 		ArrayList<Boolean> resConnexion = new ArrayList<Boolean>(Arrays.asList(false, false));
 		try {
 			for (Utilisateur u : utilisateursEnregistres) {
-				if (u.getMail().equals(email) && u.verifierMotDePasse(mdp)) {
+				if (u.getEmail().equals(email) && u.getMotDePasse().equals(mdp)) {
 					utilisateurConnecte = u;
 					resConnexion.set(0, true);
 					if (u instanceof Manager) {

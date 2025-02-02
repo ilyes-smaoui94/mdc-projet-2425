@@ -5,7 +5,7 @@ public class Reservation {
   private static int nextAvailableId = 1;
   private int id;
   private Set<Billet> billetsReservation;
-  private utilisateurResa;
+  private Utilisateur utilisateurResa;
 
   public Reservation (Utilisateur u) {
     this.id = this.getNextAvailableId();
@@ -17,10 +17,16 @@ public class Reservation {
     this.id = this.getNextAvailableId();
     this.utilisateurResa = u;
     if (billetsResa == null) {
-      this.billetsReservation == new HashSet<Billet>();
+      this.billetsReservation = new HashSet<Billet>();
     }
     else {
-      this.billetsReservation = billetsResa;
+      this.billetsReservation = new HashSet<Billet>();
+      // On ignore simplement les élements de billetsResa à valeur nulle
+      for (Billet b : billetsResa) {
+        if (b != null) {
+          this.billetsReservation.add(b);
+        }
+      }
     }
   }
 
@@ -35,7 +41,9 @@ public class Reservation {
   }
 
   public void addBillet (Billet b) {
-    this.billetsReservation.add(b);
+    if (b != null) {
+      this.billetsReservation.add(b);
+    }
   }
 
   public Set<Billet> getBillets () {

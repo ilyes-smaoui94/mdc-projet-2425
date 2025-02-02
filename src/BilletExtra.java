@@ -2,8 +2,8 @@ public abstract class BilletExtra extends Billet {
 	
 	private Billet billetBase;
 
-	public BilletExtra(Billet billetBase) {
-		super();
+	public BilletExtra(Seance seanceBillet, Billet billetBase) {
+		super(seanceBillet);
 		this.billetBase = billetBase;
 	}
 	

@@ -9,12 +9,12 @@ public class Seance {
 	private Date date;
 	private int placesRestantes;
 	
-	public Seance(Salle salleSeance, String date, String heure, int placesRestantes) {
+	public Seance(Salle salleSeance, Film f, Date date) {
 		this.id = this.getNextAvailableId();
 		this.salleSeance = salleSeance;
+		this.filmSeance = f;
 		this.date = date;
-		this.heure = heure;
-		this.placesRestantes = placesRestantes;
+		this.placesRestantes = salleSeance.getCapacite();
 	}
 	
 	// public Seance() {}
@@ -23,6 +23,10 @@ public class Seance {
 		int nextID = Seance.nextAvailableId;
 		Seance.nextAvailableId += 1;
 		return nextID;
+	}
+
+	public int getId() {
+		return this.id;
 	}
 
 	public Salle getSalle () {
@@ -41,7 +45,7 @@ public class Seance {
 		this.filmSeance = f;
 	}
 
-	public String getDate () {
+	public Date getDate () {
 		return this.date;
 	}
 

@@ -1,7 +1,7 @@
 public class Client extends Utilisateur {
 
-	public Client() {
-	}
+	// public Client() {
+	// }
 
 	public Client(String nom, String email, String motDePasse) {
 		super(nom, email, motDePasse);
