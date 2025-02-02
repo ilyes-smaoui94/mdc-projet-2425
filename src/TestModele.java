@@ -24,7 +24,19 @@ public class TestModele {
 		return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
 	}
 
+	public static void afficherRecap(IModeleCinema modele) {
+		System.out.println("\n-----Récap-----\n");
+		System.out.println("Utilisateurs :\n" + modele.getListeUtilisateurs());
+		System.out.println("Billets :\n" + modele.getListeBillets());
+		System.out.println("Films :\n" + modele.getListeFilms());
+		System.out.println("Résas :\n" + modele.getListeReservations());
+		System.out.println("Salles :\n" + modele.getListeSalles());
+		System.out.println("Seances :\n" + modele.getListeSeances());
+		System.out.println("");
+	}
+
 	public static void essayerConnexion (IModeleCinema modele, String email, String mdp) {
+		System.out.println("\n-----Connexion-----");
 		ArrayList<Boolean> resTest = modele.connecterUtilisateur(email, mdp);
 		if (resTest.get(0)) {
 			System.out.println("Connexion réussie !");
@@ -38,9 +50,11 @@ public class TestModele {
 		else {
 			System.out.println("Connexion échouée !");
 		}
+		System.out.println("");
 	}
 
 	public static void essayerAjoutSalle (IModeleCinema modele, int numero, int capacite) {
+		System.out.println("\n-----AjoutSalle-----");
 		int res = modele.ajouterSalle(numero, capacite);
 		if (res > 0) {
 			System.out.println("Salle d'ID " + res + " bien créée !");
@@ -50,9 +64,11 @@ public class TestModele {
 			System.out.println("Échec !");
 			System.out.println("(numéro : " + numero + ", capacité : " + capacite + ")");
 		}
+		System.out.println("");
 	}
 
 	public static void essayerAjoutFilm (IModeleCinema modele, String titre, int annee, String desc, int duree) {
+		System.out.println("\n-----AjoutFilm-----");
 		int res = modele.ajouterFilm(titre, annee, desc, duree);
 		if (res > 0) {
 			System.out.println("Film d'ID " + res + " bien créée !");
@@ -63,19 +79,23 @@ public class TestModele {
 			System.out.println("Échec !");
 			System.out.println("(titre : " + titre + ", annee : " + annee + ", duree : " + duree + ")");
 		}
+		System.out.println("");
 	}
 
 	public static void essayerAjoutSeance (IModeleCinema modele, int idSalle, int idFilm, Date heureDebut) {
+		System.out.println("\n-----AjoutSeance-----");
 		int res = modele.ajouterSeance(idSalle, idFilm, heureDebut);
 		if (res > 0) {
 			System.out.println("Seance d'ID " + res + " bien créée !");
 			System.out.println("(Salle numéro " + modele.getSeance(res).getSalle().getNumero() + " avec une capacité de " + modele.getSeance(res).getSalle().getCapacite() + ")");
+			System.out.println("(film d'ID " + modele.getSeance(res).getFilm().getId() + ")");
 			System.out.println("(commence à " + modele.getSeance(res).getDate() + ")");
 		}
 		else {
 			System.out.println("Échec !");
 			System.out.println("(idSalle : " + idSalle + ", idFilm : " + idFilm + ", heureDebut : " + heureDebut + ")");
 		}
+		System.out.println("");
 	}
 
 	public static void main (String args[]) {
@@ -119,18 +139,26 @@ public class TestModele {
 		essayerAjoutFilm(monModele, "EEAO", 2022, "descEEA0", 139);
 		
 		Scanner monScan = new Scanner(System.in);
-		System.out.println("idSalle, idFilm, Date");
+		
+		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
 		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
 		
 		// ;
 		
 		// Afficahge des listes du Modèles, pour une vue d'ensemble
-		System.out.println("Utilisateurs :\n" + monModele.getListeUtilisateurs());
-		System.out.println("Billets :\n" + monModele.getListeBillets());
-		System.out.println("Films :\n" + monModele.getListeFilms());
-		System.out.println("Résas :\n" + monModele.getListeReservations());
-		System.out.println("Salles :\n" + monModele.getListeSalles());
-		System.out.println("Seances :\n" + monModele.getListeSeances());
+		afficherRecap(monModele);
 		
 		// []
 		// Client/Manager

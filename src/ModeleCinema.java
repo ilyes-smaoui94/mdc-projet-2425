@@ -298,7 +298,7 @@ public class ModeleCinema implements IModeleCinema {
 	public int ajouterSeance (int idSalle, int idFilm, Date heureDebut) {
 		try {
 			Seance s = new Seance(this.getSalle(idSalle), this.getFilm(idFilm), heureDebut);
-			if (s == null) {
+			if (s == null || this.getFilm(idFilm) == null || this.getSalle(idSalle) == null) {
 				return ID_VALUE_ON_ERROR;
 			}
 			else {
@@ -326,6 +326,9 @@ public class ModeleCinema implements IModeleCinema {
 				return false;
 			}
 			else {
+        // for (Billet b: this.billetsEnregistres) {
+        //   if 
+        // }
 				this.seancesEnregistrees.remove(seanceAEnlever);
 				return true;
 			}
