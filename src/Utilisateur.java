@@ -1,62 +1,153 @@
+/**
+ * Représente un utilisateur abstrait avec un identifiant, un nom, un email et un mot de passe.
+ * Les classes concrètes doivent implémenter les méthodes de connexion et de déconnexion.
+ */
 public abstract class Utilisateur {
-	static protected int nextAvailableId = 1;
-	protected int id;
-	protected String nom;
-	protected String email;
-	protected String motDePasse;
-	private boolean connectionStatus;
 
-	// public Utilisateur() {
-	// }
+    /**
+     * Identifiant statique pour déterminer le prochain ID disponible
+     * pour chaque nouvel utilisateur.
+     */
+    static protected int nextAvailableId = 1;
 
-	public Utilisateur(String nom, String email, String motDePasse) {
-		this.id = this.getNextAvailableId();
-		this.nom = nom;
-		this.email = email;
-		this.motDePasse = motDePasse;
-		this.connectionStatus = false;
-	}
+    /**
+     * Identifiant unique de l'utilisateur.
+     */
+    protected int id;
 
-	protected static int getNextAvailableId () {
-		int nextID = nextAvailableId;
-		nextAvailableId += 1;
-		return nextID;
-	}
+    /**
+     * Nom de l'utilisateur.
+     */
+    protected String nom;
 
-	// -- Getters et Setters --
-	public int getId() {
-		return id;
-	}
+    /**
+     * Adresse email de l'utilisateur.
+     */
+    protected String email;
 
-	public String getNom() {
-		return nom;
-	}
+    /**
+     * Mot de passe de l'utilisateur.
+     */
+    protected String motDePasse;
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+    /**
+     * Indique si l'utilisateur est actuellement connecté.
+     */
+    private boolean connectionStatus;
 
-	public String getEmail() {
-		return email;
-	}
+    /**
+     * Constructeur de l'utilisateur.
+     *
+     * @param nom        Nom de l'utilisateur.
+     * @param email      Adresse email de l'utilisateur.
+     * @param motDePasse Mot de passe de l'utilisateur.
+     */
+    public Utilisateur(String nom, String email, String motDePasse) {
+        this.id = this.getNextAvailableId();
+        this.nom = nom;
+        this.email = email;
+        this.motDePasse = motDePasse;
+        this.connectionStatus = false;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * Retourne le prochain identifiant disponible et l'incrémente pour le futur utilisateur.
+     *
+     * @return le prochain identifiant disponible.
+     */
+    protected static int getNextAvailableId() {
+        int nextID = nextAvailableId;
+        nextAvailableId += 1;
+        return nextID;
+    }
 
-	public String getMotDePasse() {
-		return motDePasse;
-	}
+    // -- Getters et Setters --
 
-	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
-	}
+    /**
+     * Retourne l'identifiant unique de l'utilisateur.
+     *
+     * @return l'identifiant de l'utilisateur.
+     */
+    public int getId() {
+        return id;
+    }
 
-	public boolean getConnectionStatus() {
-		return this.connectionStatus;
-	}
+    /**
+     * Retourne le nom de l'utilisateur.
+     *
+     * @return le nom de l'utilisateur.
+     */
+    public String getNom() {
+        return nom;
+    }
 
-	public abstract boolean seConnecter();
+    /**
+     * Modifie le nom de l'utilisateur.
+     *
+     * @param nom le nouveau nom de l'utilisateur.
+     */
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-	public abstract boolean seDeconnecter();
+    /**
+     * Retourne l'adresse email de l'utilisateur.
+     *
+     * @return l'adresse email de l'utilisateur.
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Modifie l'adresse email de l'utilisateur.
+     *
+     * @param email la nouvelle adresse email de l'utilisateur.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Retourne le mot de passe de l'utilisateur.
+     *
+     * @return le mot de passe de l'utilisateur.
+     */
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+
+    /**
+     * Modifie le mot de passe de l'utilisateur.
+     *
+     * @param motDePasse le nouveau mot de passe de l'utilisateur.
+     */
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
+    }
+
+    /**
+     * Indique si l'utilisateur est actuellement connecté.
+     *
+     * @return true si l'utilisateur est connecté, false sinon.
+     */
+    public boolean getConnectionStatus() {
+        return this.connectionStatus;
+    }
+
+    /**
+     * Méthode abstraite pour connecter un utilisateur.
+     * Les classes concrètes doivent implémenter cette logique.
+     *
+     * @return true si la connexion réussit, false sinon.
+     */
+    public abstract boolean seConnecter();
+
+    /**
+     * Méthode abstraite pour déconnecter un utilisateur.
+     * Les classes concrètes doivent implémenter cette logique.
+     *
+     * @return true si la déconnexion réussit, false sinon.
+     */
+    public abstract boolean seDeconnecter();
 }
