@@ -21,7 +21,7 @@ import java.util.HashSet;
  * <p>Les billets peuvent être ajoutés un par un via {@link #addBillet(Billet)}, 
  * et récupérés via {@link #getBillets()}. Le prix total de la réservation 
  * est obtenu par la méthode {@link #getPrixTotal()}.
- * </p>
+ *  
  * 
  */
 public class Reservation {
