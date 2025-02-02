@@ -35,6 +35,8 @@ public interface IVueUtilisateur {
 
 	public String afficherDialogueAffichageSeancesUneSalle();
 
+	public String afficherDialogueSeancesUnFilm();
+
 	public void afficherSeancesUneSalle(Set<Seance> seances);
 
 	public String afficherDialogueAffichageSeancesPlusieursSalles();

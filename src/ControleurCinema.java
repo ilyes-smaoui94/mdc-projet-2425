@@ -1,13 +1,11 @@
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public class ControleurCinema implements IControleurCinema {
 
@@ -15,7 +13,7 @@ public class ControleurCinema implements IControleurCinema {
 	private IVueClient vueClient;
 	private IVueManager vueManager;
 
-	public ControleurCinema(ModeleCinema modele) {
+	public ControleurCinema(IModeleCinema modele) {
 
 		this.modele = modele;
 	}
@@ -186,7 +184,7 @@ public class ControleurCinema implements IControleurCinema {
 		return null;
 	}
 
-	public void gererCreationSeance() throws ParseException {
+	public void gererCreationSeance() {
 
 		ArrayList<String> listeArguments = this.vueManager.afficherDialogueCreationSeance();
 		Boolean creation = true;

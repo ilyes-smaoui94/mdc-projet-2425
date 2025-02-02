@@ -1,10 +1,10 @@
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class TestModele {
 
@@ -82,9 +82,9 @@ public class TestModele {
 		System.out.println("");
 	}
 
-	public static void essayerAjoutSeance (IModeleCinema modele, int idSalle, int idFilm, Date heureDebut) {
+	public static void essayerAjoutSeance (IModeleCinema modele, int idSalle, int idFilm, Date heureDebut, TypeSeance typeSeance) {
 		System.out.println("\n-----AjoutSeance-----");
-		int res = modele.ajouterSeance(idSalle, idFilm, heureDebut);
+		int res = modele.ajouterSeance(idSalle, idFilm, heureDebut, typeSeance);
 		if (res > 0) {
 			System.out.println("Seance d'ID " + res + " bien créée !");
 			System.out.println("(Salle numéro " + modele.getSeance(res).getSalle().getNumero() + " avec une capacité de " + modele.getSeance(res).getSalle().getCapacite() + ")");
@@ -141,19 +141,19 @@ public class TestModele {
 		Scanner monScan = new Scanner(System.in);
 		
 		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
-		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()), TypeSeance.IMAX);
 		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
-		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()), TypeSeance.IMAX);
 		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
-		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()), TypeSeance.IMAX);
 		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
-		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()), TypeSeance.IMAX);
 		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
-		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()), TypeSeance.IMAX);
 		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
-		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()), TypeSeance.IMAX);
 		System.out.println("idSalle, idFilm, Date (UNIX milliseconds):");
-		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()));
+		essayerAjoutSeance(monModele, monScan.nextInt(), monScan.nextInt(), new Date(monScan.nextLong()), TypeSeance.IMAX);
 		
 		// ;
 		

@@ -1,3 +1,4 @@
+
 public interface IControleurCinema {
 	// Setters and Gettersa
 	public void setVues(IVueClient vueClient, IVueManager vueManager);
