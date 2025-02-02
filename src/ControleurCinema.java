@@ -367,66 +367,6 @@ public class ControleurCinema implements IControleurCinema {
 
 	}
 
-	@Override
-	public void lancerApplication() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'lancerApplication'");
-	}
-
-	@Override
-	public void gererConnexion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'gererConnexion'");
-	}
-
-	@Override
-	public void gererReservationSeance() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'gererReservationSeance'");
-	}
-
-
-	@Override
-	public void gererAffichageSalles() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'gererAffichageSalles'");
-	}
-
-	@Override
-	public void gererAffichageResa() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'gererAffichageResa'");
-	}
-
-	@Override
-	public void gererNouvelleResa() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'gererNouvelleResa'");
-	}
-
-	@Override
-	public void gererSuppressionResa() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'gererSuppressionResa'");
-	}
-
-	@Override
-	public void gererCreationUtilisateur() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'gererCreationUtilisateur'");
-	}
-
-	@Override
-	public void gererSuppressionUtilisateur() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'gererSuppressionUtilisateur'");
-	}
-
-	@Override
-	public void gererDeconnexion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'gererDeconnexion'");
-	}
 
 	
 	
