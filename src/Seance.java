@@ -1,7 +1,8 @@
 import java.util.Date;
 
 public class Seance {
-	private static int id = 1;
+	private static int idSeance = 1;
+ 	private int id;
 	private Film film;
 	private Salle salle;
 	private Date date;
@@ -10,13 +11,13 @@ public class Seance {
 	private TypeSeance typeSeance; 
 	
 	public Seance(Film film, Date date,String heure,Salle salle,TypeSeance typeSeance ) {
-		this.id = id++;
+		this.id = idSeance++;
 		this.film=film;
 		this.salle=salle;
 		this.date=date;
 		this.heure=heure;
 		this.typeSeance=typeSeance;
-		this.nb_place_dispo=nb_place_dispo;
+		this.nb_place_dispo=this.getSalle().getCapacite();
 	}
 	
 	public Seance() {}

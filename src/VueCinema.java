@@ -87,11 +87,35 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
 
     @Override
     public String afficherDialogueAffichageSeance() {
-        return "";
+        Scanner scanner = new Scanner(System.in);
+
+	    System.out.print("Entrez l'Identifiant de la seance dont vous voulez les informations: ");
+	    String idSeance = scanner.nextLine();
+
+        return idSeance;
+    }
+
+    public String afficherDialogueSeancesUnFilm(){
+        Scanner scanner = new Scanner(System.in);
+
+	    System.out.print("Entrez l'ID du film dont vous voulez voir les prochaines séances ");
+	    String id = scanner.nextLine();
+        System.out.println("Voici les prochaine seance du Film d'ID: " + id +":");
+
+
+        return id;
     }
 
     @Override
-    public void afficherSeance(Seance s) {}
+    public void afficherSeance(Seance s) {
+        System.out.println("\nSeance : \n  -IdSeance:"+ s.getId()+"\n  -Film" +s.getFilm().getTitre()+"\n  -IdFilm: "+s.getFilm().getId()  + "\n  -Date: " + s.getDate() + "\n  -Heure: " + s.getHeure() + "\n  -Salle: "+ s.getSalle().toString() + "\n  -Type Seance:"+ s.getTypeSeance()+ ".\n");
+
+    }
+
+    public void afficherSeances(ArrayList<Seance> seances) {
+
+    }
+
 
     @Override
     public String afficherDialogueAffichageSeancesUneSalle() {
@@ -188,20 +212,12 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
     }
 	
 	public void afficherCreationFilmReussie(Film f){
-<<<<<<< HEAD
-		 System.out.println("\n✅ Film Crée : \n  -" +f.getTitre()  + "\n  -annee: " + f.getAnnee() + "\n  -Description: " + f.getDesc() + "\n  -Genre principal:"+ f.getGenre());
-=======
 		 System.out.println("\n✅ Film Crée : \n  -" +f.getTitre()  + "\n  -annee: " + f.getAnnee() + "\n  -Description: " + f.getDesc() + "\n  -Genre principal:"+ f.getGenre()+".\n");
->>>>>>> feature_gestionSalle
 
 	}
 	
 	public void afficherCreationFilmEchouer(){
-<<<<<<< HEAD
-		 System.out.println("\n❌ Film non crée :");
-=======
 		 System.out.println("\n❌ Film non crée. \n");
->>>>>>> feature_gestionSalle
 
 	}
 
@@ -330,7 +346,7 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
 
     @Override
     public void afficherCreationSeanceReussie(Seance s) {
-        System.out.println("\n✅ Seance Crée : \n" +s.getFilm().getTitre()  + "\nDate: " + s.getDate() + "\nHeure: " + s.getHeure() + "\nSalle: "+ s.getSalle().toString() + "\nType Seance:"+ s.getTypeSeance()+ ".\n");
+        System.out.println("\n✅ Seance Crée : \n  -ID: "+s.getId()+"\n  -Film: " +s.getFilm().getTitre()  + "\n  -Date: " + s.getDate() + "\n  -Heure: " + s.getHeure() + "\n  -Salle: "+ s.getSalle().toString() + "\n  -Type Seance:"+ s.getTypeSeance()+ ".\n");
 
     }
 
@@ -453,13 +469,17 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
     public void OptionSupprimerSalle() {
 		this.controleur.gererSuppressionSalle();
 	}
+    public void OptionAfficherSeance(){
+        this.controleur.gererAffichageUneSeance();
+    }
 
+    public void OptionAfficherToutesSeance(){
+        this.controleur.gererAffichageToutesSeances();
+    }
 
-
-	
-	
-	
-	
+    public void OptionAfficherSeancesFilm(){
+        this.controleur.GererAffichageToutesSeancesUnFilm();
+    }
 }
 
 
