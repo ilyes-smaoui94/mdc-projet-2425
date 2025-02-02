@@ -137,7 +137,7 @@ public class VueCinema implements IVueManager, IVueClient {
   public void afficherSeances(ArrayList<Seance> seances) {
     Set<Salle> sallesSeance = new HashSet<Salle>();
     for (Seance s: seances) {
-      if ();
+      // if ();
     }
   }
 

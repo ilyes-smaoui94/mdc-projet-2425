@@ -1,4 +1,5 @@
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -56,7 +57,16 @@ public class ControleurCinema implements IControleurCinema {
 		}
 	}
 
-	// public void gererReservationSeance ();
+	public void gererReservationSeance () {
+		ArrayList<String> donneesResa = this.vueClient.afficherDialogueReservationSeance();
+		Set<Billet> billetsAPrendre = new HashSet<Billet>();
+		for (String s : donneesResa) {
+			int idSeance = Integer.parseInt(s);
+			Billet b = new BilletPleinTarif(this.modele.getSeance(idSeance));
+			
+		}
+		this.modele.creerReservation(this.modele.getUtilisateurConnecte().getId(), billetsAPrendre);
+	}
 
 	public void setVues(IVueClient vueClient, IVueManager vueManager) {
 		this.vueClient = vueClient;
