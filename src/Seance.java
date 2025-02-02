@@ -20,7 +20,7 @@ import java.util.Date;
  * System.out.println("Salle : " + seance.getSalle().getNumero());
  * System.out.println("Places restantes : " + seance.getPlacesRestantes());
  * }</pre>
- * </p>
+ *  
  * 
  * @author 
  */
