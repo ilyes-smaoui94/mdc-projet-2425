@@ -88,7 +88,7 @@ public class ModeleCinema implements IModeleCinema {
 	}
 	
 	@Override
-	public Set<Utilisateur> getListeUtilisateur () {
+	public Set<Utilisateur> getListeUtilisateurs () {
 		return this.utilisateursEnregistres;
 	}
 

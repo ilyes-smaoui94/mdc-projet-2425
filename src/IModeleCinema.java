@@ -70,7 +70,7 @@ public interface IModeleCinema {
 	 * 
 	 * @return La liste des utilisateurs enregistrés dans le modèle
 	 */
-	public Set<Utilisateur> getListeUtilisateur ();
+	public Set<Utilisateur> getListeUtilisateurs ();
 
 	/**
 	 * Renvoie la liste des films enregistrés dans le modèle
