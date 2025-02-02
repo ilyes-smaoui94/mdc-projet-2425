@@ -7,7 +7,7 @@
  * dans un pattern Decorator pour un objet {@link Billet}. 
  * Le prix final est donc la somme du prix du billet de base 
  * et d'un supplément de 6.0€.
- * </p>
+ * 
  *
  * <p>Exemple d'utilisation :
  * <pre>{@code
@@ -18,7 +18,7 @@
  * double prixFinal = supplementPopcorn.getPrix();
  * System.out.println("Prix final avec supplément popcorn : " + prixFinal + "€");
  * }</pre>
- * </p>
+ * 
  * 
  * @see Billet
  * @see BilletExtra
@@ -40,7 +40,7 @@ public class SupplementPopcorn extends BilletExtra {
      * Calcule et retourne le prix du billet incluant le supplément popcorn.
      * <p>
      * Le prix final est le prix du billet de base majoré de 6.0€.
-     * </p>
+     * 
      *
      * @return Le prix total du billet avec supplément popcorn.
      */
