@@ -15,7 +15,7 @@ public class ControleurCinema implements IControleurCinema {
 	    	this.vue=vue;
 	    }
 
-		public Film ChercherFilmParID(HashSet<Film> listeFilms, int id) {
+		public Film chercherFilmParID(HashSet<Film> listeFilms, int id) {
 	        for (Film film : listeFilms) {
 	            if (film.getId() == id) { // Vérification basée sur l'ID
 	                return film; // 🎬 Film déjà présent !
@@ -50,12 +50,6 @@ public class ControleurCinema implements IControleurCinema {
 				    	MainGenre = Genre.Thriller;
 				    }
 			        
-
-			        if (genre == null) {   
-			            System.out.println("Erreur : Données genre invalides.");
-			            
-			            
-			        }
 
 			        // Création de la séance
 					Film film= new Film(titre,annee,descritpion,MainGenre);
@@ -97,11 +91,15 @@ public class ControleurCinema implements IControleurCinema {
 		public void GererAffichageFilms() {
 	    	HashSet<Film> films= this.modele.getListeFilm();
 	    	for (Film f : films) {
-				System.out.println("[Titre: " +f.getTitre()  + ", annee: " + f.getAnnee() + ", Description: " + f.getDesc() + ", Genre principal:"+ f.getGenre()+ "]");
+				System.out.println("[ID: "+f.getId()+ ", titre: " +f.getTitre()  + ", annee: " + f.getAnnee() + ", Description: " + f.getDesc() + ", Genre principal:"+ f.getGenre()+ "]");
             }
 	    }
 
-		public void GererAffichageFilm(Film film) {
+		public void GererAffichageFilm() {
+			String id = vue.afficherDialogueAffichageFilm();
+			int Id =Integer.parseInt(id);
+
+			Film film= chercherFilmParID(modele.getListeFilm(),Id);
 			this.vue.afficherFilm(film);
 			
 		}

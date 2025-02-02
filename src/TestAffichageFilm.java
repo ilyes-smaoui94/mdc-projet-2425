@@ -12,19 +12,19 @@ public class TestAffichageFilm {
 		modele.getListeFilm().add(f);
 		controleur.setVue(vue);
 		
+		System.out.println("Creation d'un nouveau film:");
+
 		vue.Option1();
 
 		
-		System.out.println("Test Affiche ListFilm :");
+		System.out.println("\n Affichage de la liste de tout les films actuellement au cinema :");
 		
 		vue.Option3();
-		System.out.println("\n******************************\n");
+		
+		System.out.println("\n Affichez un Film :");
 
 		
-		System.out.println("Test Affiche Film :");
-
-		
-		vue.Option4(f);
+		vue.Option4();
 
 
 

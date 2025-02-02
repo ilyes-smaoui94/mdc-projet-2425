@@ -1,6 +1,8 @@
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -47,7 +49,12 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
 
     @Override
     public String afficherDialogueAffichageFilm() {
-        return "";
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Entrez l'ID du film d'ont vous voulez les informations: ");
+	    String Id = scanner.nextLine();
+
+        return Id;
     }
 
     @Override
@@ -132,17 +139,37 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
     public ArrayList<String> AfficherDialogueCreationFilm(){  
 		Scanner scanner = new Scanner(System.in);
 
-	    System.out.print("Entrez le titre du film : ");
-	    String titre = scanner.nextLine();
+	    List<String> genresAutorises = Arrays.asList("Drame", "Comedie", "Horreur", "Action", "Thriller");
 
-	    System.out.print("Entrez l'année de sortie du film : ");
-	    String annee = scanner.nextLine();
+        String titre;
+        do {
+            System.out.print("Entrez le titre du film : ");
+            titre = scanner.nextLine().trim();
+            if (titre.isEmpty()) {
+                System.out.println("⛔ Le titre ne peut pas être vide !");
+            }
+        } while (titre.isEmpty());
 
-	    System.out.print("Entrez une description du film: ");
-	    String description = scanner.nextLine();
+        String annee;
+        do {
+            System.out.print("Entrez l'année de sortie du film : ");
+            annee = scanner.nextLine().trim();
+            if (!annee.matches("\\d{4}")) {
+                System.out.println("⛔ Veuillez entrer une année valide (ex : 2024).");
+            }
+        } while (!annee.matches("\\d{4}"));
 
-	    System.out.print("Entrez le genre principal (Drame, Comedie, Horreur, Action, Thriller): ");
-	    String genre = scanner.nextLine();
+        System.out.print("Entrez une description du film : ");
+        String description = scanner.nextLine().trim();
+
+        String genre;
+        do {
+            System.out.print("Entrez le genre principal (Drame, Comedie, Horreur, Action, Thriller) : ");
+            genre = scanner.nextLine().trim();
+            if (!genresAutorises.contains(genre)) {
+                System.out.println("⛔ Genre invalide ! Veuillez choisir parmi : " + genresAutorises);
+            }
+        } while (!genresAutorises.contains(genre));
 
 	   
         
@@ -160,12 +187,12 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
 	}
 	
 	public void afficherCreationFilmReussie(Film f){
-		 System.out.println("✅ Film Crée : \n  -" +f.getTitre()  + "\n  -annee: " + f.getAnnee() + "\n  -Description: " + f.getDesc() + "\n  -Genre principal:"+ f.getGenre());
+		 System.out.println("\n✅ Film Crée : \n  -" +f.getTitre()  + "\n  -annee: " + f.getAnnee() + "\n  -Description: " + f.getDesc() + "\n  -Genre principal:"+ f.getGenre());
 
 	}
 	
 	public void afficherCreationFilmEchouer(){
-		 System.out.println("❌ Film non crée :");
+		 System.out.println("\n❌ Film non crée :");
 
 	}
 
@@ -293,8 +320,8 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
 		this.controleur.GererAffichageFilms();
 	}
 	
-	public void Option4(Film f) {
-		this.controleur.GererAffichageFilm(f);
+	public void Option4() {
+		this.controleur.GererAffichageFilm();
 	}
 
 
