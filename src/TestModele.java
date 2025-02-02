@@ -67,6 +67,7 @@ public class TestModele {
     essayerAjoutSalle(monModele, donneesSalle[3][0], donneesSalle[3][1]);
     essayerAjoutSalle(monModele, donneesSalle[4][0], donneesSalle[4][1]);
 
+    // Afficahge des listes du Modèles, pour une vue d'ensemble
     System.out.println("Utilisateurs :\n" + monModele.getListeUtilisateurs());
     System.out.println("Billets :\n" + monModele.getListeBillets());
     System.out.println("Films :\n" + monModele.getListeFilms());
