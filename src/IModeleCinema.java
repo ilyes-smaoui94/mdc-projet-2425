@@ -3,7 +3,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
-
+/**
+ * Interface définissant les méthodes à implémenter pour tout classe gérant un Modèle pour notre application
+ */
 public interface IModeleCinema {
 
 	/**
@@ -96,6 +98,7 @@ public interface IModeleCinema {
 	/**
 	 * Renvoie la liste des séances d'un film
 	 * 
+	 * @param f Film dont on veut récupérer les séances
 	 * @return la liste des séances d'un film
 	 */
 	public Set<Seance> getListeSeancesFilm (Film f);
@@ -147,12 +150,13 @@ public interface IModeleCinema {
 	 * Enregistre un nouveau film
 	 * Sinon, renvoie un nombre négatif (-1, à priori)
 	 * 
-	 * @param nom nom du manager à enregistrer
-	 * @param email email du manager à enregistrer
-	 * @param mdp mot de passe du manager à enregistrer
+	 * @param titre titre du film à enregistrer
+	 * @param a année de sortie du film à enregistrer
+	 * @param desc description du film à enregistrer
+	 * @param duree durée (en minutes) du film à enregistrer
 	 * @return l'ID du manager créé, si possible, -1 sinon
 	 */
-	public int ajouterFilm (String titre, int a, String desc);
+	public int ajouterFilm (String titre, int a, String desc, int duree);
 
 	/**
 	 * Enregistre un nouveau film
@@ -161,10 +165,11 @@ public interface IModeleCinema {
 	 * @param titre titre du film à enregistrer
 	 * @param a année de sortie du film à enregistrer
 	 * @param desc description du film à enregistrer
-	 * @param genres genres du film à enregistrer
+	 * @param duree durée (en minutes) du film à enregistrer
+	 * @param genres_str genres du film à enregistrer
 	 * @return ID du film créé, si possible
 	 */
-	public int ajouterFilm (String titre, int a, String desc, ArrayList<String> genres_str);
+	public int ajouterFilm (String titre, int a, String desc, int duree, ArrayList<String> genres_str);
 
 	/**
 	 * Supprime le film dont l'ID est donné en paramètre
@@ -178,6 +183,7 @@ public interface IModeleCinema {
 	 * Enregistre une nouvelle salle
 	 * 
 	 * @param numeroSalle numéro de la salle à enregistrer
+	 * @param capacite capacité de la salle à enregistrer
 	 * @return ID de la salle créée en cas de succès, {@code -1} sinon
 	 */
 	public int ajouterSalle (int numeroSalle, int capacite);

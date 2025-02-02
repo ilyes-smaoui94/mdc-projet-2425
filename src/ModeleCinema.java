@@ -186,9 +186,9 @@ public class ModeleCinema implements IModeleCinema {
 	}
 
 	@Override
-	public int ajouterFilm (String titre, int a, String desc) {
+	public int ajouterFilm (String titre, int a, String desc, int duree) {
 		try {
-			Film nvFilm = new Film(titre, a, desc);
+			Film nvFilm = new Film(titre, a, desc, duree);
 			if (nvFilm == null) {
 				return ID_VALUE_ON_ERROR;
 			}
@@ -201,7 +201,7 @@ public class ModeleCinema implements IModeleCinema {
 	}
 
 	@Override
-	public int ajouterFilm (String titre, int a, String desc, ArrayList<String> genres_str) {
+	public int ajouterFilm (String titre, int a, String desc, int duree, ArrayList<String> genres_str) {
 		try {
 			Set<Genre> genresSet = new HashSet<Genre>();
 			for (String g_str: genres_str) {
@@ -211,7 +211,7 @@ public class ModeleCinema implements IModeleCinema {
 					}
 				}
 			}
-			Film nvFilm = new Film(titre, a, desc, genresSet);
+			Film nvFilm = new Film(titre, a, desc, duree, genresSet);
 			if (nvFilm == null) {
 				return ID_VALUE_ON_ERROR;
 			}
@@ -298,10 +298,11 @@ public class ModeleCinema implements IModeleCinema {
 	public int ajouterSeance (int idSalle, int idFilm, Date heureDebut) {
 		try {
 			Seance s = new Seance(this.getSalle(idSalle), this.getFilm(idFilm), heureDebut);
-			if (s == null) {
+			if (s == null || this.getFilm(idFilm) == null || this.getSalle(idSalle) == null) {
 				return ID_VALUE_ON_ERROR;
 			}
 			else {
+				// À faire : vérifier qu'il n'y a pas chevauchement entre cette séance et une autre
 				this.seancesEnregistrees.add(s);
 				return s.getId();
 			}
@@ -325,6 +326,9 @@ public class ModeleCinema implements IModeleCinema {
 				return false;
 			}
 			else {
+        // for (Billet b: this.billetsEnregistres) {
+        //   if 
+        // }
 				this.seancesEnregistrees.remove(seanceAEnlever);
 				return true;
 			}
