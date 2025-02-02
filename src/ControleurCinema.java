@@ -1,5 +1,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -36,6 +38,23 @@ public class ControleurCinema implements IControleurCinema {
 	        }
 	        return null; // ❌ Film non trouvé
 	    }
+
+		public static boolean verifierDisponibiliteSeance(ArrayList<Seance> listeSeances, Salle salle, String heure) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime heureNouvelleSeance = LocalTime.parse(heure, formatter);
+
+        for (Seance seance : listeSeances) {
+            if (seance.getSalle().getId() == salle.getId()) {
+                LocalTime heureExistante = LocalTime.parse(seance.getHeure(), formatter);
+                long difference = Math.abs(heureExistante.toSecondOfDay() - heureNouvelleSeance.toSecondOfDay()) / 3600; // Convertir en heures
+
+                if (difference < 2) {
+                    return false; // ⛔ Trop proche d'une autre séance !
+                }
+            }
+        }
+        return true; // ✅ Disponible avec une marge de 2 heures
+    }
 
 
 	     
@@ -138,9 +157,15 @@ public class ControleurCinema implements IControleurCinema {
 	public void GererCreationSeance() throws ParseException {
 
 	        	ArrayList<String> Liste =this.vue.afficherDialogueCreationSeance();
-
+				Boolean creation=true;
 	        	String f= Liste.get(0);
 	        	Film film =this.chercherFilmParNom(this.modele.getListeFilm(), f);
+
+				if (film==null){
+					vue.afficherCreationSeanceEchouee();
+					creation=false;
+					System.out.println("Le Film sélectionner n'est pas au catalogue du Cinema, merci de  l'ajouter dans un premier temps. \n");
+				}
 	        	String d= Liste.get(1);
 	        	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		    	Date date= formatter.parse(d);
@@ -151,20 +176,33 @@ public class ControleurCinema implements IControleurCinema {
 				
 				ArrayList<Salle> listeSalle=this.modele.getListeSalle();
 		    	Salle s =chercherSalleParId(listeSalle,salle);
-		    	
+		    	if(s==null){
+					creation=false;
+					vue.afficherCreationSeanceEchouee();
+					System.out.println("La Salle sélectionner n'existe, merci de reprocéder. \n");
+				}
+				else if (!verifierDisponibiliteSeance(modele.getListeSeance(),s,heure)){
+					creation=false;
+					vue.afficherCreationSeanceEchouee();
+					System.out.println("La Salle sélectionner n'est pas disponible, merci de reprocéder. \n");
+				}
 			    String  typeStr=  Liste.get(4);
-			    TypeSeance typeSeance = null;
+			    TypeSeance typeSeance = TypeSeance.REGULAR;
 
-			    if (typeStr.equalsIgnoreCase("IMAX")) {
+			    if (typeStr.equalsIgnoreCase("IMAX")||typeStr.equalsIgnoreCase("imax")||typeStr.equalsIgnoreCase("Imax")) {
 			        typeSeance = TypeSeance.IMAX;
-			    } else if (typeStr.equalsIgnoreCase("4Dmax")) {
+			    } else if (typeStr.equalsIgnoreCase("4Dmax")|| typeStr.equalsIgnoreCase("4dmax")||typeStr.equalsIgnoreCase("4DMAX")) {
 			        typeSeance = TypeSeance.DMAX_4D;
-			    } else if (typeStr.equalsIgnoreCase("3D")) {
+			    } else if (typeStr.equalsIgnoreCase("3D")||typeStr.equalsIgnoreCase("3d")) {
 			        typeSeance = TypeSeance._3D;
-			    }
+			    }else{
+					System.out.println("Attention: Le type de seance selectionner n'est pas adapté et à été mis par défaut à regular. \n");
+				}
 			    
 			 // Création de la séance
-				Seance seance= new Seance(film,date,heure,s,typeSeance);
+				if(creation){
+					Seance seance= new Seance(film,date,heure,s,typeSeance);
+				
 				 if (seance !=null) {
 		               this.vue.afficherCreationSeanceReussie(seance);
 					   this.modele.getListeSeance().add(seance);
@@ -173,7 +211,7 @@ public class ControleurCinema implements IControleurCinema {
 		            	this.vue.afficherCreationSeanceEchouee();
 		            }
 			    
-				
+				}
 			}
 			public static boolean supprimerSeanceParId(ArrayList<Seance> listeSeances, int id) {
 				Iterator<Seance> iterator = listeSeances.iterator();
@@ -206,5 +244,38 @@ public class ControleurCinema implements IControleurCinema {
 					this.vue.afficherSuppressionSeanceEchouee();				}
 	        	
 	        }
+
+			public void gererAffichageUneSeance (){
+				String s= vue.afficherDialogueAffichageSeance();
+				int idSeance=Integer.parseInt(s);
+				Seance seance= this.ChercherSeanceParID(this.modele.getListeSeance(), idSeance);
+
+				vue.afficherSeance(seance);
+
+			}
+
+			
+			public void gererAffichageToutesSeances (){
+				ArrayList<Seance> lSeances= modele.getListeSeance();
+				for (Seance seance : lSeances) {
+					vue.afficherSeance(seance);
+				}
+
+
+			}
+            public void GererAffichageToutesSeancesUnFilm() {
+                
+				String id= vue.afficherDialogueSeancesUnFilm();
+				int idFilm=Integer.parseInt(id);
+				ArrayList<Seance> ListeSeances= modele.getListeSeance();
+				for (Seance seance : ListeSeances) {
+					if(seance.getFilm().getId() ==idFilm){
+						vue.afficherSeance(seance);
+					}
+				}
+
+
+
+            }
 
 }
