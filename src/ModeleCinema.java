@@ -257,6 +257,11 @@ public class ModeleCinema implements IModeleCinema {
 				return ID_VALUE_ON_ERROR;
 			}
 			else {
+				for (Salle s2 : this.sallesEnregistrees) {
+					if (s2.getNumero() == numero) {
+						return ID_VALUE_ON_ERROR;
+					}
+				}
 				this.sallesEnregistrees.add(s);
 				return s.getId();
 			}

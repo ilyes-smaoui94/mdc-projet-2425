@@ -5,6 +5,7 @@ public class Salle {
 	private int capacite;
 	
 	public Salle(int numero, int capacite) {
+		this.id = Salle.getNextAvailableId();
 		this.numero = numero;
 		this.capacite = capacite;
 		
