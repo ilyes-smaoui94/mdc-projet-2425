@@ -8,15 +8,6 @@
  * la méthode {@link #getPrix()}, qui calcule et retourne le prix du billet.
  * </p>
  *
- * <p>Exemple d'utilisation (hypothétique) :
- * <pre>{@code
- * // Suppose qu'il existe une classe concrete "BilletAdulte" qui hérite de Billet
- * Seance seance = new Seance(...);
- * Billet billetAdulte = new BilletAdulte(seance);
- * System.out.println("ID du billet : " + billetAdulte.getId());
- * System.out.println("Prix du billet : " + billetAdulte.getPrix());
- * }</pre>
- * </p>
  * 
  */
 public abstract class Billet {
