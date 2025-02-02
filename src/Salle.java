@@ -9,12 +9,12 @@
  * System.out.println("Numéro de la salle: " + salle1.getNumero());
  * System.out.println("Capacité: " + salle1.getCapacite());
  * }</pre>
- * </p>
+ * 
  * 
  * <p>
  * Le champ {@link #nextAvailableId} est un identifiant statique auto-incrémenté 
  * qui garantit l'unicité de chaque salle créée.
- * </p>
+ * 
  * 
  */
 public class Salle {
