@@ -10,9 +10,9 @@
  *   <li>{@link TypeSeance#IMAX} : 9.0€</li>
  *   <li>{@link TypeSeance#REGULAR} : 7.0€ (prix par défaut)</li>
  * </ul>
- * </p>
+ * 
  *
- * <p>Exemple d'utilisation : </p>
+ * <p>Exemple d'utilisation : 
  * <pre>{@code
  * Seance seance = new Seance(...);
  * Billet billetEtudiant = new BilletEtudiant(seance);
