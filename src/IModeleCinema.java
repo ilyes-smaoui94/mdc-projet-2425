@@ -153,6 +153,7 @@ public interface IModeleCinema {
 	 * @param titre titre du film à enregistrer
 	 * @param a année de sortie du film à enregistrer
 	 * @param desc description du film à enregistrer
+	 * @param duree durée (en minutes) du film à enregistrer
 	 * @return l'ID du manager créé, si possible, -1 sinon
 	 */
 	public int ajouterFilm (String titre, int a, String desc, int duree);
@@ -164,6 +165,7 @@ public interface IModeleCinema {
 	 * @param titre titre du film à enregistrer
 	 * @param a année de sortie du film à enregistrer
 	 * @param desc description du film à enregistrer
+	 * @param duree durée (en minutes) du film à enregistrer
 	 * @param genres_str genres du film à enregistrer
 	 * @return ID du film créé, si possible
 	 */
