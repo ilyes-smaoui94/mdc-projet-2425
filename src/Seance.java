@@ -37,6 +37,10 @@ public class Seance {
 		return this.filmSeance;
 	}
 
+	public void setFilm (Film f) {
+		this.filmSeance = f;
+	}
+
 	public String getDate () {
 		return this.date;
 	}

@@ -1,4 +1,6 @@
 public class Salle {
+	private static int nextAvailableId = 1;
+	private int id;
 	private int numero;
 	private int capacite;
 	
@@ -7,6 +9,17 @@ public class Salle {
 		this.capacite = capacite;
 		
 	}
+
+	protected static int getNextAvailableId () {
+		int nextID = Salle.nextAvailableId;
+		Salle.nextAvailableId += 1;
+		return nextID;
+	}
+
+	public int getId () {
+		return this.id;
+	}
+	
 	public int getNumero() {
 		return numero;
 	}
