@@ -35,7 +35,7 @@
  * @see Billet
  * @see SupplementBoisson
  * @see SupplementGlace
- * @see SupplementPopCorn
+ * @see SupplementPopcorn
  */
 public abstract class BilletExtra extends Billet {
 
