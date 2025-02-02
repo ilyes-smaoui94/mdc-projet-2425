@@ -96,10 +96,15 @@ public class ControleurCinema implements IControleurCinema {
 
 		public void GererAffichageFilms() {
 	    	HashSet<Film> films= this.modele.getListeFilm();
-	    	for (Film film : films) {
-                System.out.println(film.getTitre());
+	    	for (Film f : films) {
+				System.out.println("[Titre: " +f.getTitre()  + ", annee: " + f.getAnnee() + ", Description: " + f.getDesc() + ", Genre principal:"+ f.getGenre()+ "]");
             }
 	    }
+
+		public void GererAffichageFilm(Film film) {
+			this.vue.afficherFilm(film);
+			
+		}
 	    public Film chercherFilmParNom(HashSet<Film> listeFilms,String titre){
 
 	    	for (Film film : listeFilms) {

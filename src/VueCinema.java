@@ -51,10 +51,17 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
     }
 
     @Override
-    public void afficherFilm(Film f) {}
+    public void afficherFilm(Film f) {
+        System.out.println("Film: \n  -" +f.getTitre()  + "\n  -annee: " + f.getAnnee() + "\n  -Description: " + f.getDesc() + "\n  -Genre principal:"+ f.getGenre());
+
+    }
 
     @Override
-    public void afficherFilms(Set<Film> films) {}
+    public void afficherFilms(Set<Film> films) {
+		for (Film f : films) {
+			 System.out.println("[Titre: " +f.getTitre()  + ", annee: " + f.getAnnee() + ", Description: " + f.getDesc() + ", Genre principal:"+ f.getGenre()+ "]");
+	    }
+    }
 
     @Override
     public String afficherDialogueAffichageSalle() {
@@ -280,6 +287,14 @@ public class VueCinema implements IVueManager, IVueUtilisateur, IVueClient {
 	public ArrayList<String> afficherDialogueCreationSalle() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+    public void Option3() {
+		this.controleur.GererAffichageFilms();
+	}
+	
+	public void Option4(Film f) {
+		this.controleur.GererAffichageFilm(f);
 	}
 
 
