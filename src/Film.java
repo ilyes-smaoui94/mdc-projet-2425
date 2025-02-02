@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class Film {
-	private static int nextAvailableId = 0;
+	private static int nextAvailableId = 1;
 	private int id;
 	private String titre;
 	private int annee;

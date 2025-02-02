@@ -9,7 +9,7 @@ public abstract class BilletExtra extends Billet {
 	
 	public abstract double prix();
 
-	public Billet getMonBillet() {
+	public Billet getBilletBase() {
 		return monBillet;
 	}
 }

@@ -5,7 +5,7 @@ public class BilletEtudiant extends Billet {
 	}
 
 	@Override
-	public double prix() {
+	public double getPrix() {
 		double default_price = 7.0;
 		
 		if (this.getSeance().getTypeSeance() == null) {

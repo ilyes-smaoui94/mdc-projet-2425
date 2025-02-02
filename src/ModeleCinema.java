@@ -92,7 +92,7 @@ public class ModeleCinema implements IModeleCinema {
 	public Set<Seance> getListeSeancesFilm (Film f) {
 		Set<Seance> resSeances = new HashSet<Seance>();
 		for (Seance s : this.seancesEnregistrees) {
-			if (s.getFilm() == f) {
+			if (s.getFilm().getId() == f.getId()) {
 				resSeances.add(s);
 			}
 		}
@@ -153,10 +153,10 @@ public class ModeleCinema implements IModeleCinema {
 	}
 
 	@Override
-	public int ajouterFilm (titre: String, a: int, desc: String, genres: ArrayList<String>) {
+	public int ajouterFilm (String titre, int a, String desc, ArrayList<String> genres_str) {
 		try {
 			Set<Genre> genresSet = new HashSet<Genre>();
-			for (String g_str: genres) {
+			for (String g_str: genres_str) {
 				for (Genre g: Genre.values()) {
 					if (g.name().equalsIgnoreCase(g_str)) {
 						genresSet.add(g);
@@ -201,9 +201,9 @@ public class ModeleCinema implements IModeleCinema {
 	}
 
 	@Override
-	public int ajouterSalle (num: int, capacite: int) {
+	public int ajouterSalle (int numero, int capacite) {
 		try {
-			Salle s = new Salle(num, capacite);
+			Salle s = new Salle(numero, capacite);
 			if (s == null) {
 				return ID_VALUE_ON_ERROR;
 			}
@@ -218,7 +218,7 @@ public class ModeleCinema implements IModeleCinema {
 	}
 
 	@Override
-	public boolean supprimerSalle (numero: int) {
+	public boolean supprimerSalle (int id) {
 		try {
 			Salle salleAEnlever = null;
 			for (Salle s: this.sallesEnregistrees) {
