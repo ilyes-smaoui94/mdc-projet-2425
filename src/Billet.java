@@ -8,13 +8,17 @@ public abstract class Billet {
 		this.id = this.getNextAvailableId();
 	}
 
-	public int getNextAvailableId () {
+	protected static int getNextAvailableId () {
 		int nextId = nextAvailableId;
 		Film.nextAvailableId += 1;
 		return nextID;
 	}
 
 	public abstract double getPrix();
+
+	public int getId () {
+		return this.id;
+	}
 
 	public Seance getSeance() {
 		return this.seanceBillet;

@@ -1,51 +1,56 @@
-package app_cinema;
+import java.util.Date;
 
 public class Seance {
-	private Salle salle;
-	private String date;
-	private String heure;
-	private int nb_place_dispo;
+	private static int nextAvailableId = 1;
+	private int id;
+	private Salle salleSeance;
+	private Film filmSeance;
 	private TypeSeance typeSeance; 
+	private Date date;
+	private int placesRestantes;
 	
-	public Seance(Salle salle, String date, String heure, int nb_place_dispo) {
-		this.salle = salle;
+	public Seance(Salle salleSeance, String date, String heure, int placesRestantes) {
+		this.id = this.getNextAvailableId();
+		this.salleSeance = salleSeance;
 		this.date = date;
 		this.heure = heure;
-		this.nb_place_dispo = nb_place_dispo;
+		this.placesRestantes = placesRestantes;
 	}
 	
-	public Seance() {}
+	// public Seance() {}
 
-	public String getDate() {
+	protected static int getNextAvailableId () {
+		int nextID = Seance.nextAvailableId;
+		Seance.nextAvailableId += 1;
+		return nextID;
+	}
+
+	public Salle getSalle () {
+		return this.salleSeance;
+	}
+
+	public void setSalle(Salle salleSeance) {
+		this.salleSeance = salleSeance;
+	}
+
+	public Film getFilm () {
+		return this.filmSeance;
+	}
+
+	public String getDate () {
 		return this.date;
 	}
 
-	public void setDate(String date) {
+	public void setDate (Date date) {
 		this.date = date;
 	}
 
-	public String getHeure() {
-		return this.heure;
+	public int getPlacesRestantes () {
+		return this.placesRestantes;
 	}
 
-	public void setHeure(String heure) {
-		this.heure = heure;
-	}
-
-	public int getNb_place_dispo() {
-		return this.nb_place_dispo;
-	}
-
-	public void setNb_place_dispo(int nb_place_dispo) {
-		this.nb_place_dispo = nb_place_dispo;
-	}
-
-	public Salle getSalle() {
-		return this.salle;
-	}
-
-	public void setSalle(Salle salle) {
-		this.salle = salle;
+	public void setPlacesRestantes (int placesRestantes) {
+		this.placesRestantes = placesRestantes;
 	}
 
 	public TypeSeance getTypeSeance() {

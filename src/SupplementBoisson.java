@@ -1,14 +1,12 @@
-package app_cinema;
-
-public class SupplementBoisson extends BilletExtra{
+public class SupplementBoisson extends BilletExtra {
 
 	public SupplementBoisson(Billet Billet) {
 		super(Billet);
 	}
 	
-	public double prix() {
+	public double getPrix() {
 		// TODO Auto-generated method stub
-		double p = this.getMonBillet().prix();
+		double p = this.getBilletBase().prix();
 		return p + 3.0;
 	}
 }

@@ -1,5 +1,3 @@
-package app_cinema;
-
 public class Planning {
 	private static Planning planningUnique;
 	

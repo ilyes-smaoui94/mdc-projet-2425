@@ -1,15 +1,15 @@
 public abstract class BilletExtra extends Billet {
 	
-	private Billet monBillet;
+	private Billet billetBase;
 
-	public BilletExtra( Billet monBillet) {
+	public BilletExtra(Billet billetBase) {
 		super();
-		this.monBillet = monBillet;
+		this.billetBase = billetBase;
 	}
 	
-	public abstract double prix();
+	public abstract double getPrix();
 
 	public Billet getBilletBase() {
-		return monBillet;
+		return this.billetBase;
 	}
 }

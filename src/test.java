@@ -1,5 +1,3 @@
-package app_cinema;
-
 public class test {
 
 	public static void main(String[] args) {

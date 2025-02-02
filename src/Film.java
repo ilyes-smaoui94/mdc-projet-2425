@@ -1,5 +1,3 @@
-package app_cinema;
-
 import java.util.Set;
 import java.util.HashSet;
 
@@ -23,15 +21,19 @@ public class Film {
 		this.titre = t;
 		this.annee = a;
 		this.description = d;
-		this.genres = gf;
+		this.genres = g != null ? g : new HashSet<Genre>();
 	}
 
-	public int getNextAvailableId () {
+	protected int getNextAvailableId () {
 		int nextId = Film.nextAvailableId;
 		Film.nextAvailableId += 1;
 		return nextId;
 	}
-
+	
+	public int getId () {
+		return this.id;
+	}
+	
 	public String getTitre () {
 		return this.titre;
 	}
@@ -57,6 +59,6 @@ public class Film {
 		this.genres.remove(g);
 	}
 	public void setGenres (Set<Genres> g) {
-		this.genres = g;
+		this.genres = g != null ? g : new HashSet<Genre>();
 	}
 }

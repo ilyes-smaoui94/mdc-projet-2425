@@ -1,4 +1,3 @@
-package app_cinema;
 import java.util.Set;
 import java.util.HashSet;
 

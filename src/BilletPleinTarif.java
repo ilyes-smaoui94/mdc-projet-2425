@@ -5,7 +5,7 @@ public class BilletPleinTarif extends Billet {
 	}
 
 	@Override
-	public double prix() {
+	public double getPrix() {
 		double default_price = 11.0;
 		if (this.getSeance().getTypeSeance() == null) {
 			return default_price; 

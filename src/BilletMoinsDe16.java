@@ -1,6 +1,6 @@
-public class BilletMoins16 extends Billet {
+public class BilletMoinsDe16 extends Billet {
 
-	public BilletMoins16(Seance seance) {
+	public BilletMoinsDe16(Seance seance) {
 		super(seance);
 	}
 

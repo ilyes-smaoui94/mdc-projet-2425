@@ -1,5 +1,3 @@
-package app_cinema;
-
 import java.util.ArrayList;
 
 public interface IVueCinema {

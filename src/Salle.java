@@ -1,5 +1,3 @@
-package app_cinema;
-
 public class Salle {
 	private int numero;
 	private int capacite;
