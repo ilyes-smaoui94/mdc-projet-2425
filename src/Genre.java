@@ -10,7 +10,7 @@
  *   <li>{@link #THRILLER}</li>
  *   <li>{@link #ROMANTIQUE}</li>
  * </ul>
- * </p>
+ * 
  */
 public enum Genre {
     /**
