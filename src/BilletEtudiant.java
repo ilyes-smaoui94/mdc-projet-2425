@@ -12,14 +12,13 @@
  * </ul>
  * </p>
  *
- * <p>Exemple d'utilisation :
+ * <p>Exemple d'utilisation : </p>
  * <pre>{@code
  * Seance seance = new Seance(...);
  * Billet billetEtudiant = new BilletEtudiant(seance);
  * double prix = billetEtudiant.getPrix();
  * System.out.println("Prix du billet étudiant : " + prix + " €");
  * }</pre>
- * </p>
  * 
  */
 public class BilletEtudiant extends Billet {
