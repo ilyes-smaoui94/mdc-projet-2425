@@ -75,7 +75,10 @@ public class VueCinema implements IVueManager, IVueClient {
           this.controleur.gererSuppressionSalle();
           break;
         case 8:
+        try {
           this.controleur.gererCreationSeance();
+        } catch (Exception e) {
+        }
           break;
         case 9:
           this.controleur.gererSuppressionSeance();

@@ -1,3 +1,4 @@
+import java.text.ParseException;
 
 public interface IControleurCinema {
 	// Setters and Gettersa
@@ -55,7 +56,7 @@ public interface IControleurCinema {
 	public void gererSuppressionSalle();
 
 	// Seance Management
-	public void gererCreationSeance();
+	public void gererCreationSeance() throws ParseException;
 
 	public void gererSuppressionSeance();
 }

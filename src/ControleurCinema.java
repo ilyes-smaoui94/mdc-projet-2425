@@ -184,7 +184,7 @@ public class ControleurCinema implements IControleurCinema {
 		return null;
 	}
 
-	public void gererCreationSeance() {
+	public void gererCreationSeance() throws ParseException {
 
 		ArrayList<String> listeArguments = this.vueManager.afficherDialogueCreationSeance();
 		Boolean creation = true;
