@@ -6,22 +6,20 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Implémentation de l'interface {@link IModeleCinema} pour gérer le modèle d'un cinéma.
+ * Implémentation de l'interface {@link IModeleCinema} pour la gestion du modèle d'un cinéma.
  * <p>
- * Cette classe gère les utilisateurs, les films, les salles, les séances, les billets et les réservations.
- * Chaque entité est stockée dans une collection type {@code Set}.
+ * Cette classe gère l'enregistrement et la manipulation des utilisateurs, films, salles, séances, billets et réservations.
+ * Les entités sont stockées dans des collections de type {@code Set}.
  * </p>
  * <p>
- * Chaque méthode est conçue pour capturer les exception etretourne en cas d'erreur,
- *  une valeur par défaut, la constante {@link #ID_VALUE_ON_ERROR} (-1) pour les méthodes
- * retournant un entier ou {@code false} pour les méthodes retournant un booléen.
+ * Remarque : cette implémentation n'est pas thread-safe ; une synchronisation externe sera nécessaire
+ * dans un environnement multi-thread.
  * </p>
- * <p>
- *  le champ {@code utilisateurConnecte} représente l'utilisateur actuellement connecté.
- * </p>
+ * 
+ * @version 1.0
  */
 public class ModeleCinema implements IModeleCinema {
-
+    
     /** L'utilisateur actuellement connecté. */
     private Utilisateur utilisateurConnecte;
     /** Ensemble des utilisateurs enregistrés. */
@@ -39,13 +37,13 @@ public class ModeleCinema implements IModeleCinema {
     /** Ensemble des réservations enregistrées. */
     private Set<Reservation> reservationsEnregistrees;
 
-    /** Constante représentant la valeur d'erreur pour les méthodes retournant un int. */
+    /** Constante retournée en cas d'erreur lors d'une opération. */
     public static final int ID_VALUE_ON_ERROR = -1;
-
+    
     /**
      * Constructeur de {@code ModeleCinema}.
      * <p>
-     * Initialise les différentes collections utilisées pour stocker les entités du cinéma.
+     * Initialise toutes les collections utilisées pour stocker les différentes entités du modèle.
      * </p>
      */
     public ModeleCinema() {
@@ -57,12 +55,12 @@ public class ModeleCinema implements IModeleCinema {
         this.billetsEnregistres = new HashSet<Billet>();
         this.reservationsEnregistrees = new HashSet<Reservation>();
     }
-
+    
     /**
      * Récupère l'utilisateur enregistré correspondant à l'ID fourni.
-     *
-     * @param id L'identifiant de l'utilisateur à récupérer.
-     * @return L'instance de {@code Utilisateur} si trouvée, ou {@code null} sinon.
+     * 
+     * @param id L'ID de l'utilisateur à récupérer.
+     * @return L'utilisateur correspondant, ou {@code null} s'il n'est pas trouvé.
      */
     @Override
     public Utilisateur getUtilisateur(int id) {
@@ -73,12 +71,12 @@ public class ModeleCinema implements IModeleCinema {
         }
         return null;
     }
-
+    
     /**
      * Récupère le film enregistré correspondant à l'ID fourni.
-     *
-     * @param id L'identifiant du film à récupérer.
-     * @return L'instance de {@code Film} si trouvée, ou {@code null} sinon.
+     * 
+     * @param id L'ID du film à récupérer.
+     * @return Le film correspondant, ou {@code null} s'il n'est pas trouvé.
      */
     @Override
     public Film getFilm(int id) {
@@ -89,12 +87,12 @@ public class ModeleCinema implements IModeleCinema {
         }
         return null;
     }
-
+    
     /**
      * Récupère la réservation enregistrée correspondant à l'ID fourni.
-     *
-     * @param id L'identifiant de la réservation à récupérer.
-     * @return L'instance de {@code Reservation} si trouvée, ou {@code null} sinon.
+     * 
+     * @param id L'ID de la réservation à récupérer.
+     * @return La réservation correspondante, ou {@code null} si elle n'est pas trouvée.
      */
     @Override
     public Reservation getReservation(int id) {
@@ -105,12 +103,12 @@ public class ModeleCinema implements IModeleCinema {
         }
         return null;
     }
-
+    
     /**
      * Récupère le billet enregistré correspondant à l'ID fourni.
-     *
-     * @param id L'identifiant du billet à récupérer.
-     * @return L'instance de {@code Billet} si trouvée, ou {@code null} sinon.
+     * 
+     * @param id L'ID du billet à récupérer.
+     * @return Le billet correspondant, ou {@code null} s'il n'est pas trouvé.
      */
     @Override
     public Billet getBillet(int id) {
@@ -121,12 +119,12 @@ public class ModeleCinema implements IModeleCinema {
         }
         return null;
     }
-
+    
     /**
      * Récupère la salle enregistrée correspondant à l'ID fourni.
-     *
-     * @param id L'identifiant de la salle à récupérer.
-     * @return L'instance de {@code Salle} si trouvée, ou {@code null} sinon.
+     * 
+     * @param id L'ID de la salle à récupérer.
+     * @return La salle correspondante, ou {@code null} si elle n'est pas trouvée.
      */
     @Override
     public Salle getSalle(int id) {
@@ -137,12 +135,12 @@ public class ModeleCinema implements IModeleCinema {
         }
         return null;
     }
-
+    
     /**
      * Récupère la séance enregistrée correspondant à l'ID fourni.
-     *
-     * @param id L'identifiant de la séance à récupérer.
-     * @return L'instance de {@code Seance} si trouvée, ou {@code null} sinon.
+     * 
+     * @param id L'ID de la séance à récupérer.
+     * @return La séance correspondante, ou {@code null} si elle n'est pas trouvée.
      */
     @Override
     public Seance getSeance(int id) {
@@ -153,51 +151,51 @@ public class ModeleCinema implements IModeleCinema {
         }
         return null;
     }
-
+    
     /**
-     * Retourne l'ensemble des utilisateurs enregistrés.
-     *
+     * Retourne l'ensemble des utilisateurs enregistrés dans le modèle.
+     * 
      * @return Un {@code Set} contenant tous les utilisateurs enregistrés.
      */
     @Override
-    public Set<Utilisateur> getListeUtilisateur() {
+    public Set<Utilisateur> getListeUtilisateurs() {
         return this.utilisateursEnregistres;
     }
-
+    
     /**
-     * Retourne l'ensemble des films enregistrés.
-     *
+     * Retourne l'ensemble des films enregistrés dans le modèle.
+     * 
      * @return Un {@code Set} contenant tous les films enregistrés.
      */
     @Override
     public Set<Film> getListeFilms() {
         return this.filmsEnregistres;
     }
-
+    
     /**
-     * Retourne l'ensemble des salles enregistrées.
-     *
+     * Retourne l'ensemble des salles enregistrées dans le modèle.
+     * 
      * @return Un {@code Set} contenant toutes les salles enregistrées.
      */
     @Override
     public Set<Salle> getListeSalles() {
         return this.sallesEnregistrees;
     }
-
+    
     /**
-     * Retourne l'ensemble des séances enregistrées.
-     *
+     * Retourne l'ensemble des séances enregistrées dans le modèle.
+     * 
      * @return Un {@code Set} contenant toutes les séances enregistrées.
      */
     @Override
     public Set<Seance> getListeSeances() {
         return this.seancesEnregistrees;
     }
-
+    
     /**
      * Retourne l'ensemble des séances associées à un film donné.
-     *
-     * @param f Le film dont on souhaite obtenir les séances.
+     * 
+     * @param f Le film pour lequel on souhaite obtenir les séances.
      * @return Un {@code Set} contenant les séances du film.
      */
     @Override
@@ -210,34 +208,34 @@ public class ModeleCinema implements IModeleCinema {
         }
         return resSeances;
     }
-
+    
     /**
-     * Retourne l'ensemble des réservations enregistrées.
-     *
+     * Retourne l'ensemble des réservations enregistrées dans le modèle.
+     * 
      * @return Un {@code Set} contenant toutes les réservations enregistrées.
      */
     @Override
     public Set<Reservation> getListeReservations() {
         return this.reservationsEnregistrees;
     }
-
+    
     /**
-     * Retourne l'ensemble des billets enregistrés.
-     *
+     * Retourne l'ensemble des billets enregistrés dans le modèle.
+     * 
      * @return Un {@code Set} contenant tous les billets enregistrés.
      */
     @Override
     public Set<Billet> getListeBillets() {
         return this.billetsEnregistres;
     }
-
+    
     /**
-     * Ajoute un nouveau client.
-     *
+     * Enregistre un nouveau client dans le modèle.
+     * 
      * @param nom Le nom du client à ajouter.
-     * @param email L'adresse email du client.
-     * @param mdp Le mot de passe du client.
-     * @return L'ID du client créé en cas de succès, ou {@link #ID_VALUE_ON_ERROR} en cas d'erreur.
+     * @param email L'adresse email du client à ajouter.
+     * @param mdp Le mot de passe du client à ajouter.
+     * @return L'ID du client créé en cas de succès, ou {@code -1} en cas d'erreur.
      */
     @Override
     public int ajouterClient(String nom, String email, String mdp) {
@@ -252,14 +250,14 @@ public class ModeleCinema implements IModeleCinema {
             return ID_VALUE_ON_ERROR;
         }
     }
-
+    
     /**
-     * Ajoute un nouveau manager.
-     *
+     * Enregistre un nouveau manager dans le modèle.
+     * 
      * @param nom Le nom du manager à ajouter.
-     * @param email L'adresse email du manager.
-     * @param mdp Le mot de passe du manager.
-     * @return L'ID du manager créé en cas de succès, ou {@link #ID_VALUE_ON_ERROR} en cas d'erreur.
+     * @param email L'adresse email du manager à ajouter.
+     * @param mdp Le mot de passe du manager à ajouter.
+     * @return L'ID du manager créé en cas de succès, ou {@code -1} en cas d'erreur.
      */
     @Override
     public int ajouterManager(String nom, String email, String mdp) {
@@ -275,10 +273,10 @@ public class ModeleCinema implements IModeleCinema {
             return ID_VALUE_ON_ERROR;
         }
     }
-
+    
     /**
-     * Supprime l'utilisateur ayant l'ID spécifié.
-     *
+     * Supprime l'utilisateur dont l'ID est spécifié.
+     * 
      * @param id L'ID de l'utilisateur à supprimer.
      * @return {@code true} si la suppression a réussi, {@code false} sinon.
      */
@@ -302,14 +300,14 @@ public class ModeleCinema implements IModeleCinema {
             return false;
         }
     }
-
+    
     /**
-     * Ajoute un nouveau film.
-     *
+     * Enregistre un nouveau film dans le modèle.
+     * 
      * @param titre Le titre du film.
      * @param a L'année de sortie du film.
      * @param desc La description du film.
-     * @return L'ID du film créé en cas de succès, ou {@link #ID_VALUE_ON_ERROR} en cas d'erreur.
+     * @return L'ID du film créé en cas de succès, ou {@code -1} en cas d'erreur.
      */
     @Override
     public int ajouterFilm(String titre, int a, String desc) {
@@ -324,15 +322,15 @@ public class ModeleCinema implements IModeleCinema {
             return ID_VALUE_ON_ERROR;
         }
     }
-
+    
     /**
-     * Ajoute un nouveau film avec les genres spécifiés.
-     *
+     * Enregistre un nouveau film avec genres dans le modèle.
+     * 
      * @param titre Le titre du film.
      * @param a L'année de sortie du film.
      * @param desc La description du film.
      * @param genres_str Une liste de genres sous forme de chaînes de caractères.
-     * @return L'ID du film créé en cas de succès, ou {@link #ID_VALUE_ON_ERROR} en cas d'erreur.
+     * @return L'ID du film créé en cas de succès, ou {@code -1} en cas d'erreur.
      */
     @Override
     public int ajouterFilm(String titre, int a, String desc, ArrayList<String> genres_str) {
@@ -356,10 +354,10 @@ public class ModeleCinema implements IModeleCinema {
             return ID_VALUE_ON_ERROR;
         }
     }
-
+    
     /**
-     * Supprime le film ayant l'ID spécifié.
-     *
+     * Supprime le film dont l'ID est spécifié.
+     * 
      * @param id L'ID du film à supprimer.
      * @return {@code true} si la suppression a réussi, {@code false} sinon.
      */
@@ -383,13 +381,13 @@ public class ModeleCinema implements IModeleCinema {
             return false;
         }
     }
-
+    
     /**
-     * Ajoute une nouvelle salle.
-     *
+     * Enregistre une nouvelle salle dans le modèle.
+     * 
      * @param numero Le numéro de la salle.
      * @param capacite La capacité de la salle.
-     * @return L'ID de la salle créée en cas de succès, ou {@link #ID_VALUE_ON_ERROR} en cas d'erreur.
+     * @return L'ID de la salle créée en cas de succès, ou {@code -1} en cas d'erreur.
      */
     @Override
     public int ajouterSalle(int numero, int capacite) {
@@ -398,6 +396,12 @@ public class ModeleCinema implements IModeleCinema {
             if (s == null) {
                 return ID_VALUE_ON_ERROR;
             } else {
+                // Vérifie qu'une salle avec le même numéro n'existe pas déjà
+                for (Salle s2 : this.sallesEnregistrees) {
+                    if (s2.getNumero() == numero) {
+                        return ID_VALUE_ON_ERROR;
+                    }
+                }
                 this.sallesEnregistrees.add(s);
                 return s.getId();
             }
@@ -405,10 +409,10 @@ public class ModeleCinema implements IModeleCinema {
             return ID_VALUE_ON_ERROR;
         }
     }
-
+    
     /**
-     * Supprime la salle ayant l'ID spécifié.
-     *
+     * Supprime la salle dont l'ID est spécifié.
+     * 
      * @param id L'ID de la salle à supprimer.
      * @return {@code true} si la suppression a réussi, {@code false} sinon.
      */
@@ -432,14 +436,14 @@ public class ModeleCinema implements IModeleCinema {
             return false;
         }
     }
-
+    
     /**
-     * Ajoute une nouvelle séance.
-     *
+     * Enregistre une nouvelle séance dans le modèle.
+     * 
      * @param idSalle L'ID de la salle pour la séance.
      * @param idFilm L'ID du film pour la séance.
      * @param heureDebut La date et l'heure de début de la séance.
-     * @return L'ID de la séance créée en cas de succès, ou {@link #ID_VALUE_ON_ERROR} en cas d'erreur.
+     * @return L'ID de la séance créée en cas de succès, ou {@code -1} en cas d'erreur.
      */
     @Override
     public int ajouterSeance(int idSalle, int idFilm, Date heureDebut) {
@@ -455,10 +459,10 @@ public class ModeleCinema implements IModeleCinema {
             return ID_VALUE_ON_ERROR;
         }
     }
-
+    
     /**
-     * Supprime la séance ayant l'ID spécifié.
-     *
+     * Supprime la séance dont l'ID est spécifié.
+     * 
      * @param id L'ID de la séance à supprimer.
      * @return {@code true} si la suppression a réussi, {@code false} sinon.
      */
@@ -482,16 +486,13 @@ public class ModeleCinema implements IModeleCinema {
             return false;
         }
     }
-
+    
     /**
-     * Crée une nouvelle réservation pour un utilisateur donné.
-     * <p>
-     * Les billets spécifiés sont ajoutés à la collection des billets enregistrés.
-     * </p>
-     *
+     * Crée une nouvelle réservation dans le modèle pour un utilisateur donné.
+     * 
      * @param idUtilisateur L'ID de l'utilisateur effectuant la réservation.
-     * @param billetsAPrendre Un ensemble de billets à réserver (plusieurs billets pour une même séance sont possibles).
-     * @return L'ID de la réservation créée en cas de succès, ou {@link #ID_VALUE_ON_ERROR} en cas d'erreur.
+     * @param billetsAPrendre Un ensemble de billets à réserver (pour plusieurs places, plusieurs instances du même billet peuvent être fournies).
+     * @return L'ID de la réservation créée en cas de succès, ou {@code -1} en cas d'erreur.
      */
     @Override
     public int creerReservation(int idUtilisateur, Set<Billet> billetsAPrendre) {
@@ -512,13 +513,10 @@ public class ModeleCinema implements IModeleCinema {
             return ID_VALUE_ON_ERROR;
         }
     }
-
+    
     /**
-     * Supprime la réservation ayant l'ID spécifié.
-     * <p>
-     * Les billets associés à la réservation sont également supprimés.
-     * </p>
-     *
+     * Supprime la réservation dont l'ID est spécifié.
+     * 
      * @param id L'ID de la réservation à supprimer.
      * @return {@code true} si la suppression a réussi, {@code false} sinon.
      */
@@ -545,20 +543,14 @@ public class ModeleCinema implements IModeleCinema {
             return false;
         }
     }
-
+    
     /**
      * Tente de connecter un utilisateur en vérifiant son adresse email et son mot de passe.
-     * <p>
-     * En cas de succès, l'utilisateur devient l'utilisateur connecté du modèle.
-     * </p>
-     *
+     * Si la connexion est réussie, l'utilisateur devient l'utilisateur connecté.
+     * 
      * @param email L'adresse email de l'utilisateur.
      * @param mdp Le mot de passe de l'utilisateur.
-     * @return Un {@code ArrayList<Boolean>} contenant deux éléments :
-     *         <ul>
-     *           <li>Le premier élément est {@code true} en cas de succès de la connexion, {@code false} sinon.</li>
-     *           <li>Le deuxième élément indique si l'utilisateur est un manager ({@code true}) ou non ({@code false}).</li>
-     *         </ul>
+     * @return Un {@code ArrayList<Boolean>} contenant deux éléments : le premier vaut {@code true} en cas de succès, et le second indique si l'utilisateur est un manager.
      */
     @Override
     public ArrayList<Boolean> connecterUtilisateur(String email, String mdp) {
@@ -579,10 +571,10 @@ public class ModeleCinema implements IModeleCinema {
             return resConnexion;
         }
     }
-
+    
     /**
      * Déconnecte l'utilisateur actuellement connecté.
-     *
+     * 
      * @return {@code true} si la déconnexion a réussi, {@code false} sinon.
      */
     @Override
@@ -598,3 +590,4 @@ public class ModeleCinema implements IModeleCinema {
         }
     }
 }
+
