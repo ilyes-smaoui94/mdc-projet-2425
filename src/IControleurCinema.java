@@ -19,8 +19,7 @@ public interface IControleurCinema {
 	public void gererConnexion();
 
 	// Reservation and Film Management
-	public void gererReservationSeance();
-
+	
 	public void gererAffichageFilm();
 
 	public void gererAffichageFilms();
@@ -31,8 +30,8 @@ public interface IControleurCinema {
 
 	public void gererAffichageSeancesUnFilm();
 
-	public void gererAffichageUneSeance();
-
+	public void gererAffichageSeance();
+	
 	public void gererAffichageResa();
 
 	public void gererNouvelleResa();

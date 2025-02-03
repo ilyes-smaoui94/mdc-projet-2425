@@ -169,7 +169,7 @@ public class VueCinema implements IVueManager, IVueClient {
     for (Salle s : salles) {
       System.out.println("Salle d'ID " + s.getId() + ":");
       System.out.println("Numéro : " + s.getNumero());
-      System.out.println("Capacité : " + s.getCapacite());
+      System.out.println("Capacité : " + s.getCapacite() + "\n");
     }
   }
 
@@ -186,10 +186,8 @@ public class VueCinema implements IVueManager, IVueClient {
   public String afficherDialogueSeancesUnFilm() {
     // Scanner this.leScanner = new Scanner(System.in);
 
-    System.out.print("Entrez l'ID du film dont vous voulez voir les prochaines séances ");
+    System.out.print("Entrez l'ID du film dont vous voulez voir les séances :");
     String id = this.leScanner.nextLine();
-    System.out.println("Voici les prochaine seance du Film d'ID: " + id + ":");
-
     return id;
   }
 
@@ -208,35 +206,13 @@ public class VueCinema implements IVueManager, IVueClient {
   }
 
   @Override
-  public String afficherDialogueAffichageSeancesUneSalle() {
-    return "";
-  }
-
-  @Override
-  public void afficherSeancesUneSalle(Set<Seance> seances) {
-  }
-
-  @Override
-  public void afficherSeancesPlusieursSalles(Set<Seance> seances) {
-  }
-
-  @Override
-  public ArrayList<String> afficherDialogueReservationSeance() {
+  public ArrayList<String> afficherDialogueNouvelleReservation() {
     ArrayList<String> res = new ArrayList<>();
-    System.out
-        .println("Pour faire votre réservation, veuillez entrer dans l'ordre (futures options à rajouter plus tard):");
+    System.out.println("Pour faire votre réservation, veuillez entrer dans l'ordre :");
     System.out.println("- ID de la séance à réserver");
+    System.out.println("- (futures options à rajouter plus tard)");
     res.add(this.leScanner.nextLine());
     return res;
-  }
-
-  public void afficherReservationReussie(Reservation r) {
-    System.out.println("Réservation faites avec succès !");
-    for (Billet b : r.getBillets()) {
-      System.out.println("Séance de " + b.getSeance().getDate());
-      System.out.println("Dans la salle numéro " + b.getSeance().getSalle().getNumero());
-      System.out.println("Film : " + b.getSeance().getFilm() + "\n------------------");
-    }
   }
 
   @Override
@@ -244,6 +220,7 @@ public class VueCinema implements IVueManager, IVueClient {
     System.out.println("Réservation échouée !");
   }
 
+  @Override
   public void afficherReservation(Reservation r) {
     System.out.println("Récapitulatif de la réservation d'ID " + r.getId() + " :");
     int i = 1;
@@ -252,8 +229,14 @@ public class VueCinema implements IVueManager, IVueClient {
       System.out.println("Séance de " + b.getSeance().getDate());
       System.out.println("Dans la salle numéro " + b.getSeance().getSalle().getNumero());
       System.out.println("Film : " + b.getSeance().getFilm() + "\n------------------");
-      i += 1;
+      i++;
     }
+  }
+
+  @Override
+  public void afficherReservationReussie(Reservation r) {
+    System.out.println("Réservation faites avec succès !");
+    this.afficherReservation(r);
   }
 
   @Override
@@ -290,13 +273,17 @@ public class VueCinema implements IVueManager, IVueClient {
   }
 
   @Override
-  public void afficherDialogueSuppressionUtilisateur() {
+  public ArrayList<String> afficherDialogueSuppressionUtilisateur() {
     // Dans ce cas, la méthode ne retourne pas les informations saisies.
     // Vous pouvez soit stocker l'information dans un attribut, soit appeler
     // directement le contrôleur.
+    ArrayList<String> res = new ArrayList<>();
     System.out.println("Suppression d'un utilisateur.");
     System.out.print("Entrez l'email de l'utilisateur à supprimer : ");
     String email = this.leScanner.nextLine();
+    System.out.println("Vous avez demandé la suppression de l'utilisateur : " + email);
+    res.add(email);
+    return res;
 
     // Ici, vous pouvez par exemple transmettre l'email saisi au contrôleur
     // ou le stocker dans un attribut afin qu'il soit utilisé ensuite.
@@ -304,7 +291,6 @@ public class VueCinema implements IVueManager, IVueClient {
     // this.controleur.GererSuppressionUtilisateur(email);
 
     // Pour cet exemple, nous affichons simplement une confirmation de la saisie :
-    System.out.println("Vous avez demandé la suppression de l'utilisateur : " + email);
   }
 
   @Override
@@ -434,7 +420,7 @@ public class VueCinema implements IVueManager, IVueClient {
   public ArrayList<String> afficherDialogueCreationSeance() {
     // Scanner this.leScanner = new Scanner(System.in);
 
-    System.out.print("Entrez le film : ");
+    System.out.print("Entrez l'ID du film : ");
     String film = this.leScanner.nextLine();
 
     String date;
@@ -461,7 +447,7 @@ public class VueCinema implements IVueManager, IVueClient {
     LocalTime enteredTime;
 
     while (true) {
-      System.out.print("Entrez l'heure (HH:MM) : ");
+      System.out.print("Entrez l'heure (HH:mm) : ");
       heure = this.leScanner.nextLine();
       try {
         LocalDate enteredDate = LocalDate.parse(date, dateFormatter);
