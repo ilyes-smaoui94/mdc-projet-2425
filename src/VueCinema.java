@@ -10,19 +10,33 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * Classe de la Vue implémentant à la fois IVueManager et IVueClient, de manière à permettre à notres Vue
+ * de correspondre à tous les types d'utilisateurs
+ */
 public class VueCinema implements IVueManager, IVueClient {
 
 	private IControleurCinema controleur;
 	// private ModeleCinema modele;
 	private Scanner leScanner;
+	
 	private final String STOP_STRING = "STOP";
 
+	/**
+	 * 
+	 * @param controleur Contrôleur associé à la Vue
+	 * @param modele Modèle associé à la Vue
+	 */
 	public VueCinema(ControleurCinema controleur, IModeleCinema modele) {
 		this.controleur = controleur;
 		// this.modele = modele;
 		this.leScanner = new Scanner(System.in);
 	}
 
+	/**
+	 * Affiche le menu client, avec ses options, et appelle la fonction {@code gerer..()} du Contrôleur
+	 * Correspondant au choix fait par l'utilisateur
+	 */
 	@Override
 	public void afficherMenuClient() {
 		int choix = -1;
@@ -69,6 +83,10 @@ public class VueCinema implements IVueManager, IVueClient {
 		// choisie.
 	}
 
+	/**
+	 * Affiche le menu client, avec ses options, et appelle la fonction {@code gerer..()} du Contrôleur
+	 * Correspondant au choix fait par l'utilisateur
+	 */
 	@Override
 	public void afficherMenuManager() {
 		System.out.println("\n=== Menu Manager ===");
@@ -136,6 +154,11 @@ public class VueCinema implements IVueManager, IVueClient {
 		}
 	}
 
+	/**
+	 * Demande à l'utilsateur de se connecter, récupère ses identifiants et les renvoie au Contrôleur
+	 * 
+	 * @return {@code ArrayList<String>} contenant les identifiants rentrés par l'utilisateur
+	 */
 	@Override
 	public ArrayList<String> afficherDialogueConnexion() {
 		ArrayList<String> res = new ArrayList<>();
@@ -185,6 +208,11 @@ public class VueCinema implements IVueManager, IVueClient {
 		return filmId;
 	}
 
+	/**
+	 * Affiche les informations du film donné en paramètre
+	 * 
+	 * @param f Film dont on affiche les informations
+	 */
 	@Override
 	public void afficherFilm(Film f) {
 		System.out.print("Film d'ID " + f.getId() + " : \n\t-" + f.getTitre() + "\n\t-annee: " + f.getAnnee()
@@ -343,6 +371,12 @@ public class VueCinema implements IVueManager, IVueClient {
 		System.out.println("Échec de la suppression de l'utilisateur.");
 	}
 
+	/**
+	 * Récupère des données (titre, année de sortie, etc.) sur un nouveau film à enregistrer dans le modèle
+	 * (par l'intermédiaire du Contrôleur, comme toujours)
+	 * 
+	 * @return {@code ArrayList<String>} contenant les données permettant au Contrôleur d'enregistrer un nouveau film
+	 */
 	@Override
 	public ArrayList<String> afficherDialogueCreationFilm() {
 		// Scanner this.leScanner = new Scanner(System.in);
@@ -475,6 +509,12 @@ public class VueCinema implements IVueManager, IVueClient {
 		System.out.println("Salle supprimée avec succès !");
 	}
 
+	/**
+	 * Récupère des données (sur la salle, le film, etc.) sur une nouvelle séance à enregistrer dans le modèle
+	 * (par l'intermédiaire du Contrôleur, comme toujours)
+	 * 
+	 * @return {@code ArrayList<String>} contenant les données permettant au Contrôleur d'enregistrer une nouvelle séance
+	 */
 	@Override
 	public ArrayList<String> afficherDialogueCreationSeance() {
 		// Scanner this.leScanner = new Scanner(System.in);
@@ -574,24 +614,6 @@ public class VueCinema implements IVueManager, IVueClient {
 		System.out.println("❌ Seance non supprimée.");
 
 	}
-
-	// @Override
-	// public void afficherSuppressionSalleReussie() {
-	// // TODO Auto-generated method stub
-
-	// }
-
-	// @Override
-	// public void afficherSuppressionSalleEchouee() {
-	// // TODO Auto-generated method stub
-
-	// }
-
-	// @Override
-	// public void afficherSuppressionSeanceReussie() {
-	// // TODO Auto-generated method stub
-
-	// }
 
 	@Override
 	public ArrayList<String> afficherDialogueCreationSalle() {

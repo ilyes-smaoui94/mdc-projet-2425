@@ -6,23 +6,43 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Classe jouant le rôle de Contrôleur dans l'application
+ * C'est cette classe qui appelera les différents de la Vue, récupèrera les éventuelles données envoyées par l'utilisateur,
+ * et fera appel au Modèle pour gérer la partie Métier
+ * Elle coordine les deux autres parties de l'application (Vue et Modèle), et détermine les séquences d'actions à suivre
+ */
 public class ControleurCinema implements IControleurCinema {
 
 	private IModeleCinema modele;
 	private IVueClient vueClient;
 	private IVueManager vueManager;
 
+	/**
+	 * Constructeur assez rudimentaire
+	 * 
+	 * @param modele Modèle associé au Contrôleur
+	 */
 	public ControleurCinema(IModeleCinema modele) {
 
 		this.modele = modele;
 	}
 
+	/**
+	 * Définit les objets de la Vue à laquelle le Contrôleur fera appel par la suite
+	 * 
+	 * @param vueClient vue permettant d'utiliser les fonctionnalités de Vue relatives à un client
+	 * @param vueManager vue permettant d'utiliser les fonctionnalités de Vue relatives à un manager
+	 */
 	@Override
 	public void setVues(IVueClient vueClient, IVueManager vueManager) {
 		this.vueClient = vueClient;
 		this.vueManager = vueManager;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public IVueClient getVueClient() {
 		return this.vueClient;
@@ -43,6 +63,9 @@ public class ControleurCinema implements IControleurCinema {
 		this.modele = modele;
 	}
 
+	/**
+	 * Lance le bon menu en fonction du statut de l'utilisateur connecté (Manager vs. Client)
+	 */
 	public void lancerMenu() {
 		if (this.modele.getUtilisateurConnecte() instanceof Manager) {
 			this.vueManager.afficherMenuManager();
@@ -51,12 +74,18 @@ public class ControleurCinema implements IControleurCinema {
 		}
 	}
 
+	/**
+	 * Démarre l'application
+	 */
 	@Override
 	public void lancerApplication() {
 		// "Activer" la vue si nécessaire
 		this.gererConnexion();
 	}
 
+	/**
+	 *  Permet à un utilisateur de se connecter
+	 */
 	@Override
 	public void gererConnexion() {
 		// boolean connecte = false;
@@ -83,6 +112,11 @@ public class ControleurCinema implements IControleurCinema {
 		// }
 	}
 
+	/**
+	 * Permet d'afficher un film
+	 * Récupère d'abord l'ID du film à afficher, via la Vue, fait appel au Modèle pour le récupérer
+	 * Et rappelle enfin la Vue pour afficher les données ainsi récupérées
+	 */
 	@Override
 	public void gererAffichageFilm() {
 		String id_str = this.vueClient.afficherDialogueAffichageFilm();
@@ -144,6 +178,10 @@ public class ControleurCinema implements IControleurCinema {
 		this.lancerMenu();
 	}
 
+	/**
+	 * Gere l'affichage de réservation, en récupérant l'ID de celle-ci, puis en l'affichant,
+	 * à l'aide de la Vue et du Modèle
+	 */
 	@Override
 	public void gererAffichageResa() {
 		String id_str = this.vueClient.affichageDialogueAffichageResa();
@@ -322,25 +360,6 @@ public class ControleurCinema implements IControleurCinema {
 		this.lancerMenu();
 	}
 
-	// public Film chercherFilmParNom(HashSet<Film> listeFilms, String titre) {
-
-	// for (Film film : listeFilms) {
-	// if (film.getTitre().equalsIgnoreCase(titre)) { // Vérification basée sur l'ID
-	// return film; // 🎬 Film déjà présent !
-	// }
-	// }
-	// return null; // ❌ Film non trouvé
-	// }
-
-	// public Salle chercherSalleParId(ArrayList<Salle> salles, int num) {
-	// for (Salle salle : salles) {
-	// if (salle.getId() == num) {
-	// return salle;
-	// }
-	// }
-	// return null;
-	// }
-
 	@Override
 	public void gererCreationSeance() throws ParseException {
 
@@ -401,32 +420,12 @@ public class ControleurCinema implements IControleurCinema {
 		this.lancerMenu();
 	}
 
-	// public static boolean supprimerSeanceParId(ArrayList<Seance> listeSeances,
-	// int id) {
-	// Iterator<Seance> iterator = listeSeances.iterator();
-
-	// while (iterator.hasNext()) {
-	// Seance seance = iterator.next();
-	// if (seance.getId() == id) { // Vérifie si l'ID correspond
-	// iterator.remove(); // Supprime la séance en toute sécurité
-	// System.out.println("✅ Séance avec ID " + id + " supprimée avec succès.");
-	// return true; // Retourne true si la suppression a eu lieu
-	// }
-	// }
-
-	// System.out.println("⛔ Aucune séance trouvée avec l'ID " + id + ".");
-	// return false; // Retourne false si aucune séance n'a été trouvée
-	// }
-
 	@Override
 	public void gererSuppressionSeance() {
 		ArrayList<String> Liste;
 
 		Liste = this.vueManager.afficherDialogueSuppressionSeance();
 		int id = Integer.parseInt(Liste.get(0));
-		// Seance s = ChercherSeanceParID(this.modele.getListeSeances(), id); [MERGE]
-		// Seance seance = this.modele.getSeance(id);
-		// boolean supprime = supprimerSeanceParId(this.modele.getListeSeances(), id);
 		boolean supprime = this.modele.supprimerSeance(id);
 
 		if (supprime) {
@@ -441,21 +440,4 @@ public class ControleurCinema implements IControleurCinema {
 		this.vueManager.afficherUtilisateurs(this.modele.getListeUtilisateurs());
 		this.lancerMenu();
 	}
-
-	// public static boolean supprimerSalleParId(ArrayList<Salle> listeSalles, int
-	// id) {
-	// Iterator<Salle> iterator = listeSalles.iterator();
-
-	// while (iterator.hasNext()) {
-	// Salle salle = iterator.next();
-	// if (salle.getId() == id) { // Vérifie si l'ID correspond
-	// iterator.remove(); // Supprime la salle en toute sécurité
-	// System.out.println("✅ Salle avec ID " + id + " supprimée avec succès.");
-	// return true; // Retourne true si la suppression a eu lieu
-	// }
-	// }
-
-	// System.out.println("⛔ Aucune salle trouvée avec l'ID " + id + ".");
-	// return false; // Retourne false si aucune salle n'a été trouvée
-	// }
 }
