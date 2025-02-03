@@ -254,7 +254,7 @@ public class ControleurCinema implements IControleurCinema {
 		int annee = Integer.parseInt(donneesFilm.get(1));
 		String description = donneesFilm.get(2);
 		String duree_str = donneesFilm.get(3);
-		HashSet<String> genres_str = new HashSet<>(donneesFilm.subList(4, donneesFilm.size() - 1));
+		HashSet<String> genres_str = new HashSet<>(donneesFilm.subList(4, donneesFilm.size()));
 
 		// Création de la séance
 		try {
@@ -391,7 +391,8 @@ public class ControleurCinema implements IControleurCinema {
 				// Création de la séance
 				try {
 					// Seance seance = new Seance(film, dateSeance, heure_str, s, typeSeance);
-					this.modele.ajouterSeance(idSalle, filmId, dateSeance, typeSeance);
+					int idSeance = this.modele.ajouterSeance(idSalle, filmId, dateSeance, typeSeance);
+					this.vueManager.afficherCreationSeanceReussie(this.modele.getSeance(idSeance));
 				} catch (Exception e) {
 					this.vueManager.afficherCreationSeanceEchouee();
 				}

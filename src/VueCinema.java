@@ -7,7 +7,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-// import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -16,6 +15,7 @@ public class VueCinema implements IVueManager, IVueClient {
 	private IControleurCinema controleur;
 	// private ModeleCinema modele;
 	private Scanner leScanner;
+	private final String STOP_STRING = "STOP";
 
 	public VueCinema(ControleurCinema controleur, IModeleCinema modele) {
 		this.controleur = controleur;
@@ -179,11 +179,13 @@ public class VueCinema implements IVueManager, IVueClient {
 
 	@Override
 	public void afficherFilm(Film f) {
-		System.out.print("Film: \n\t-" + f.getTitre() + "\n\t-annee: " + f.getAnnee() + "\n\t-Description: " + f.getDesc()
-				+ "\n\t" + f.getDuree() + "\n\t- Genres :\n\t");
+		System.out.print("Film d'ID " + f.getId() + " : \n\t-" + f.getTitre() + "\n\t-annee: " + f.getAnnee() + "\n\t-Description: " + f.getDesc()
+				+ "\n\t-Durée: " + f.getDuree() + "\n\t- Genres :\n\t");
 		for (Genre g : f.getGenres()) {
 			System.out.print(g + ", ");
 		}
+		System.out.println("\n");
+		// System.out.println(f.getGenres()); // [debugging]
 
 	}
 
@@ -217,9 +219,9 @@ public class VueCinema implements IVueManager, IVueClient {
 
 	@Override
 	public void afficherSeance(Seance s) {
-		System.out.println("\nSeance : \n  -IdSeance:" + s.getId() + "\n  -Film" + s.getFilm().getTitre() + "\n  -IdFilm: "
+		System.out.println("\nSeance : \n  -IdSeance:" + s.getId() + "\n  -Film: " + s.getFilm().getTitre() + "\n  -IdFilm: "
 				+ s.getFilm().getId() + "\n  -Date: " + s.getDate() + "\n  -Salle: "
-				+ s.getSalle().toString() + "\n  -Type Seance:" + s.getTypeSeance() + ".\n");
+				+ s.getSalle().getId() + "\n  -Type Seance:" + s.getTypeSeance() + ".\n");
 	}
 
 	@Override
@@ -258,11 +260,13 @@ public class VueCinema implements IVueManager, IVueClient {
 	public void afficherReservation(Reservation r) {
 		System.out.println("Récapitulatif de la réservation d'ID " + r.getId() + " :");
 		int i = 1;
+		System.out.println("-----");
 		for (Billet b : r.getBillets()) {
 			System.out.println("Billet n°" + i + " (ID : " + b.getId() + ") :");
 			System.out.println("Séance de " + b.getSeance().getDate());
 			System.out.println("Dans la salle numéro " + b.getSeance().getSalle().getNumero());
-			System.out.println("Film : " + b.getSeance().getFilm() + "\n------------------");
+			System.out.println("Film : " + b.getSeance().getFilm().getTitre() + "\n");
+			System.out.println("-----");
 			i++;
 		}
 	}
@@ -364,50 +368,56 @@ public class VueCinema implements IVueManager, IVueClient {
 		System.out.print("Entrez la durée du film, en minutes : ");
 		String duree_str = this.leScanner.nextLine().trim();
 
-		String genre;
-		System.out.print("Entrez le genre principal (");
-		for (Genre g : Genre.values()) {
-			System.out.print(g.name());
-		}
-		System.out.println(" :\n");
-		do {
-			genre = this.leScanner.nextLine().trim().toUpperCase();
-			if (!genresAutorises.contains(genre)) {
-				System.out.println("⛔ Genre invalide ! Veuillez choisir parmi : " + genresAutorises);
-			}
-		} while (!genresAutorises.contains(genre));
-
 		ArrayList<String> Liste = new ArrayList<>();
 		Liste.add(titre);
 		Liste.add(annee);
 		Liste.add(description);
 		Liste.add(duree_str);
-		Liste.add(genre);
 
+		String genre_str;
+		System.out.print("Entrez les genres du film (");
+		for (Genre g : Genre.values()) {
+			System.out.print(g.name() + ", ");
+		}
+		System.out.println(") :\n");
+		System.out.println("(Entrer " + STOP_STRING + " pour arrêter la saisie)");
+		do { 
+			do {
+				genre_str = this.leScanner.nextLine().trim().toUpperCase();
+				// System.out.println("-" + genre_str + "-");// [debugging]
+				if (!(genresAutorises.contains(genre_str) || genre_str.toUpperCase().equals(this.STOP_STRING.toUpperCase()))) {
+					System.out.println("⛔ Genre invalide ! Veuillez choisir parmi : " + genresAutorises);
+				}
+			} while (!(genresAutorises.contains(genre_str) || genre_str.toUpperCase().equals(this.STOP_STRING.toUpperCase())));
+			if (genre_str.toUpperCase().equals(this.STOP_STRING.toUpperCase())) {
+				break;
+			}
+			Liste.add(genre_str);
+		} while (true);
 		return Liste;
 
 	}
 
 	@Override
 	public void afficherCreationFilmReussie(Film f) {
-		System.out.println("\n✅ Film Crée :");
+		System.out.println("\n Film créé avec succès :");
 		this.afficherFilm(f);
 	}
 
 	@Override
 	public void afficherCreationFilmEchouee() {
-		System.out.println("\n❌ Film non crée. \n");
+		System.out.println("\nLe film n'a pas pu être correctement créé !\n");
 
 	}
 
 	@Override
 	public void afficherSuppressionFilmReussie() {
-		System.out.println("✅ Film supprimé avec succès !");
+		System.out.println("Film supprimé avec succès !");
 	}
 
 	@Override
 	public void afficherSuppressionFilmEchouee() {
-		System.out.println("❌ Impossible de supprimer. \n");
+		System.out.println("Impossible de supprimer. \n");
 
 	}
 
@@ -427,13 +437,13 @@ public class VueCinema implements IVueManager, IVueClient {
 
 	@Override
 	public void afficherCreationSalleReussie(Salle s) {
-		System.out.println("✅ Salle creer avec succès :");
+		System.out.println("Salle créée avec succès :");
 		this.afficherSalles(new HashSet<Salle>(Arrays.asList(s)));
 	}
 
 	@Override
 	public void afficherCreationSalleEchouee() {
-		System.out.println("❌ Impossible de Creer la salle. \n");
+		System.out.println("Impossible de Creer la salle. \n");
 
 	}
 
@@ -504,7 +514,7 @@ public class VueCinema implements IVueManager, IVueClient {
 			}
 		}
 
-		System.out.print("Choissiez la salle: ");
+		System.out.print("Choisissez la salle (par ID): ");
 		String salle = this.leScanner.nextLine();
 
 		System.out.print("Entrez le type de séance (IMAX, 4Dmax, 3D) : ");
@@ -576,7 +586,7 @@ public class VueCinema implements IVueManager, IVueClient {
 	public ArrayList<String> afficherDialogueCreationSalle() {
 		// Scanner this.leScanner = new Scanner(System.in);
 
-		System.out.print("Entrez le numero ID de la salle à creer: ");
+		System.out.print("Entrez le numero de la salle à creer: ");
 		String id = this.leScanner.nextLine();
 
 		System.out.print("Entrez le nombre maximal de place pour la nouvelle salle : ");
@@ -640,7 +650,7 @@ public class VueCinema implements IVueManager, IVueClient {
 	public void afficherSuppressionResaReussie() {
 		System.out.println("Réservation supprimée avec succès !");
 	}
-	
+
 	@Override
 	public void afficherSuppressionResaEchouee() {
 		System.out.println("La réservation n'a pas pu être supprimée correctement !");

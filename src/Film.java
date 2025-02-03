@@ -90,7 +90,7 @@ public class Film {
      * @param duree La durée du film en minutes (au minimum 30).
      */
     public Film(String t, int a, String d, int duree) {
-        this.id = this.getNextAvailableId();
+        this.id = Film.getNextAvailableId();
         this.titre = t;
         this.annee = a;
         this.description = d;
@@ -111,7 +111,7 @@ public class Film {
      *              S'il est {@code null}, l'ensemble sera initialisé vide.
      */
     public Film(String t, int a, String d, int duree, Set<Genre> g) {
-        this.id = this.getNextAvailableId();
+        this.id = Film.getNextAvailableId();
         this.titre = t;
         this.annee = a;
         this.description = d;
@@ -124,7 +124,7 @@ public class Film {
      *
      * @return Le prochain identifiant unique de film.
      */
-    protected int getNextAvailableId() {
+    protected static int getNextAvailableId() {
         int nextId = Film.nextAvailableId;
         Film.nextAvailableId += 1;
         return nextId;
