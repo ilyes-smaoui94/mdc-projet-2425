@@ -27,25 +27,37 @@ public interface IVueUtilisateur {
 
 	public void afficherFilms(Set<Film> films);
 
+	public String afficherDialogueSeancesUnFilm();
+
 	public void afficherSalles(Set<Salle> salles);
 
 	public String afficherDialogueAffichageSeance();
 
 	public void afficherSeance(Seance s);
 
-	public String afficherDialogueAffichageSeancesUneSalle();
+	public void afficherSeances(Set<Seance> s);
 
+	public String affichageDialogueAffichageResa ();
+
+<<<<<<< HEAD
 	public String afficherDialogueSeancesUnFilm();
 
 	public void afficherSeancesUneSalle(Set<Seance> seances);
+=======
+	public void afficherReservation(Reservation r);
+	
+	public void afficherReservationReussie(Reservation r);
+>>>>>>> copy_melting_pot
 
-	public String afficherDialogueAffichageSeancesPlusieursSalles();
+	public String afficherDialogueSuppressionResa ();
+	
+	public void afficherSuppressionResaReussie();
 
-	public void afficherSeancesPlusieursSalles(Set<Seance> seances);
+	public void afficherSuppressionResaEchouee();
 
-	public ArrayList<String> afficherDialogueReservationSeance();
+	public void afficherAffichageResaEchoue();
+	
+	public ArrayList<String> afficherDialogueNouvelleReservation();
 
-	// void afficherReservationReussie(Reservation r);
 	public void afficherReservationEchouee();
-	// void afficherReservation(Reservation r);
 }

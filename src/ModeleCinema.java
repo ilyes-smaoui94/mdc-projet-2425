@@ -216,7 +216,7 @@ public class ModeleCinema implements IModeleCinema {
 	}
 
 	@Override
-	public int ajouterFilm (String titre, int a, String desc, int duree, ArrayList<String> genres_str) {
+	public int ajouterFilm (String titre, int a, String desc, int duree, Set<String> genres_str) {
 		try {
 			Set<Genre> genresSet = new HashSet<Genre>();
 			for (String g_str: genres_str) {

@@ -9,17 +9,17 @@ public interface IVueManager extends IVueUtilisateur {
     void afficherCreationUtilisateurReussie(Utilisateur u);
     public void afficherCreationUtilisateurEchouee();
     
-    public void afficherDialogueSuppressionUtilisateur();
+    public ArrayList<String> afficherDialogueSuppressionUtilisateur();
     public void afficherSuppressionUtilisateurReussie();
     public void afficherSuppressionUtilisateurEchouee();
 
-    public ArrayList<String> AfficherDialogueCreationFilm();
+    public ArrayList<String> afficherDialogueCreationFilm();
     public void afficherCreationFilmReussie(Film f);
-    public void afficherCreationFilmEchouer();
+    public void afficherCreationFilmEchouee();
 
-    public ArrayList<String> AfficherDialogueSuppressionFilm();
+    public ArrayList<String> afficherDialogueSuppressionFilm();
     public void afficherSuppressionFilmReussie();
-    public void afficherSuppressionFilmEchouer();
+    public void afficherSuppressionFilmEchouee();
 
     public ArrayList<String> afficherDialogueCreationSalle();
     public void afficherCreationSalleReussie(Salle s);
