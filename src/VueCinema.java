@@ -60,7 +60,10 @@ public class VueCinema implements IVueManager, IVueClient {
 			case 8 -> this.controleur.gererNouvelleResa();
 			case 9 -> this.controleur.gererSuppressionResa();
 			case 10 -> this.controleur.gererDeconnexion();
-			default -> System.out.println("Choix invalide, veuillez réessayer.");
+			default -> {
+				System.out.println("Choix invalide, veuillez réessayer.");
+				this.afficherMenuClient();
+			}
 		}
 		// } while (choix != 3); // On quitte le menu lorsque la déconnexion est
 		// choisie.
@@ -86,7 +89,8 @@ public class VueCinema implements IVueManager, IVueClient {
 		System.out.println("15. Supprimer salle");
 		System.out.println("16. Créer séance");
 		System.out.println("17. Supprimer séance");
-		System.out.println("18. Déconnexion");
+		System.out.println("18. Afficher la liste des utilisateurs");
+		System.out.println("19. Déconnexion");
 		System.out.print("Votre choix : ");
 
 		int choix = -1;
@@ -123,8 +127,12 @@ public class VueCinema implements IVueManager, IVueClient {
 				}
 			}
 			case 17 -> this.controleur.gererSuppressionSeance();
-			case 18 -> this.controleur.gererDeconnexion();
-			default -> System.out.println("Choix invalide, veuillez réessayer.");
+			case 18 -> this.controleur.gererAffichageUtilisateurs();
+			case 19 -> this.controleur.gererDeconnexion();
+			default -> {
+				System.out.println("Choix invalide, veuillez réessayer.");
+				this.afficherMenuManager();
+			}
 		}
 	}
 
@@ -179,7 +187,8 @@ public class VueCinema implements IVueManager, IVueClient {
 
 	@Override
 	public void afficherFilm(Film f) {
-		System.out.print("Film d'ID " + f.getId() + " : \n\t-" + f.getTitre() + "\n\t-annee: " + f.getAnnee() + "\n\t-Description: " + f.getDesc()
+		System.out.print("Film d'ID " + f.getId() + " : \n\t-" + f.getTitre() + "\n\t-annee: " + f.getAnnee()
+				+ "\n\t-Description: " + f.getDesc()
 				+ "\n\t-Durée: " + f.getDuree() + "\n\t- Genres :\n\t");
 		for (Genre g : f.getGenres()) {
 			System.out.print(g + ", ");
@@ -219,9 +228,10 @@ public class VueCinema implements IVueManager, IVueClient {
 
 	@Override
 	public void afficherSeance(Seance s) {
-		System.out.println("\nSeance : \n  -IdSeance:" + s.getId() + "\n  -Film: " + s.getFilm().getTitre() + "\n  -IdFilm: "
-				+ s.getFilm().getId() + "\n  -Date: " + s.getDate() + "\n  -Salle: "
-				+ s.getSalle().getId() + "\n  -Type Seance:" + s.getTypeSeance() + ".\n");
+		System.out
+				.println("\nSeance : \n  -IdSeance:" + s.getId() + "\n  -Film: " + s.getFilm().getTitre() + "\n  -IdFilm: "
+						+ s.getFilm().getId() + "\n  -Date: " + s.getDate() + "\n  -Salle: "
+						+ s.getSalle().getId() + "\n  -Type Seance:" + s.getTypeSeance() + ".\n");
 	}
 
 	@Override
@@ -381,14 +391,15 @@ public class VueCinema implements IVueManager, IVueClient {
 		}
 		System.out.println(") :\n");
 		System.out.println("(Entrer " + STOP_STRING + " pour arrêter la saisie)");
-		do { 
+		do {
 			do {
 				genre_str = this.leScanner.nextLine().trim().toUpperCase();
 				// System.out.println("-" + genre_str + "-");// [debugging]
 				if (!(genresAutorises.contains(genre_str) || genre_str.toUpperCase().equals(this.STOP_STRING.toUpperCase()))) {
 					System.out.println("⛔ Genre invalide ! Veuillez choisir parmi : " + genresAutorises);
 				}
-			} while (!(genresAutorises.contains(genre_str) || genre_str.toUpperCase().equals(this.STOP_STRING.toUpperCase())));
+			} while (!(genresAutorises.contains(genre_str)
+					|| genre_str.toUpperCase().equals(this.STOP_STRING.toUpperCase())));
 			if (genre_str.toUpperCase().equals(this.STOP_STRING.toUpperCase())) {
 				break;
 			}
@@ -664,5 +675,14 @@ public class VueCinema implements IVueManager, IVueClient {
 	@Override
 	public void afficherSuppressionSalleEchouee() {
 		System.out.println("La salle n'a pas pu être supprimée correctement !");
+	}
+
+	public void afficherUtilisateurs (Set<Utilisateur> utilisateurs) {
+		System.out.println("Utilisateurs enregistrés dans le modèle :\n");
+		System.out.println("-----");
+		for (Utilisateur u: utilisateurs) {
+			System.out.println("- Utilisateur d'ID " + u.getId() + ", de nom " + u.getNom() + " et d'identifiant/email " + u.getEmail());
+		}
+		System.out.println("-----");
 	}
 }

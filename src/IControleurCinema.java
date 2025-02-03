@@ -59,4 +59,6 @@ public interface IControleurCinema {
 	public void gererCreationSeance() throws ParseException;
 
 	public void gererSuppressionSeance();
+
+	public void gererAffichageUtilisateurs();
 }
