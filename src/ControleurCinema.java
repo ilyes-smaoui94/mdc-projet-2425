@@ -437,6 +437,11 @@ public class ControleurCinema implements IControleurCinema {
 		this.lancerMenu();
 	}
 
+	public void gererAffichageUtilisateurs() {
+		this.vueManager.afficherUtilisateurs(this.modele.getListeUtilisateurs());
+		this.lancerMenu();
+	}
+
 	// public static boolean supprimerSalleParId(ArrayList<Salle> listeSalles, int
 	// id) {
 	// Iterator<Salle> iterator = listeSalles.iterator();

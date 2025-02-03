@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Set;
 
 public interface IVueManager extends IVueUtilisateur {
    // ChoixMenu afficherMenuManager();
@@ -37,5 +38,5 @@ public interface IVueManager extends IVueUtilisateur {
     public void afficherSuppressionSeanceReussie();
     public void afficherSuppressionSeanceEchouee();
     
-    
+    public void afficherUtilisateurs (Set<Utilisateur> utilisateurs);
 }
