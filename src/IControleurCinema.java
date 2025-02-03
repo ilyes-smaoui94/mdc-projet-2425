@@ -1,4 +1,3 @@
-
 import java.text.ParseException;
 
 public interface IControleurCinema {
