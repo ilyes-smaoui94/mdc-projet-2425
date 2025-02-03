@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> copy_melting_pot
 import java.text.ParseException;
 
 public interface IControleurCinema {

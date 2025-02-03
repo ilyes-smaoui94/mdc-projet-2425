@@ -39,15 +39,9 @@ public interface IVueUtilisateur {
 
 	public String affichageDialogueAffichageResa ();
 
-<<<<<<< HEAD
-	public String afficherDialogueSeancesUnFilm();
-
-	public void afficherSeancesUneSalle(Set<Seance> seances);
-=======
 	public void afficherReservation(Reservation r);
 	
 	public void afficherReservationReussie(Reservation r);
->>>>>>> copy_melting_pot
 
 	public String afficherDialogueSuppressionResa ();
 	
