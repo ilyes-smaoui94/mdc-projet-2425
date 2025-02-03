@@ -124,7 +124,9 @@ public class ControleurCinema implements IControleurCinema {
 
 		// Film film = chercherFilmParID(modele.getListeFilms(), idFilm);
 		Film film = this.modele.getFilm(idFilm);
-		this.vueClient.afficherFilm(film);
+		if (film != null) {
+			this.vueClient.afficherFilm(film);
+		}
 		this.lancerMenu();
 	}
 
@@ -174,7 +176,9 @@ public class ControleurCinema implements IControleurCinema {
 		String s = this.vueClient.afficherDialogueAffichageSeance();
 		int idSeance = Integer.parseInt(s);
 		Seance seance = this.modele.getSeance(idSeance);
-		this.vueClient.afficherSeance(seance);
+		if (seance != null) {
+			this.vueClient.afficherSeance(seance);
+		}
 		this.lancerMenu();
 	}
 
